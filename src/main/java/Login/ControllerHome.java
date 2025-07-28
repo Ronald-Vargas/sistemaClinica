@@ -24,6 +24,7 @@ public class ControllerHome implements ActionListener{
     
     if (e.getSource() == home.BtnPatients) {
     LoginPatient loginpatient = new LoginPatient();
+    ControllerLoginPatients controllerloginpatients = new ControllerLoginPatients(loginpatient);
     loginpatient.setVisible(true);
     home.dispose();
     

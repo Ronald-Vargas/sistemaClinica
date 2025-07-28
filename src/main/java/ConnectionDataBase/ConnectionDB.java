@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 
 
-public class ConnectionDataBase {
+public class ConnectionDB {
  
     
     Connection Conectar = null;

@@ -28,10 +28,10 @@ public class LoginPatient extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         TxtEmail = new javax.swing.JTextField();
         TxtPass = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BtnLogOut = new javax.swing.JButton();
+        BtnLogIn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        LblRegister = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -66,25 +66,25 @@ public class LoginPatient extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(204, 0, 0));
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Salir");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnLogOut.setBackground(new java.awt.Color(204, 0, 0));
+        BtnLogOut.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        BtnLogOut.setForeground(new java.awt.Color(255, 255, 255));
+        BtnLogOut.setText("Salir");
+        BtnLogOut.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnLogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnLogOutActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 204, 204));
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Ingresar");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BtnLogIn.setBackground(new java.awt.Color(0, 204, 204));
+        BtnLogIn.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        BtnLogIn.setForeground(new java.awt.Color(255, 255, 255));
+        BtnLogIn.setText("Ingresar");
+        BtnLogIn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnLogIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BtnLogInActionPerformed(evt);
             }
         });
 
@@ -93,14 +93,14 @@ public class LoginPatient extends javax.swing.JFrame {
         jLabel5.setText("¿Olvitaste tu contraseña?");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 204, 204));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("¿Aun no tienes una cuenta? Registrate");
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        LblRegister.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        LblRegister.setForeground(new java.awt.Color(0, 204, 204));
+        LblRegister.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblRegister.setText("¿Aun no tienes una cuenta? Registrate");
+        LblRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LblRegister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
+                LblRegisterMouseClicked(evt);
             }
         });
 
@@ -131,9 +131,9 @@ public class LoginPatient extends javax.swing.JFrame {
                     .addGroup(BackgroundLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
                         .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(LblRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnLogIn, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(BtnLogOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(152, Short.MAX_VALUE))))
         );
         BackgroundLayout.setVerticalGroup(
@@ -157,11 +157,11 @@ public class LoginPatient extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
+                .addComponent(LblRegister)
                 .addGap(30, 30, 30)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
 
@@ -221,26 +221,18 @@ public class LoginPatient extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtPassActionPerformed
 
     
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-       Register register = new Register();
-       register.setVisible(true);
-       this.dispose();
-    }//GEN-LAST:event_jLabel6MouseClicked
+    private void LblRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblRegisterMouseClicked
+     
+    }//GEN-LAST:event_LblRegisterMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       MenuPatient menupatients = new MenuPatient();
-       menupatients.setVisible(true);
-       this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void BtnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogInActionPerformed
+
+    }//GEN-LAST:event_BtnLogInActionPerformed
 
     
-    
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         Home home = new Home();
-       home.setVisible(true);
-       this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void BtnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogOutActionPerformed
+
+    }//GEN-LAST:event_BtnLogOutActionPerformed
 
     
     
@@ -312,16 +304,16 @@ public class LoginPatient extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
+    public javax.swing.JButton BtnLogIn;
+    public javax.swing.JButton BtnLogOut;
     private javax.swing.JLabel LblImg;
+    public javax.swing.JLabel LblRegister;
     public javax.swing.JTextField TxtEmail;
     public javax.swing.JPasswordField TxtPass;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }

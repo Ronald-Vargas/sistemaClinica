@@ -1,7 +1,7 @@
 
 package Mvc;
 
-import ConnectionDataBase.ConnectionDataBase;
+import ConnectionDataBase.ConnectionDB;
 import Login.ControllerHome;
 import Login.Home;
 import com.formdev.flatlaf.FlatLightLaf;
@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         FlatLightLaf.setup();
         
-    ConnectionDataBase objetoconexion = new ConnectionDataBase();
+    ConnectionDB objetoconexion = new ConnectionDB();
     objetoconexion.establecerConexion();
         
         
