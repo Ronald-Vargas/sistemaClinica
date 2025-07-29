@@ -2,6 +2,7 @@
 package Login;
 
 import ConnectionDataBase.ConnectionDB;
+import General.ControllerMenuPatientNew;
 import General.MenuPatientNew;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -113,6 +114,7 @@ public class ControllerRegisterPatients implements ActionListener{
           
      saveUsers();   
      MenuPatientNew menupatientnew = new MenuPatientNew();
+     ControllerMenuPatientNew controllermenupatientnew = new ControllerMenuPatientNew(menupatientnew);
      menupatientnew.setVisible(true);
      register.dispose();
     

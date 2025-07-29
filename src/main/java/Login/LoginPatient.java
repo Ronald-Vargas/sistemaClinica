@@ -80,7 +80,7 @@ public class LoginPatient extends javax.swing.JFrame {
         BtnLogIn.setBackground(new java.awt.Color(0, 204, 204));
         BtnLogIn.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         BtnLogIn.setForeground(new java.awt.Color(255, 255, 255));
-        BtnLogIn.setText("Ingresar");
+        BtnLogIn.setText("Iniciar Sesión");
         BtnLogIn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnLogIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

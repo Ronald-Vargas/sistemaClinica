@@ -1,16 +1,27 @@
 
 package Login;
 
+import ConnectionDataBase.ConnectionDB;
+import General.MenuPatient;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 
 public class ControllerLoginPatients implements ActionListener{
     
     
   private LoginPatient loginpatient;
+  
+  ConnectionDataBase.ConnectionDB con = new ConnectionDB();
+  Connection cn = con.establecerConexion();
+    
+  
 
     public ControllerLoginPatients(LoginPatient loginpatient) {
         this.loginpatient = loginpatient;
@@ -37,7 +48,50 @@ public class ControllerLoginPatients implements ActionListener{
     
     
     
+    public void validationLogIn() {
+    String email = loginpatient.TxtEmail.getText();
+    String pass = loginpatient.TxtPass.getText();
     
+    
+    if (email.isEmpty() || pass.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, Complete todos los datos solicitados", "Información Incompleta", JOptionPane.ERROR_MESSAGE);
+
+    } else {
+    
+        
+        try {
+    String query = "SELECT Correo, Contrasena FROM Pacientes WHERE Correo = '"+email+"' AND Contrasena = '"+pass+"'";
+    PreparedStatement ps = cn.prepareStatement(query);
+    ResultSet rs = ps.executeQuery();
+
+    
+    
+    if (rs.next()) {
+        JOptionPane.showMessageDialog(null, "Inicio de sesión aprovado", "Inicio de Sesión", JOptionPane.INFORMATION_MESSAGE);
+        MenuPatient menupatient = new MenuPatient();
+        menupatient.setVisible(true);
+        loginpatient.dispose();
+        
+        
+        
+        
+        
+    } else {
+    JOptionPane.showMessageDialog(null, "Correo o Contraseña Incorrectos", "Error", JOptionPane.ERROR_MESSAGE);    
+    }
+    
+    
+    
+    
+        }catch (Exception i) {
+    JOptionPane.showMessageDialog(null, "Error al iniciar sesión: " +i , "Error", JOptionPane.ERROR_MESSAGE);
+    
+    }
+     
+    }
+    
+   
+    }
     
     
     
@@ -57,7 +111,7 @@ public class ControllerLoginPatients implements ActionListener{
     
     
      if (e.getSource() == loginpatient.BtnLogIn) {
-    
+    validationLogIn();
     
         
     
