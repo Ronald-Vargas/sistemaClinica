@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -20,12 +19,13 @@ public class ControllerMenuPatientNew implements ActionListener{
     
     
     private MenuPatientNew menupatientnew;
+     
+       private String id;
        String lastNameF = "";
        String lastNameM = "";
        String phone = "";
        String province = "";
        String age = "";
-       String id = "";
        String responsible = "";
        String civilStatus = "";
        String sex = "";
@@ -40,10 +40,16 @@ public class ControllerMenuPatientNew implements ActionListener{
        
        
     
-    public ControllerMenuPatientNew(MenuPatientNew menupatientnew) {
+    public ControllerMenuPatientNew(MenuPatientNew menupatientnew, String id) {
         this.menupatientnew = menupatientnew;
+        this.id = id;
         
         this.menupatientnew.BtnContinue.addActionListener(this);
+        
+         // Asignar y bloquear campo de ID
+        menupatientnew.TxtId.setText(id);
+        
+        
         
       // Evento cuando cambia la fecha
       menupatientnew.JDateOfBirth.getDateEditor().addPropertyChangeListener("date", evt -> calculateAge());
@@ -61,43 +67,42 @@ public class ControllerMenuPatientNew implements ActionListener{
     if (e.getSource() == menupatientnew.BtnContinue) {
         
         if (menupatientnew.TxtLastNameF.getText().trim().isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Por favor ingrese el primer apellido.");
+    JOptionPane.showMessageDialog(null, "Por favor, ingrese el primer apellido.");
     return;
     }
     if (menupatientnew.TxtLastNameM.getText().trim().isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Por favor ingrese el segundo apellido.");
+    JOptionPane.showMessageDialog(null, "Por favor, ingrese el segundo apellido.");
     return;
     }
     if (menupatientnew.TxtPhone.getText().trim().isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Por favor ingrese el número de teléfono.");
+    JOptionPane.showMessageDialog(null, "Por favor, ingrese el número de teléfono.");
     return;
     }
-    if (menupatientnew.ComboProvince.equals("-SELECCIONAR-")) {
-    JOptionPane.showMessageDialog(null, "Por favor seleccione una provincia.");
+    if (menupatientnew.ComboProvince.getSelectedItem().equals("-SELECCIONAR-")) {
+    JOptionPane.showMessageDialog(null, "Por favor, seleccione una provincia.");
     return;
-    }
+}
     if (menupatientnew.TxtId.getText().trim().isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Por favor ingrese la edad.");
+    JOptionPane.showMessageDialog(null, "Por favor, ingrese la identificación.");
     return;
     }
-    if (menupatientnew.TxtResponsible.getText().trim().isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Por favor ingrese el nombre del responsable.");
-    return;
-    }
-    if (menupatientnew.ComboCivilStatus.equals("-SELECCIONAR-")) {
-    JOptionPane.showMessageDialog(null, "Por favor seleccione el estado civil.");
+    
+    if (menupatientnew.ComboCivilStatus.getSelectedItem().equals("-SELECCIONAR-")) {
+    JOptionPane.showMessageDialog(null, "Por favor, seleccione el estado civil.");
     return;
 }
-if (menupatientnew.ComboSex.equals("-SELECCIONAR-")) {
-    JOptionPane.showMessageDialog(null, "Por favor seleccione el sexo.");
+
+if (menupatientnew.ComboSex.getSelectedItem().equals("-SELECCIONAR-")) {
+    JOptionPane.showMessageDialog(null, "Por favor, seleccione el sexo.");
     return;
 }
-if (menupatientnew.ComboOccupation.equals("-SELECCIONAR-")) {
-    JOptionPane.showMessageDialog(null, "Por favor seleccione la ocupación.");
+
+if (menupatientnew.ComboOccupation.getSelectedItem().equals("-SELECCIONAR-")) {
+    JOptionPane.showMessageDialog(null, "Por favor, seleccione la ocupación.");
     return;
 }
 if (menupatientnew.JDateOfBirth.getDate() == null) {
-    JOptionPane.showMessageDialog(null, "Por favor seleccione la fecha de nacimiento.");
+    JOptionPane.showMessageDialog(null, "Por favor, seleccione la fecha de nacimiento.");
     return;
 }
 
@@ -110,15 +115,13 @@ if (menupatientnew.JDateOfBirth.getDate() == null) {
        civilStatus = (String) menupatientnew.ComboCivilStatus.getSelectedItem();
        sex = (String) menupatientnew.ComboSex.getSelectedItem();
        occupation = (String) menupatientnew.ComboOccupation.getSelectedItem();
-       id = menupatientnew.TxtId.getText();
        
        
        
        
        
-       SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-       dateOfBirth = sdf.format(menupatientnew.JDateOfBirth.getDate());
-
+      Date fecha = menupatientnew.JDateOfBirth.getDate();
+      java.sql.Date sqlDate = new java.sql.Date(fecha.getTime());
     
     saveUser();
     MenuPatient menupatient = new MenuPatient();
@@ -160,9 +163,19 @@ if (menupatientnew.JDateOfBirth.getDate() == null) {
             edad--;
         }
 
-        age = (String.valueOf(edad));
+        age = (String.valueOf(edad--));
+        
+      
+    if (edad-- >= 18) {
+        menupatientnew.TxtResponsible.setText("");
+        menupatientnew.TxtResponsible.setEditable(false); // Bloquear edición
+ 
+        
+    } else {
+       menupatientnew.TxtResponsible.setEditable(true); // Habilitar edición si es menor
     }
     
+    }
     
     
     
@@ -174,23 +187,40 @@ if (menupatientnew.JDateOfBirth.getDate() == null) {
     
     public void saveUser() {
     
-        try{
-    String query = "UPDATE Pacientes SET "
-    + "PrimerApellido = '"+lastNameF+"', "
-    + "SegundoApellido = '"+lastNameM+"', "
-    + "Telefono = '"+phone+"', "
-    + "Direccion = '"+province+"', "
-    + "Edad = '"+age+"', "
-    + "Responsable = '"+responsible+"', "
-    + "EstadoCivil = '"+civilStatus+"', "
-    + "Sexo = '"+sex+"', "
-    + "Ocupacion = '"+occupation+"', "
-    + "FechaNacimiento = '"+dateOfBirth+"' "
-    + "WHERE Identificacion = '"+id+"'";
-    PreparedStatement ps = cn.prepareStatement(query);
-    ps.executeUpdate();
-    JOptionPane.showMessageDialog(null, "Datos registrados correctamente");
-    return;
+        try {
+        String query = "UPDATE Pacientes SET "
+            + "PrimerApellido = ?, "
+            + "SegundoApellido = ?, "
+            + "Telefono = ?, "
+            + "Direccion = ?, "
+            + "Edad = ?, "
+            + "Responsable = ?, "
+            + "EstadoCivil = ?, "
+            + "Sexo = ?, "
+            + "Ocupacion = ?, "
+            + "FechaNacimiento = ? "
+            + "WHERE Identificacion = ?";
+
+        PreparedStatement ps = cn.prepareStatement(query);
+        ps.setString(1, lastNameF);
+        ps.setString(2, lastNameM);
+        ps.setString(3, phone);
+        ps.setString(4, province);
+        ps.setString(5, age);
+        ps.setString(6, responsible);
+        ps.setString(7, civilStatus);
+        ps.setString(8, sex);
+        ps.setString(9, occupation);
+
+        // Fecha segura
+        Date fecha = menupatientnew.JDateOfBirth.getDate();
+        java.sql.Date sqlDate = new java.sql.Date(fecha.getTime());
+        ps.setDate(10, sqlDate);
+
+        ps.setString(11, id);
+
+        ps.executeUpdate();
+        JOptionPane.showMessageDialog(null, "Datos registrados correctamente");
        }catch (Exception i){
         JOptionPane.showMessageDialog(null, "NO SE REGISTRARON LOS DATOS: " +i, "Error",JOptionPane.ERROR_MESSAGE);    
         return;
@@ -199,7 +229,6 @@ if (menupatientnew.JDateOfBirth.getDate() == null) {
     
     
     }
-    
     
     
     

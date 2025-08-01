@@ -2,7 +2,10 @@
 package General;
 
 import Login.Home;
+import com.github.lgooddatepicker.components.TimePickerSettings;
+import com.github.lgooddatepicker.components.TimePickerSettings.TimeIncrement;
 import java.awt.Color;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -13,6 +16,7 @@ public class MenuPatient extends javax.swing.JFrame {
     public MenuPatient() {
         initComponents();
         initCalendar();
+        initTimePicker();
     }
 
     
@@ -32,7 +36,7 @@ public class MenuPatient extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        timePicker1 = new com.github.lgooddatepicker.components.TimePicker();
+        ComboTime = new com.github.lgooddatepicker.components.TimePicker();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -128,10 +132,10 @@ public class MenuPatient extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Salir");
         jButton3.setBackground(new java.awt.Color(255, 0, 0));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Salir");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -154,7 +158,7 @@ public class MenuPatient extends javax.swing.JFrame {
                     .addComponent(ComboCalendar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
-                    .addComponent(timePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ComboTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(BackgroundLayout.createSequentialGroup()
                 .addGap(154, 154, 154)
@@ -175,7 +179,7 @@ public class MenuPatient extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ComboTime, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,11 +223,19 @@ public class MenuPatient extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public void initCalendar() {
-    Date today = new Date();
-    ComboCalendar.setMinSelectableDate(today);
-     
-       
+ 
     ComboCalendar.getJCalendar().getDayChooser().addDateEvaluator(new com.toedter.calendar.IDateEvaluator() {
         @Override
         public boolean isInvalid(Date date) {
@@ -273,7 +285,10 @@ public class MenuPatient extends javax.swing.JFrame {
 }
     
     
-    
+    public void initTimePicker() {
+    TimePickerSettings settings = ComboTime.getSettings();
+    settings.generatePotentialMenuTimes(TimeIncrement.ThirtyMinutes, LocalTime.of(8, 0), LocalTime.of(16, 0));
+    }
     
     
     
@@ -318,6 +333,7 @@ public class MenuPatient extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
     private com.toedter.calendar.JDateChooser ComboCalendar;
+    public com.github.lgooddatepicker.components.TimePicker ComboTime;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -331,6 +347,5 @@ public class MenuPatient extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private com.github.lgooddatepicker.components.TimePicker timePicker1;
     // End of variables declaration//GEN-END:variables
 }

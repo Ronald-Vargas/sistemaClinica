@@ -37,6 +37,7 @@ public class ControllerLoginPatients implements ActionListener{
         public void mouseClicked(MouseEvent e) {
         Register register = new Register();
         ControllerRegisterPatients controllerloginpatients = new ControllerRegisterPatients(register);
+        ValidationsPatients validationpatients = new ValidationsPatients(register);
         register.setVisible(true);
         loginpatient.dispose();
         }
@@ -48,57 +49,7 @@ public class ControllerLoginPatients implements ActionListener{
     
     
     
-    public void validationLogIn() {
-    String email = loginpatient.TxtEmail.getText();
-    String pass = loginpatient.TxtPass.getText();
-    
-    
-    if (email.isEmpty() || pass.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor, Complete todos los datos solicitados", "Información Incompleta", JOptionPane.ERROR_MESSAGE);
-
-    } else {
-    
-        
-        try {
-    String query = "SELECT Correo, Contrasena FROM Pacientes WHERE Correo = '"+email+"' AND Contrasena = '"+pass+"'";
-    PreparedStatement ps = cn.prepareStatement(query);
-    ResultSet rs = ps.executeQuery();
-
-    
-    
-    if (rs.next()) {
-        JOptionPane.showMessageDialog(null, "Inicio de sesión aprovado", "Inicio de Sesión", JOptionPane.INFORMATION_MESSAGE);
-        MenuPatient menupatient = new MenuPatient();
-        menupatient.setVisible(true);
-        loginpatient.dispose();
-        
-        
-        
-        
-        
-    } else {
-    JOptionPane.showMessageDialog(null, "Correo o Contraseña Incorrectos", "Error", JOptionPane.ERROR_MESSAGE);    
-    }
-    
-    
-    
-    
-        }catch (Exception i) {
-    JOptionPane.showMessageDialog(null, "Error al iniciar sesión: " +i , "Error", JOptionPane.ERROR_MESSAGE);
-    
-    }
-     
-    }
-    
    
-    }
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -131,6 +82,64 @@ public class ControllerLoginPatients implements ActionListener{
     
     
     }
+    
+    
+    
+    
+    
+     public void validationLogIn() {
+    String email = loginpatient.TxtEmail.getText();
+    String pass = loginpatient.TxtPass.getText();
+    
+    
+    if (email.isEmpty() || pass.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, Complete todos los datos solicitados", "Información Incompleta", JOptionPane.ERROR_MESSAGE);
+
+    } else {
+    
+        
+       try {
+    String query = "SELECT Correo, Contrasena FROM Pacientes WHERE Correo = ? AND Contrasena = ?";
+    PreparedStatement ps = cn.prepareStatement(query);
+    ps.setString(1, email); 
+    ps.setString(2, pass);  
+
+    ResultSet rs = ps.executeQuery();
+
+    if (rs.next()) {
+        JOptionPane.showMessageDialog(null, "Inicio de sesión aprobado", "Inicio de Sesión", JOptionPane.INFORMATION_MESSAGE);
+        MenuPatient menupatient = new MenuPatient();
+        menupatient.setVisible(true);
+        loginpatient.dispose();
+        
+        
+        
+        
+        
+    } else {
+    JOptionPane.showMessageDialog(null, "Correo o Contraseña Incorrectos", "Error", JOptionPane.ERROR_MESSAGE);    
+    }
+    
+    
+    
+    
+        }catch (Exception i) {
+    JOptionPane.showMessageDialog(null, "Error al iniciar sesión: " +i , "Error", JOptionPane.ERROR_MESSAGE);
+    
+    }
+     
+    }
+    
+   
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
