@@ -9,18 +9,13 @@ public class Doctors {
     private String correo;
     private String telefono;
 
-    public Doctors(String id, String nombre, String primerApellido, String segundoApellido, String identificacion, String correo, String telefono) {
-        this.id = id;
+    public Doctors( String nombre, String primerApellido, String segundoApellido, String identificacion, String correo, String telefono) {
         this.nombre = nombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
         this.identificacion = identificacion;
         this.correo = correo;
         this.telefono = telefono;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getNombre() {
@@ -45,10 +40,6 @@ public class Doctors {
 
     public String getTelefono() {
         return telefono;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public void setNombre(String nombre) {
