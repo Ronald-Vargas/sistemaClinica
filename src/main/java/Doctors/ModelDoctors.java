@@ -2,6 +2,8 @@ package Doctors;
 
 import ConnectionDataBase.ConnectionDB;
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -27,7 +29,6 @@ public class ModelDoctors {
 
             while (rs.next()) {
                 Doctors doctor = new Doctors(
-                    rs.getString("identificacion"),
                     rs.getString("nombre"),
                     rs.getString("primerApellido"),
                     rs.getString("segundoApellido"),
@@ -65,5 +66,44 @@ public class ModelDoctors {
             return false;
         }
     }
-    //prueba
+
+    public boolean deletedoctor(String id) {
+    String sql = "DELETE FROM Doctores WHERE Identificacion=?";
+        try (Connection conexion = conn.establecerConexion();
+             PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+        ps.setString(1, id);
+        return ps.executeUpdate() > 0;
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null,
+                "Error eliminando Doctor:\n" + e.getMessage(),
+                "SQL Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+}
+    public boolean update (String idOriginal, String nombre, String primerApellido, String segundoApellido, String correo, String telefono) {
+    
+        String sql = "UPDATE Doctores SET Nombre=?, PrimerApellido=?, SegundoApellido=?, Correo=?, Telefono=? WHERE Identificacion=?";
+        
+        try (Connection conexion = conn.establecerConexion();
+             PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+            ps.setString(1, nombre);
+            ps.setString(2, primerApellido);
+            ps.setString(3, segundoApellido);
+            ps.setString(4, correo);
+            ps.setString(5, telefono);
+            ps.setString(6, idOriginal);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error al actualizar doctor:\n" + e.getMessage(),
+                    "SQL Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
 }
