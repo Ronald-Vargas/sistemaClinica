@@ -1,7 +1,7 @@
 
 package Login;
 
-import General.MenuPatient;
+import General.MenuAppointmentPatient;
 import General.MenuPatientNew;
 import java.awt.Image;
 import javax.swing.ImageIcon;

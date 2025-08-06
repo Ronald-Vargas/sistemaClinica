@@ -10,7 +10,7 @@ import Doctors.PanelDoctors;
 import Doctors.MenuNewDoctor;
 import Login.LoginDoctor;
 import Patients.PanelPatients;
-import Quotes.PanelQoutes;
+import Appointment.PanelQoutes;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -142,7 +142,9 @@ public class ControllerMenuDoctor implements ActionListener{
     ModelDoctors modeldoctors = new ModelDoctors();
     MenuNewDoctor menunewdoctor = new MenuNewDoctor();
     ControllerDoctors controllerdoctors = new ControllerDoctors(menunewdoctor, paneldoctors, modeldoctors);
-      ControllerNewDoctor controllernewdoctor = new ControllerNewDoctor(menunewdoctor, modeldoctors, paneldoctors);
+    boolean editando = false;
+    String idOriginal = "";
+    ControllerNewDoctor controllernewdoctor = new ControllerNewDoctor(menunewdoctor, modeldoctors, paneldoctors, editando, idOriginal );
     paneldoctors.setSize(1020, 720);
     paneldoctors.setLocation(0,0);
   

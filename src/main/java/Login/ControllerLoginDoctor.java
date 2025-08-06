@@ -4,7 +4,7 @@ package Login;
 import ConnectionDataBase.ConnectionDB;
 import General.ControllerMenuDoctor;
 import General.MenuDoctor;
-import General.MenuPatient;
+import General.MenuAppointmentPatient;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

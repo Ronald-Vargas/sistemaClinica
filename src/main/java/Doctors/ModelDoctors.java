@@ -46,12 +46,20 @@ public class ModelDoctors {
 
         return lista;
     }
+    
+    
+    
+    
+    
 
-    public boolean insertDoctor(Doctors doctor) {
+    public boolean insertDoctor(Doctors doctor) { 
+        
+        
         String sql = "INSERT INTO doctores (nombre, primerApellido, segundoApellido, identificacion, correo, telefono, contrasena) VALUES (?, ?, ?, ?, ?, ?,?)";
 
-        try (Connection conexion = conn.establecerConexion();
-             PreparedStatement ps = conexion.prepareStatement(sql)) {
+try (Connection conexion = conn.establecerConexion();
+         PreparedStatement checkPs = conexion.prepareStatement(sql)) {
+         PreparedStatement ps = conexion.prepareStatement(sql);
 
             ps.setString(1, doctor.getNombre());
             ps.setString(2, doctor.getPrimerApellido());
@@ -69,6 +77,34 @@ public class ModelDoctors {
             return false;
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    public boolean existeDoctor(String identificacion) {
+    String sql = "SELECT COUNT(*) FROM doctores WHERE identificacion = ?";
+    try (Connection conexion = conn.establecerConexion();
+         PreparedStatement ps = conexion.prepareStatement(sql)) {
+        ps.setString(1, identificacion);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        return rs.getInt(1) > 0;
+    } catch (Exception e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+    
+    
+    
+    
+    
+    
+    
+    
 
     public boolean deletedoctor(String id) {
     String sql = "DELETE FROM Doctores WHERE Identificacion=?";
@@ -85,6 +121,16 @@ public class ModelDoctors {
         return false;
     }
 }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public boolean update (String idOriginal, String nombre, String primerApellido, String segundoApellido, String correo, String telefono, String contrasena) {
     
         String sql = "UPDATE Doctores SET Nombre=?, PrimerApellido=?, SegundoApellido=?, Correo=?, Telefono=?, Contrasena=? WHERE Identificacion=?";

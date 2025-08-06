@@ -124,7 +124,7 @@ if (menupatientnew.JDateOfBirth.getDate() == null) {
       java.sql.Date sqlDate = new java.sql.Date(fecha.getTime());
     
     saveUser();
-    MenuPatient menupatient = new MenuPatient();
+    MenuAppointmentPatient menupatient = new MenuAppointmentPatient();
     menupatient.setVisible(true);
     menupatientnew.dispose();
     

@@ -1,5 +1,5 @@
 
-package Quotes;
+package Appointment;
 
 
 public class PanelQoutes extends javax.swing.JPanel {

@@ -1,5 +1,6 @@
 package Doctors;
 
+import General.MenuDoctor;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +29,9 @@ public class ControllerDoctors implements ActionListener {
         this.paneldoctors.btnEdit.addActionListener(this);
 
     }
+    
+    
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -38,11 +42,7 @@ public class ControllerDoctors implements ActionListener {
             if (!editando) {  // ----- INSERT -----
 
             menunewdoctor.setVisible(true);
-            MenuNewDoctor menunewdoctor = new MenuNewDoctor();
-            ModelDoctors modeldoctors = new ModelDoctors();
-            PanelDoctors paneldoctors = new PanelDoctors();
-                    
-            ControllerNewDoctor controllernewdoctor = new ControllerNewDoctor(menunewdoctor, modeldoctors, paneldoctors);
+
             }else {
                 
                 String nombre = menunewdoctor.TxtNombre.getText();
@@ -63,6 +63,8 @@ public class ControllerDoctors implements ActionListener {
                 idOriginal = "";
                 menunewdoctor.BtnContinue.setText("Guardar");
                 menunewdoctor.TxtId1.setEnabled(true);
+                new ControllerNewDoctor(menunewdoctor, modeldoctors, paneldoctors, false, "");
+
             
 
             }
@@ -72,6 +74,15 @@ public class ControllerDoctors implements ActionListener {
         modifydoctors();    
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     public void deleteDoctor (){
     int fila = paneldoctors.DoctorsTable.getSelectedRow();
@@ -95,10 +106,12 @@ public class ControllerDoctors implements ActionListener {
                         "Seleccione un doctor de la tabla.",
                         "Sin selección", JOptionPane.ERROR_MESSAGE);
     }
-
-    
-    
     }
+    
+    
+    
+    
+    
     
     public void loadDoctors() {
         List<Doctors> lista = modeldoctors.obtainDoctors();
@@ -119,6 +132,11 @@ public class ControllerDoctors implements ActionListener {
     }
     
 
+    
+    
+    
+    
+    
     public void modifydoctors(){
     int fila = paneldoctors.DoctorsTable.getSelectedRow();
             if (fila < 0) {
@@ -142,6 +160,8 @@ public class ControllerDoctors implements ActionListener {
             menunewdoctor.BtnContinue.setText("Guardar cambios");
             menunewdoctor.TxtId1.setEnabled(false);     // no se cambia la PK
             menunewdoctor.setVisible(true);   // volvemos al form de alta
+            new ControllerNewDoctor(menunewdoctor, modeldoctors, paneldoctors, true, idOriginal);
+
             }
 
     

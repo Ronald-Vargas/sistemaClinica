@@ -2,7 +2,7 @@
 package Login;
 
 import ConnectionDataBase.ConnectionDB;
-import General.MenuPatient;
+import General.MenuAppointmentPatient;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -108,7 +108,7 @@ public class ControllerLoginPatients implements ActionListener{
 
     if (rs.next()) {
         JOptionPane.showMessageDialog(null, "Inicio de sesión aprobado", "Inicio de Sesión", JOptionPane.INFORMATION_MESSAGE);
-        MenuPatient menupatient = new MenuPatient();
+        MenuAppointmentPatient menupatient = new MenuAppointmentPatient();
         menupatient.setVisible(true);
         loginpatient.dispose();
         

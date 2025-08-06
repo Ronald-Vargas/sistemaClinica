@@ -1,6 +1,7 @@
 
 package General;
 
+import Login.ControllerHome;
 import Login.Home;
 import com.github.lgooddatepicker.components.TimePickerSettings;
 import com.github.lgooddatepicker.components.TimePickerSettings.TimeIncrement;
@@ -10,10 +11,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class MenuPatient extends javax.swing.JFrame {
+public class MenuAppointmentPatient extends javax.swing.JFrame {
 
     
-    public MenuPatient() {
+    public MenuAppointmentPatient() {
         initComponents();
         initCalendar();
         initTimePicker();
@@ -51,25 +52,25 @@ public class MenuPatient extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Agenda tu cita");
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setText("Horario:");
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel3.setText("Dias libres: ");
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel4.setText("De Lunes a Viernes, de 8 am a 4 pm.");
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel5.setText("Sabado y Domingo.");
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Tu información personal ya se encuentra almacenada en nuestro sistema.");
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -109,23 +110,23 @@ public class MenuPatient extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
+        jButton1.setText("Seleccionar fecha de mi cita");
         jButton1.setBackground(new java.awt.Color(0, 0, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Seleccionar fecha de mi cita");
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel7.setText("Seleccionar horario");
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel8.setText("Seleccionar doctor");
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jButton2.setText("Finalizar");
         jButton2.setBackground(new java.awt.Color(0, 204, 0));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Finalizar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -211,13 +212,14 @@ public class MenuPatient extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        MenuPatient menupatient = new MenuPatient();
+        MenuAppointmentPatient menupatient = new MenuAppointmentPatient();
         menupatient.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Home home = new Home();
+        ControllerHome contrllerhome = new ControllerHome(home);
        home.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -234,15 +236,28 @@ public class MenuPatient extends javax.swing.JFrame {
     
     
     
-    public void initCalendar() {
- 
+ public void initCalendar() {
     ComboCalendar.getJCalendar().getDayChooser().addDateEvaluator(new com.toedter.calendar.IDateEvaluator() {
         @Override
         public boolean isInvalid(Date date) {
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
+
+            // Obtener la fecha actual sin hora
+            Calendar today = Calendar.getInstance();
+            today.set(Calendar.HOUR_OF_DAY, 0);
+            today.set(Calendar.MINUTE, 0);
+            today.set(Calendar.SECOND, 0);
+            today.set(Calendar.MILLISECOND, 0);
+
+            // Deshabilitar sábados y domingos
             int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-            return (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY);
+            boolean isWeekend = (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY);
+
+            // Deshabilitar fechas pasadas
+            boolean isPastDate = cal.before(today);
+
+            return isWeekend || isPastDate;
         }
 
         @Override
@@ -280,10 +295,9 @@ public class MenuPatient extends javax.swing.JFrame {
             return null;
         }
     });
- 
-    
 }
-    
+ 
+ 
     
     public void initTimePicker() {
     TimePickerSettings settings = ComboTime.getSettings();
@@ -312,20 +326,21 @@ public class MenuPatient extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAppointmentPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAppointmentPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAppointmentPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAppointmentPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuPatient().setVisible(true);
+                new MenuAppointmentPatient().setVisible(true);
             }
         });
     }
