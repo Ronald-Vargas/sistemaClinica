@@ -3,7 +3,11 @@ package General;
 
 import About.PanelAbout;
 import Box.PanelBox;
+import Doctors.ControllerDoctors;
+import Doctors.ControllerNewDoctor;
+import Doctors.ModelDoctors;
 import Doctors.PanelDoctors;
+import Doctors.MenuNewDoctor;
 import Login.LoginDoctor;
 import Patients.PanelPatients;
 import Quotes.PanelQoutes;
@@ -15,18 +19,18 @@ import java.awt.event.ActionListener;
 public class ControllerMenuDoctor implements ActionListener{
     
     
-   private MenuDoctor menu;
+   private MenuDoctor menudoctor;
 
-    public ControllerMenuDoctor(MenuDoctor menu) {
-        this.menu = menu;
+    public ControllerMenuDoctor(MenuDoctor menudoctor) {
+        this.menudoctor = menudoctor;
         
         
-        menu.BtnBox.addActionListener(this);
-        menu.BtnQuotes.addActionListener(this);
-        menu.BtnPatients.addActionListener(this);
-        menu.BtnDoctors.addActionListener(this);
-        menu.BtnLogout.addActionListener(this);
-        menu.BtnAbout.addActionListener(this);
+        menudoctor.BtnBox.addActionListener(this);
+        menudoctor.BtnQuotes.addActionListener(this);
+        menudoctor.BtnPatients.addActionListener(this);
+        menudoctor.BtnDoctors.addActionListener(this);
+        menudoctor.BtnLogout.addActionListener(this);
+        menudoctor.BtnAbout.addActionListener(this);
         
         initQuotes();
 
@@ -44,26 +48,26 @@ public class ControllerMenuDoctor implements ActionListener{
     public void actionPerformed (ActionEvent e) {
     
     
-    if (e.getSource() == menu.BtnBox) {
+    if (e.getSource() == menudoctor.BtnBox) {
     initBox();
     
     
     
-    } else if (e.getSource() == menu.BtnQuotes) {
+    } else if (e.getSource() == menudoctor.BtnQuotes) {
     initQuotes();
     
-    } else if (e.getSource() == menu.BtnPatients) {
+    } else if (e.getSource() == menudoctor.BtnPatients) {
     initPatients();
     
-    } else if (e.getSource() == menu.BtnDoctors) {
+    } else if (e.getSource() == menudoctor.BtnDoctors) {
     initDoctors();
     
-    } else if (e.getSource() == menu.BtnLogout) {
+    } else if (e.getSource() == menudoctor.BtnLogout) {
         LoginDoctor logindoctor = new LoginDoctor();
         logindoctor.setVisible(true);
-        menu.dispose();
+        menudoctor.dispose();
         
-    } else if (e.getSource() == menu.BtnAbout) {
+    } else if (e.getSource() == menudoctor.BtnAbout) {
     initAbot();
     
     }
@@ -91,10 +95,10 @@ public class ControllerMenuDoctor implements ActionListener{
     panelbox.setLocation(0,0);
   
     
-    menu.Content.removeAll();
-    menu.Content.add(panelbox, BorderLayout.CENTER);
-    menu.Content.revalidate();
-    menu.Content.repaint();
+    menudoctor.Content.removeAll();
+    menudoctor.Content.add(panelbox, BorderLayout.CENTER);
+    menudoctor.Content.revalidate();
+    menudoctor.Content.repaint();
 
 }
     
@@ -108,10 +112,10 @@ public class ControllerMenuDoctor implements ActionListener{
     panelquotes.setLocation(0,0);
   
     
-    menu.Content.removeAll();
-    menu.Content.add(panelquotes, BorderLayout.CENTER);
-    menu.Content.revalidate();
-    menu.Content.repaint();
+    menudoctor.Content.removeAll();
+    menudoctor.Content.add(panelquotes, BorderLayout.CENTER);
+    menudoctor.Content.revalidate();
+    menudoctor.Content.repaint();
 
 }
     
@@ -123,10 +127,10 @@ public class ControllerMenuDoctor implements ActionListener{
     panelpatients.setLocation(0,0);
   
     
-    menu.Content.removeAll();
-    menu.Content.add(panelpatients, BorderLayout.CENTER);
-    menu.Content.revalidate();
-    menu.Content.repaint();
+    menudoctor.Content.removeAll();
+    menudoctor.Content.add(panelpatients, BorderLayout.CENTER);
+    menudoctor.Content.revalidate();
+    menudoctor.Content.repaint();
 
 }  
     
@@ -135,14 +139,18 @@ public class ControllerMenuDoctor implements ActionListener{
   
   public void initDoctors() {
     PanelDoctors paneldoctors = new PanelDoctors();
+    ModelDoctors modeldoctors = new ModelDoctors();
+    MenuNewDoctor menunewdoctor = new MenuNewDoctor();
+    ControllerDoctors controllerdoctors = new ControllerDoctors(menunewdoctor, paneldoctors, modeldoctors);
+      ControllerNewDoctor controllernewdoctor = new ControllerNewDoctor(menunewdoctor, modeldoctors, paneldoctors);
     paneldoctors.setSize(1020, 720);
     paneldoctors.setLocation(0,0);
   
     
-    menu.Content.removeAll();
-    menu.Content.add(paneldoctors, BorderLayout.CENTER);
-    menu.Content.revalidate();
-    menu.Content.repaint();
+    menudoctor.Content.removeAll();
+    menudoctor.Content.add(paneldoctors, BorderLayout.CENTER);
+    menudoctor.Content.revalidate();
+    menudoctor.Content.repaint();
 
 }  
   
@@ -153,10 +161,10 @@ public class ControllerMenuDoctor implements ActionListener{
     panelabout.setLocation(0,0);
   
     
-    menu.Content.removeAll();
-    menu.Content.add(panelabout, BorderLayout.CENTER);
-    menu.Content.revalidate();
-    menu.Content.repaint();
+    menudoctor.Content.removeAll();
+    menudoctor.Content.add(panelabout, BorderLayout.CENTER);
+    menudoctor.Content.revalidate();
+    menudoctor.Content.repaint();
 
 }  
   

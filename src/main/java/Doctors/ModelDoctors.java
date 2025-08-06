@@ -34,7 +34,8 @@ public class ModelDoctors {
                     rs.getString("segundoApellido"),
                     rs.getString("identificacion"),
                     rs.getString("correo"),
-                    rs.getString("telefono")
+                    rs.getString("telefono"),
+                    rs.getString("contrasena")
                 );
                 lista.add(doctor);
             }
@@ -47,7 +48,7 @@ public class ModelDoctors {
     }
 
     public boolean insertDoctor(Doctors doctor) {
-        String sql = "INSERT INTO doctores (nombre, primerApellido, segundoApellido, identificacion, correo, telefono) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO doctores (nombre, primerApellido, segundoApellido, identificacion, correo, telefono, contrasena) VALUES (?, ?, ?, ?, ?, ?,?)";
 
         try (Connection conexion = conn.establecerConexion();
              PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -58,6 +59,8 @@ public class ModelDoctors {
             ps.setString(4, doctor.getIdentificacion());
             ps.setString(5, doctor.getCorreo());
             ps.setString(6, doctor.getTelefono());
+            ps.setString(7, doctor.getContrasena());
+            
 
             ps.executeUpdate();
             return true;
@@ -82,9 +85,9 @@ public class ModelDoctors {
         return false;
     }
 }
-    public boolean update (String idOriginal, String nombre, String primerApellido, String segundoApellido, String correo, String telefono) {
+    public boolean update (String idOriginal, String nombre, String primerApellido, String segundoApellido, String correo, String telefono, String contrasena) {
     
-        String sql = "UPDATE Doctores SET Nombre=?, PrimerApellido=?, SegundoApellido=?, Correo=?, Telefono=? WHERE Identificacion=?";
+        String sql = "UPDATE Doctores SET Nombre=?, PrimerApellido=?, SegundoApellido=?, Correo=?, Telefono=?, Contrasena=? WHERE Identificacion=?";
         
         try (Connection conexion = conn.establecerConexion();
              PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -94,7 +97,9 @@ public class ModelDoctors {
             ps.setString(3, segundoApellido);
             ps.setString(4, correo);
             ps.setString(5, telefono);
-            ps.setString(6, idOriginal);
+            ps.setString(6, contrasena);
+            ps.setString(7, idOriginal);
+            
 
             return ps.executeUpdate() > 0;
 

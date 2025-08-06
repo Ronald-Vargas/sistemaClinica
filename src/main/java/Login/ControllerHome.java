@@ -14,6 +14,7 @@ public class ControllerHome implements ActionListener{
         
         this.home.BtnPatients.addActionListener(this);
         this.home.BtnDoctors.addActionListener(this);
+        this.home.BtnOut.addActionListener(this);
     }
 
   
@@ -28,15 +29,16 @@ public class ControllerHome implements ActionListener{
     loginpatient.setVisible(true);
     home.dispose();
     
-    
+     
     } else if (e.getSource() == home.BtnDoctors) {
     LoginDoctor logindoctor = new LoginDoctor();
     ControllerLoginDoctor controllerlogindoctor = new ControllerLoginDoctor(logindoctor);
     logindoctor.setVisible(true);
     home.dispose();
     
-    
-    
+
+    } else if (e.getSource() == home.BtnOut) {
+    System.exit(0);
     }
     
     

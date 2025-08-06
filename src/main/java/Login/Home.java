@@ -25,6 +25,7 @@ public class Home extends javax.swing.JFrame {
         BtnPatients = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        BtnOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -130,6 +131,18 @@ public class Home extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
+        BtnOut.setBackground(new java.awt.Color(0, 204, 204));
+        BtnOut.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BtnOut.setForeground(new java.awt.Color(255, 255, 255));
+        BtnOut.setText("X");
+        BtnOut.setBorderPainted(false);
+        BtnOut.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnOutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);
         Background.setLayout(BackgroundLayout);
         BackgroundLayout.setHorizontalGroup(
@@ -140,11 +153,15 @@ public class Home extends javax.swing.JFrame {
                 .addGap(179, 179, 179)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(256, 256, 256))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(BtnOut, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         BackgroundLayout.setVerticalGroup(
             BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BackgroundLayout.createSequentialGroup()
-                .addGap(235, 235, 235)
+                .addComponent(BtnOut, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(200, 200, 200)
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -176,6 +193,10 @@ public class Home extends javax.swing.JFrame {
     private void BtnDoctorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDoctorsActionPerformed
 
     }//GEN-LAST:event_BtnDoctorsActionPerformed
+
+    private void BtnOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnOutActionPerformed
 
     
     
@@ -215,6 +236,7 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
     public javax.swing.JButton BtnDoctors;
+    public javax.swing.JButton BtnOut;
     public javax.swing.JButton BtnPatients;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

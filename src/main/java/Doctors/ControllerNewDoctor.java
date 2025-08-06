@@ -44,13 +44,14 @@ public class ControllerNewDoctor implements ActionListener {
         String identificacion = menunewdoctor.TxtId1.getText();
         String correo = menunewdoctor.Txtmail.getText();
         String telefono = menunewdoctor.TxtPhone.getText();
+        String contrasena = menunewdoctor.TxtPass.getText();
 
-        if (nombre.isEmpty() || primerApellido.isEmpty() || identificacion.isEmpty()) {
+        if (nombre.isEmpty() || primerApellido.isEmpty() || segundoApellido.isEmpty() || identificacion.isEmpty() || correo.isEmpty() || telefono.isEmpty() || contrasena.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor complete los campos obligatorios.");
             return;
         }
 
-        Doctors doctor = new Doctors(nombre, primerApellido, segundoApellido, identificacion, correo, telefono);
+        Doctors doctor = new Doctors(nombre, primerApellido, segundoApellido, identificacion, correo, telefono, contrasena);
 
         // Insertar en la base de datos
         if (modeldoctors.insertDoctor(doctor)) {
@@ -79,7 +80,8 @@ public class ControllerNewDoctor implements ActionListener {
                 doctor.getSegundoApellido(),
                 doctor.getIdentificacion(),
                 doctor.getCorreo(),
-                doctor.getTelefono()
+                doctor.getTelefono(),
+                doctor.getContrasena()
             });
         }
     }
