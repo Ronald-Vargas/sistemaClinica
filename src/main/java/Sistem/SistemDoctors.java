@@ -1,17 +1,17 @@
 
-package General;
+package Sistem;
 
 
-import Login.Home;
+import Home.Home;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
 
-public class MenuDoctor extends javax.swing.JFrame {
+public class SistemDoctors extends javax.swing.JFrame {
 
    
-    public MenuDoctor() {
+    public SistemDoctors() {
         initComponents();
 
         initHour();
@@ -329,21 +329,23 @@ public class MenuDoctor extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuDoctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SistemDoctors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuDoctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SistemDoctors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuDoctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SistemDoctors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuDoctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SistemDoctors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuDoctor().setVisible(true);
+                new SistemDoctors().setVisible(true);
             }
         });
     }

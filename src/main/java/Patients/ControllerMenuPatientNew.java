@@ -1,6 +1,8 @@
 
-package General;
+package Patients;
 
+import Patients.MenuPatientNew;
+import Appointment.MenuAppointmentPatient;
 import ConnectionDataBase.ConnectionDB;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,6 +1,7 @@
 
-package General;
+package Sistem;
 
+import Sistem.SistemDoctors;
 import About.PanelAbout;
 import Box.PanelBox;
 import Doctors.ControllerDoctors;
@@ -10,18 +11,18 @@ import Doctors.PanelDoctors;
 import Doctors.MenuNewDoctor;
 import Login.LoginDoctor;
 import Patients.PanelPatients;
-import Appointment.PanelQoutes;
+import Appointment.PanelAppointmentDoctors;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class ControllerMenuDoctor implements ActionListener{
+public class ControllerSistemDoctors implements ActionListener{
     
     
-   private MenuDoctor menudoctor;
+   private SistemDoctors menudoctor;
 
-    public ControllerMenuDoctor(MenuDoctor menudoctor) {
+    public ControllerSistemDoctors(SistemDoctors menudoctor) {
         this.menudoctor = menudoctor;
         
         
@@ -107,7 +108,7 @@ public class ControllerMenuDoctor implements ActionListener{
     
     
     public void initQuotes() {
-    PanelQoutes panelquotes = new PanelQoutes();
+    PanelAppointmentDoctors panelquotes = new PanelAppointmentDoctors();
     panelquotes.setSize(1020, 720);
     panelquotes.setLocation(0,0);
   

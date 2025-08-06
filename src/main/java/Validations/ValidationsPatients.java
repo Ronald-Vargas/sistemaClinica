@@ -1,6 +1,7 @@
 
-package Login;
+package Validations;
 
+import Register.Register;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 

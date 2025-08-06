@@ -1,5 +1,5 @@
 
-package Login;
+package Register;
 
 
 import java.awt.Image;

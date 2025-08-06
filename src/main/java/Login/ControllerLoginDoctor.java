@@ -1,10 +1,11 @@
 
 package Login;
 
+import Home.Home;
 import ConnectionDataBase.ConnectionDB;
-import General.ControllerMenuDoctor;
-import General.MenuDoctor;
-import General.MenuAppointmentPatient;
+import Sistem.ControllerSistemDoctors;
+import Sistem.SistemDoctors;
+import Appointment.MenuAppointmentPatient;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -93,8 +94,8 @@ public class ControllerLoginDoctor implements ActionListener{
         JOptionPane.showMessageDialog(null, "Inicio de sesión aprobado", "Inicio de Sesión", JOptionPane.INFORMATION_MESSAGE);
         
         
-        MenuDoctor menudoctor = new MenuDoctor();
-        ControllerMenuDoctor controllermenudoctor = new ControllerMenuDoctor(menudoctor);
+        SistemDoctors menudoctor = new SistemDoctors();
+        ControllerSistemDoctors controllermenudoctor = new ControllerSistemDoctors(menudoctor);
         menudoctor.setVisible(true);
         logindoctor.dispose();
         

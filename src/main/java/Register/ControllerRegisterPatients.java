@@ -1,10 +1,15 @@
 
-package Login;
+package Register;
 
+import Home.Home;
+import Home.ControllerHome;
+import Register.Register;
 import ConnectionDataBase.ConnectionDB;
-import General.ControllerMenuPatientNew;
-import General.MenuPatientNew;
-import General.ValidationsPatientNew;
+import Patients.ControllerMenuPatientNew;
+import Patients.MenuPatientNew;
+import Validations.ValidationsPatientNew;
+import Login.ControllerLoginPatients;
+import Login.LoginPatient;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;

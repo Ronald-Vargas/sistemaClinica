@@ -1,8 +1,8 @@
 
-package General;
+package Appointment;
 
-import Login.ControllerHome;
-import Login.Home;
+import Home.ControllerHome;
+import Home.Home;
 import com.github.lgooddatepicker.components.TimePickerSettings;
 import com.github.lgooddatepicker.components.TimePickerSettings.TimeIncrement;
 import java.awt.Color;

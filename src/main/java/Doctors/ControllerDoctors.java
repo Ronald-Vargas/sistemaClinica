@@ -1,6 +1,6 @@
 package Doctors;
 
-import General.MenuDoctor;
+import Sistem.SistemDoctors;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

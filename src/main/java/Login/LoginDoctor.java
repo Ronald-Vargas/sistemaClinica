@@ -1,7 +1,7 @@
 
 package Login;
 
-import General.MenuDoctor;
+import Sistem.SistemDoctors;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 

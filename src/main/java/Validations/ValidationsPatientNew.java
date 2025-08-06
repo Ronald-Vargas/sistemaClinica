@@ -1,6 +1,7 @@
 
-package General;
+package Validations;
 
+import Patients.MenuPatientNew;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 

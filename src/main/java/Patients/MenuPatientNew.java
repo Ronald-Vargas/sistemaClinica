@@ -1,5 +1,5 @@
 
-package General;
+package Patients;
 
 import java.awt.Color;
 import java.util.Calendar;
@@ -65,54 +65,54 @@ public class MenuPatientNew extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Registra tus datos");
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
 
-        jLabel12.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Completa toda la información solicitada para registrarte como paciente.");
+        jLabel12.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel15.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Primer apellido");
+        jLabel15.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel16.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Segundo apellido");
+        jLabel16.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel17.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Ocupación");
+        jLabel17.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        Lbl4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         Lbl4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Lbl4.setText("Identificación");
+        Lbl4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel19.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("Estado civil");
+        jLabel19.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel20.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("Fecha de nacimiento");
+        jLabel20.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel22.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setText("Telefono");
+        jLabel22.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel23.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setText("Sexo");
+        jLabel23.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel24.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel24.setText("Provincia");
+        jLabel24.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
+        BtnContinue.setText("Continuar");
         BtnContinue.setBackground(new java.awt.Color(0, 204, 0));
         BtnContinue.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         BtnContinue.setForeground(new java.awt.Color(255, 255, 255));
-        BtnContinue.setText("Continuar");
         BtnContinue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnContinueActionPerformed(evt);
@@ -128,21 +128,21 @@ public class MenuPatientNew extends javax.swing.JFrame {
         TxtId.setEnabled(false);
         TxtId.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
-        ComboSex.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         ComboSex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-SELECCIONAR-", "Masculino", "Femenino" }));
+        ComboSex.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
-        ComboProvince.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         ComboProvince.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-SELECCIONAR-", "San José", "Alajuela", "Cartago", "Heredia", "Guanacaste", "Puntarenas", "Limón" }));
+        ComboProvince.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
-        ComboOccupation.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         ComboOccupation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-SELECCIONAR-", "Empleado", "Estudiante", "Desempleado", "Pensionado", "Independiente", "Ama de casa", "Comerciante", "Otro" }));
+        ComboOccupation.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
-        ComboCivilStatus.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         ComboCivilStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-SELECCIONAR-", "Soltero(a)", "Casado(a)", "Divorciado(a)", "Viudo(a)", "Unión libre (o Unido(a))", "Separado(a)", "Comprometido(a)", " " }));
+        ComboCivilStatus.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
-        jLabel21.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("Familiar responsable");
+        jLabel21.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
         TxtResponsible.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 

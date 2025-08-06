@@ -1,6 +1,10 @@
 
-package Login;
+package Home;
 
+import Login.ControllerLoginDoctor;
+import Login.ControllerLoginPatients;
+import Login.LoginDoctor;
+import Login.LoginPatient;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

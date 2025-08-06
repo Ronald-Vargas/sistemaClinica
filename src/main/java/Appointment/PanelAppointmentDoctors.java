@@ -2,9 +2,9 @@
 package Appointment;
 
 
-public class PanelQoutes extends javax.swing.JPanel {
+public class PanelAppointmentDoctors extends javax.swing.JPanel {
 
-    public PanelQoutes() {
+    public PanelAppointmentDoctors() {
         initComponents();
         initStyles();
     }
