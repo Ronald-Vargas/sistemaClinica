@@ -1,17 +1,16 @@
 
 package Sistem;
 
-import Sistem.SistemDoctors;
 import About.PanelAbout;
 import Box.PanelBox;
 import Doctors.ControllerDoctors;
-import Doctors.ControllerNewDoctor;
 import Doctors.ModelDoctors;
 import Doctors.PanelDoctors;
-import Doctors.MenuNewDoctor;
 import Login.LoginDoctor;
 import Patients.PanelPatients;
 import Appointment.PanelAppointmentDoctors;
+import Patients.ControllerPanelPatients;
+import Patients.ModelPanelPatients;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -124,6 +123,8 @@ public class ControllerSistemDoctors implements ActionListener{
     
   public void initPatients() {
     PanelPatients panelpatients = new PanelPatients();
+    ModelPanelPatients modelpanelpatients = new ModelPanelPatients();
+    ControllerPanelPatients controllerpanelpatients = new ControllerPanelPatients(panelpatients, modelpanelpatients);
     panelpatients.setSize(1020, 720);
     panelpatients.setLocation(0,0);
   
@@ -141,11 +142,9 @@ public class ControllerSistemDoctors implements ActionListener{
   public void initDoctors() {
     PanelDoctors paneldoctors = new PanelDoctors();
     ModelDoctors modeldoctors = new ModelDoctors();
-    MenuNewDoctor menunewdoctor = new MenuNewDoctor();
-    ControllerDoctors controllerdoctors = new ControllerDoctors(menunewdoctor, paneldoctors, modeldoctors);
+    ControllerDoctors controllerdoctors = new ControllerDoctors(paneldoctors, modeldoctors);
     boolean editando = false;
     String idOriginal = "";
-    ControllerNewDoctor controllernewdoctor = new ControllerNewDoctor(menunewdoctor, modeldoctors, paneldoctors, editando, idOriginal );
     paneldoctors.setSize(1020, 720);
     paneldoctors.setLocation(0,0);
   

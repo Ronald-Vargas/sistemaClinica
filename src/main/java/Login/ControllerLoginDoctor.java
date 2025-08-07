@@ -6,6 +6,7 @@ import ConnectionDataBase.ConnectionDB;
 import Sistem.ControllerSistemDoctors;
 import Sistem.SistemDoctors;
 import Appointment.MenuAppointmentPatient;
+import Home.ControllerHome;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,6 +55,7 @@ public class ControllerLoginDoctor implements ActionListener{
         
         } else if (e.getSource() == logindoctor.BtnExit) {
         Home home = new Home();
+        ControllerHome controllerhome = new ControllerHome(home);
         home.setVisible(true);
         logindoctor.dispose();
                 

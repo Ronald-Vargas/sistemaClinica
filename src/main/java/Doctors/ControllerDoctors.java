@@ -1,7 +1,6 @@
 package Doctors;
 
-import Sistem.SistemDoctors;
-import java.awt.BorderLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -10,7 +9,6 @@ import javax.swing.JOptionPane;
 
 public class ControllerDoctors implements ActionListener {
 
-    private MenuNewDoctor menunewdoctor;
     private PanelDoctors paneldoctors;
     private ModelDoctors modeldoctors;
     private boolean editando = false;
@@ -18,61 +16,115 @@ public class ControllerDoctors implements ActionListener {
     
     
     
-    public ControllerDoctors(MenuNewDoctor menunewdoctor, PanelDoctors paneldoctors, ModelDoctors modeldoctors) {
-        this.menunewdoctor = menunewdoctor;
+    public ControllerDoctors(PanelDoctors paneldoctors, ModelDoctors modeldoctors) {
         this.paneldoctors = paneldoctors;
         this.modeldoctors = modeldoctors;
         
-
+       loadDoctors();
+       initializeListeners();
+       
+       
+       this.paneldoctors.TxtSearch.addActionListener(new ActionListener() {
+     @Override
+            public void actionPerformed(ActionEvent e) {
+                searchDoctor();
+            }
+            });
+       
+    }
+    
+    
+    private void initializeListeners() {
         this.paneldoctors.btnAdd.addActionListener(this);
         this.paneldoctors.btnDelete.addActionListener(this);
         this.paneldoctors.btnEdit.addActionListener(this);
-
+        this.paneldoctors.BtnContinue.addActionListener(this);
     }
     
     
     
 
+    
+    
+    
     @Override
     public void actionPerformed(ActionEvent e) {
 
 
         // Evento al presionar "Agregar" en PanelDoctors
         if (e.getSource() == paneldoctors.btnAdd) {
-            if (!editando) {  // ----- INSERT -----
-
-            menunewdoctor.setVisible(true);
-
-            }else {
-                
-                String nombre = menunewdoctor.TxtNombre.getText();
-                String primerApellido = menunewdoctor.TxtLastName.getText();
-                String segundoApellido = menunewdoctor.TxtSecondLastname.getText();
-                String correo = menunewdoctor.Txtmail.getText();
-                String telefono = menunewdoctor.TxtPhone.getText();
-                String contrasena = menunewdoctor.TxtPass.getText();
-                
-                
-                boolean ok = modeldoctors.update(
-                idOriginal, nombre, primerApellido, segundoApellido,correo, telefono, contrasena);
-                if (ok) {
-                    JOptionPane.showMessageDialog(null, "Doctor actualizado correctamente");
-                }
-                // restauramos estado “normal”
-                editando = false;
-                idOriginal = "";
-                menunewdoctor.BtnContinue.setText("Guardar");
-                menunewdoctor.TxtId1.setEnabled(true);
-                new ControllerNewDoctor(menunewdoctor, modeldoctors, paneldoctors, false, "");
-
-            
-
-            }
-        }else if (e.getSource() == paneldoctors.btnDelete){
-        deleteDoctor();
-        }else if(e.getSource() == paneldoctors.btnEdit){
-        modifydoctors();    
+        handleAddAction();
+        } else if (e.getSource() == paneldoctors.btnDelete) {
+            deleteDoctor();
+        } else if (e.getSource() == paneldoctors.btnEdit) {
+             modifydoctors();    
+        } else if (e.getSource() == paneldoctors.BtnContinue) {
+            registrarDoctor();
+           
         }
+    }
+        
+        
+    
+    
+    
+    private void registrarDoctor() {
+    String nombre = paneldoctors.TxtNombre.getText();
+    String primerApellido = paneldoctors.TxtLastName.getText();
+    String segundoApellido = paneldoctors.TxtSecondLastname.getText();
+    String identificacion = paneldoctors.TxtId1.getText();
+    String correo = paneldoctors.Txtmail.getText();
+    String telefono = paneldoctors.TxtPhone.getText();
+    String contrasena = paneldoctors.TxtPass.getText();
+
+    if (nombre.isEmpty() || primerApellido.isEmpty() || segundoApellido.isEmpty() || identificacion.isEmpty() || correo.isEmpty() || telefono.isEmpty() || contrasena.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Por favor complete los campos obligatorios.");
+        return;
+    }
+
+    if (editando) {
+  
+        boolean actualizado = modeldoctors.update(idOriginal, nombre, primerApellido, segundoApellido, correo, telefono, contrasena);
+        if (actualizado) {
+            JOptionPane.showMessageDialog(null, "Doctor actualizado correctamente.");
+            paneldoctors.jTabbedPane.setSelectedIndex(0);
+            cleanfields();
+            loadDoctors();
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al actualizar doctor.");
+        }
+
+    } else {
+        // ➕ INSERTAR NUEVO
+        if (modeldoctors.existeDoctor(identificacion)) {
+            JOptionPane.showMessageDialog(null, "Ya existe un doctor con esa identificación.");
+            return;
+        } 
+
+        Doctors doctor = new Doctors(nombre, primerApellido, segundoApellido, identificacion, correo, telefono, contrasena);
+        if (modeldoctors.insertDoctor(doctor)) {
+            JOptionPane.showMessageDialog(null, "Doctor registrado con éxito.");
+            paneldoctors.jTabbedPane.setSelectedIndex(0);
+            loadDoctors();
+            cleanfields();
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al registrar doctor.");
+        }
+    }
+}
+    
+    
+    
+    
+    
+    
+       private void cleanfields() {
+        paneldoctors.TxtNombre.setText("");
+        paneldoctors.TxtLastName.setText("");
+        paneldoctors.TxtSecondLastname.setText("");
+        paneldoctors.TxtId1.setText("");
+        paneldoctors.Txtmail.setText("");
+        paneldoctors.TxtPhone.setText("");
     }
     
     
@@ -83,6 +135,56 @@ public class ControllerDoctors implements ActionListener {
     
     
     
+    
+    
+     private void handleAddAction() {
+        if (!editando) {
+            // Modo INSERT
+            paneldoctors.jTabbedPane.setSelectedIndex(1);
+        } else {
+            // Modo UPDATE
+            updateDoctor();
+        }
+    }
+    
+    
+    
+    
+     
+     private void updateDoctor() {
+        String nombre = paneldoctors.TxtNombre.getText().trim();
+        String primerApellido = paneldoctors.TxtLastName.getText().trim();
+        String segundoApellido = paneldoctors.TxtSecondLastname.getText().trim();
+        String correo = paneldoctors.Txtmail.getText().trim();
+        String telefono = paneldoctors.TxtPhone.getText().trim();
+        String contrasena = paneldoctors.TxtPass.getText();
+        
+        boolean ok = modeldoctors.update(idOriginal, nombre, primerApellido, segundoApellido, correo, telefono, contrasena);
+        
+        if (ok) {
+            JOptionPane.showMessageDialog(null, "Doctor actualizado correctamente");
+            resetEditingState();
+        }
+    }
+     
+     
+     
+     
+     
+     
+     private void resetEditingState() {
+        editando = false;
+        idOriginal = "";
+        paneldoctors.BtnContinue.setText("Guardar");
+        paneldoctors.TxtId1.setEnabled(true);
+    }
+     
+     
+     
+     
+     
+     
+     
     
     public void deleteDoctor (){
     int fila = paneldoctors.DoctorsTable.getSelectedRow();
@@ -137,6 +239,8 @@ public class ControllerDoctors implements ActionListener {
     
     
     
+    
+    
     public void modifydoctors(){
     int fila = paneldoctors.DoctorsTable.getSelectedRow();
             if (fila < 0) {
@@ -147,25 +251,73 @@ public class ControllerDoctors implements ActionListener {
             } else {
             
             idOriginal = paneldoctors.DoctorsTable.getValueAt(fila, 3).toString();
-            menunewdoctor.TxtId1.setText(idOriginal);
-            menunewdoctor.TxtNombre.setText(paneldoctors.DoctorsTable.getValueAt(fila, 0).toString());
-            menunewdoctor.TxtLastName.setText(paneldoctors.DoctorsTable.getValueAt(fila, 1).toString());
-            menunewdoctor.TxtSecondLastname.setText(paneldoctors.DoctorsTable.getValueAt(fila, 2).toString());
-            menunewdoctor.Txtmail.setText(paneldoctors.DoctorsTable.getValueAt(fila, 4).toString());
-            menunewdoctor.TxtPhone.setText(paneldoctors.DoctorsTable.getValueAt(fila, 5).toString());
-            menunewdoctor.TxtPass.setText(paneldoctors.DoctorsTable.getValueAt(fila, 6).toString());
+            paneldoctors.TxtId1.setText(idOriginal);
+            paneldoctors.TxtNombre.setText(paneldoctors.DoctorsTable.getValueAt(fila, 0).toString());
+            paneldoctors.TxtLastName.setText(paneldoctors.DoctorsTable.getValueAt(fila, 1).toString());
+            paneldoctors.TxtSecondLastname.setText(paneldoctors.DoctorsTable.getValueAt(fila, 2).toString());
+            paneldoctors.Txtmail.setText(paneldoctors.DoctorsTable.getValueAt(fila, 4).toString());
+            paneldoctors.TxtPhone.setText(paneldoctors.DoctorsTable.getValueAt(fila, 5).toString());
+            paneldoctors.TxtPass.setText(paneldoctors.DoctorsTable.getValueAt(fila, 6).toString());
 
             // preparamos modo edición
             editando = true;
-            menunewdoctor.BtnContinue.setText("Guardar cambios");
-            menunewdoctor.TxtId1.setEnabled(false);     // no se cambia la PK
-            menunewdoctor.setVisible(true);   // volvemos al form de alta
-            new ControllerNewDoctor(menunewdoctor, modeldoctors, paneldoctors, true, idOriginal);
-
+            paneldoctors.BtnContinue.setText("Guardar cambios");
+            paneldoctors.TxtId1.setEnabled(false);     // no se cambia la PK
+            paneldoctors.jTabbedPane.setSelectedIndex(1);   // volvemos al form de alta
             }
 
     
     }
+    
+ 
+    
+    
+    
+    public void searchDoctor() {
+    String doctor = paneldoctors.TxtSearch.getText().trim();
+    
+    if (doctor.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Ingrese la  identificación que desea buscar", "Campo vacío", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+
+
+    DefaultTableModel modelo = (DefaultTableModel) paneldoctors.DoctorsTable.getModel();
+    boolean encontrado = false;
+
+    for (int i = 0; i < modelo.getRowCount(); i++) {
+        String idActual = modelo.getValueAt(i, 3
+        ).toString();
+        if (idActual.equalsIgnoreCase(doctor)) {
+            // Selecciona la fila
+            paneldoctors.DoctorsTable.setRowSelectionInterval(i, i);
+            // Opcional: mover scroll para que se vea
+            paneldoctors.DoctorsTable.scrollRectToVisible(paneldoctors.DoctorsTable.getCellRect(i, 0, true));
+            encontrado = true;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        JOptionPane.showMessageDialog(null, "No se encontró el doctor con esa identificación", "No encontrado", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 }
