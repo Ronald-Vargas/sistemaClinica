@@ -39,6 +39,8 @@ public class ControllerDoctors implements ActionListener {
         this.paneldoctors.btnDelete.addActionListener(this);
         this.paneldoctors.btnEdit.addActionListener(this);
         this.paneldoctors.BtnContinue.addActionListener(this);
+        this.paneldoctors.BtnOut.addActionListener(this);
+
     }
     
     
@@ -60,7 +62,9 @@ public class ControllerDoctors implements ActionListener {
              modifydoctors();    
         } else if (e.getSource() == paneldoctors.BtnContinue) {
             registrarDoctor();
-           
+        } else if (e.getSource() == paneldoctors.BtnOut) {
+        cleanfields();
+        paneldoctors.jTabbedPane.setSelectedIndex(0);
         }
     }
         
@@ -76,19 +80,20 @@ public class ControllerDoctors implements ActionListener {
     String correo = paneldoctors.Txtmail.getText();
     String telefono = paneldoctors.TxtPhone.getText();
     String contrasena = paneldoctors.TxtPass.getText();
+    String especialidad = (String) paneldoctors.ComboSpecialty.getSelectedItem();
 
-    if (nombre.isEmpty() || primerApellido.isEmpty() || segundoApellido.isEmpty() || identificacion.isEmpty() || correo.isEmpty() || telefono.isEmpty() || contrasena.isEmpty()) {
+    if (nombre.isEmpty() || primerApellido.isEmpty() || segundoApellido.isEmpty() || identificacion.isEmpty() || correo.isEmpty() || telefono.isEmpty() || contrasena.isEmpty() || especialidad.equals("--SELECCIONAR--")) {
         JOptionPane.showMessageDialog(null, "Por favor complete los campos obligatorios.");
         return;
     }
 
     if (editando) {
   
-        boolean actualizado = modeldoctors.update(idOriginal, nombre, primerApellido, segundoApellido, correo, telefono, contrasena);
+        boolean actualizado = modeldoctors.update(idOriginal, nombre, primerApellido, segundoApellido, correo, telefono, contrasena, especialidad);
         if (actualizado) {
             JOptionPane.showMessageDialog(null, "Doctor actualizado correctamente.");
             paneldoctors.jTabbedPane.setSelectedIndex(0);
-            cleanfields();
+            resetEditingState();
             loadDoctors();
         } else {
             JOptionPane.showMessageDialog(null, "Error al actualizar doctor.");
@@ -101,7 +106,7 @@ public class ControllerDoctors implements ActionListener {
             return;
         } 
 
-        Doctors doctor = new Doctors(nombre, primerApellido, segundoApellido, identificacion, correo, telefono, contrasena);
+        Doctors doctor = new Doctors(nombre, primerApellido, segundoApellido, identificacion, correo, telefono, contrasena, especialidad);
         if (modeldoctors.insertDoctor(doctor)) {
             JOptionPane.showMessageDialog(null, "Doctor registrado con éxito.");
             paneldoctors.jTabbedPane.setSelectedIndex(0);
@@ -125,7 +130,9 @@ public class ControllerDoctors implements ActionListener {
         paneldoctors.TxtId1.setText("");
         paneldoctors.Txtmail.setText("");
         paneldoctors.TxtPhone.setText("");
-    }
+        paneldoctors.ComboSpecialty.setSelectedIndex(0);    
+        paneldoctors.TxtPass.setText("");
+        }
     
     
     
@@ -139,11 +146,10 @@ public class ControllerDoctors implements ActionListener {
     
      private void handleAddAction() {
         if (!editando) {
-            // Modo INSERT
+            
             paneldoctors.jTabbedPane.setSelectedIndex(1);
         } else {
-            // Modo UPDATE
-            updateDoctor();
+            JOptionPane.showMessageDialog(null, "Ya está editando un doctor. Finalice la edición primero.");
         }
     }
     
@@ -158,8 +164,9 @@ public class ControllerDoctors implements ActionListener {
         String correo = paneldoctors.Txtmail.getText().trim();
         String telefono = paneldoctors.TxtPhone.getText().trim();
         String contrasena = paneldoctors.TxtPass.getText();
+        String especialidad = (String) paneldoctors.ComboSpecialty.getSelectedItem();
         
-        boolean ok = modeldoctors.update(idOriginal, nombre, primerApellido, segundoApellido, correo, telefono, contrasena);
+        boolean ok = modeldoctors.update(idOriginal, nombre, primerApellido, segundoApellido, correo, telefono, contrasena, especialidad);
         
         if (ok) {
             JOptionPane.showMessageDialog(null, "Doctor actualizado correctamente");
@@ -176,7 +183,9 @@ public class ControllerDoctors implements ActionListener {
         editando = false;
         idOriginal = "";
         paneldoctors.BtnContinue.setText("Guardar");
+        paneldoctors.BtnOut.setVisible(true);
         paneldoctors.TxtId1.setEnabled(true);
+        cleanfields();
     }
      
      
@@ -228,7 +237,8 @@ public class ControllerDoctors implements ActionListener {
                 doctor.getIdentificacion(),
                 doctor.getCorreo(),
                 doctor.getTelefono(),
-                doctor.getContrasena()
+                doctor.getContrasena(),
+                doctor.getEspecialidad()
             });
         }
     }
@@ -258,10 +268,12 @@ public class ControllerDoctors implements ActionListener {
             paneldoctors.Txtmail.setText(paneldoctors.DoctorsTable.getValueAt(fila, 4).toString());
             paneldoctors.TxtPhone.setText(paneldoctors.DoctorsTable.getValueAt(fila, 5).toString());
             paneldoctors.TxtPass.setText(paneldoctors.DoctorsTable.getValueAt(fila, 6).toString());
+            paneldoctors.ComboSpecialty.setSelectedItem(paneldoctors.DoctorsTable.getValueAt(fila, 7).toString());
 
             // preparamos modo edición
             editando = true;
             paneldoctors.BtnContinue.setText("Guardar cambios");
+            paneldoctors.BtnOut.setVisible(false);
             paneldoctors.TxtId1.setEnabled(false);     // no se cambia la PK
             paneldoctors.jTabbedPane.setSelectedIndex(1);   // volvemos al form de alta
             }
@@ -305,14 +317,6 @@ public class ControllerDoctors implements ActionListener {
     
     
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     

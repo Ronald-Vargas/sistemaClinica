@@ -5,7 +5,6 @@ import Home.Home;
 import ConnectionDataBase.ConnectionDB;
 import Sistem.ControllerSistemDoctors;
 import Sistem.SistemDoctors;
-import Appointment.MenuAppointmentPatient;
 import Home.ControllerHome;
 
 import java.awt.event.ActionEvent;

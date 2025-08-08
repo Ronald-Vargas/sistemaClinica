@@ -2,8 +2,6 @@ package Doctors;
 
 import ConnectionDataBase.ConnectionDB;
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -35,7 +33,8 @@ public class ModelDoctors {
                     rs.getString("identificacion"),
                     rs.getString("correo"),
                     rs.getString("telefono"),
-                    rs.getString("contrasena")
+                    rs.getString("contrasena"),
+                    rs.getString("especialidad")
                 );
                 lista.add(doctor);
             }
@@ -55,7 +54,7 @@ public class ModelDoctors {
     public boolean insertDoctor(Doctors doctor) { 
         
         
-        String sql = "INSERT INTO doctores (nombre, primerApellido, segundoApellido, identificacion, correo, telefono, contrasena) VALUES (?, ?, ?, ?, ?, ?,?)";
+        String sql = "INSERT INTO doctores (nombre, primerApellido, segundoApellido, identificacion, correo, telefono, contrasena, especialidad) VALUES (?, ?, ?, ?, ?, ?,?,?)";
 
 try (Connection conexion = conn.establecerConexion();
          PreparedStatement checkPs = conexion.prepareStatement(sql)) {
@@ -68,7 +67,7 @@ try (Connection conexion = conn.establecerConexion();
             ps.setString(5, doctor.getCorreo());
             ps.setString(6, doctor.getTelefono());
             ps.setString(7, doctor.getContrasena());
-            
+            ps.setString(8, doctor.getEspecialidad());
 
             ps.executeUpdate();
             return true;
@@ -131,9 +130,9 @@ try (Connection conexion = conn.establecerConexion();
     
     
     
-    public boolean update (String idOriginal, String nombre, String primerApellido, String segundoApellido, String correo, String telefono, String contrasena) {
+    public boolean update (String idOriginal, String nombre, String primerApellido, String segundoApellido, String correo, String telefono, String contrasena, String especialidad) {
     
-        String sql = "UPDATE Doctores SET Nombre=?, PrimerApellido=?, SegundoApellido=?, Correo=?, Telefono=?, Contrasena=? WHERE Identificacion=?";
+        String sql = "UPDATE Doctores SET Nombre=?, PrimerApellido=?, SegundoApellido=?, Correo=?, Telefono=?, Contrasena=?, Especialidad=? WHERE Identificacion=?";
         
         try (Connection conexion = conn.establecerConexion();
              PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -144,7 +143,8 @@ try (Connection conexion = conn.establecerConexion();
             ps.setString(4, correo);
             ps.setString(5, telefono);
             ps.setString(6, contrasena);
-            ps.setString(7, idOriginal);
+            ps.setString(7, especialidad);
+            ps.setString(8, idOriginal);
             
 
             return ps.executeUpdate() > 0;

@@ -1,9 +1,11 @@
 
 package Patients;
 
-import Patients.MenuPatientNew;
-import Appointment.MenuAppointmentPatient;
+import Appointment.ControllerPanelAppointmentPatient;
+import Appointment.PanelAppointmentPatient;
 import ConnectionDataBase.ConnectionDB;
+import Register.Register;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -16,12 +18,15 @@ import javax.swing.JOptionPane;
 
 
 
-public class ControllerMenuPatientNew implements ActionListener{
+public class ControllerPanelPatientNew implements ActionListener{
     
     
     
-    private MenuPatientNew menupatientnew;
-     
+    private PanelPatientNew panelpatientnew;
+    private PanelAppointmentPatient panelappointmentpatient;
+    private Register register;
+
+    
        private String id;
        String lastNameF = "";
        String lastNameM = "";
@@ -42,19 +47,20 @@ public class ControllerMenuPatientNew implements ActionListener{
        
        
     
-    public ControllerMenuPatientNew(MenuPatientNew menupatientnew, String id) {
-        this.menupatientnew = menupatientnew;
+    public ControllerPanelPatientNew (PanelPatientNew panelpatientnew, String id, Register register) {
+        this.panelpatientnew = panelpatientnew;
         this.id = id;
+        this.register = register;
         
-        this.menupatientnew.BtnContinue.addActionListener(this);
+        this.panelpatientnew.BtnContinue.addActionListener(this);
         
          // Asignar y bloquear campo de ID
-        menupatientnew.TxtId.setText(id);
+        panelpatientnew.TxtId.setText(id);
         
         
         
       // Evento cuando cambia la fecha
-      menupatientnew.JDateOfBirth.getDateEditor().addPropertyChangeListener("date", evt -> calculateAge());
+      panelpatientnew.JDateOfBirth.getDateEditor().addPropertyChangeListener("date", evt -> calculateAge());
     }
     
     
@@ -66,72 +72,75 @@ public class ControllerMenuPatientNew implements ActionListener{
     @Override
     public void actionPerformed (ActionEvent e) {
     
-    if (e.getSource() == menupatientnew.BtnContinue) {
+    if (e.getSource() == panelpatientnew.BtnContinue) {
         
-        if (menupatientnew.TxtLastNameF.getText().trim().isEmpty()) {
+        if (panelpatientnew.TxtLastNameF.getText().trim().isEmpty()) {
     JOptionPane.showMessageDialog(null, "Por favor, ingrese el primer apellido.");
     return;
     }
-    if (menupatientnew.TxtLastNameM.getText().trim().isEmpty()) {
+    if (panelpatientnew.TxtLastNameM.getText().trim().isEmpty()) {
     JOptionPane.showMessageDialog(null, "Por favor, ingrese el segundo apellido.");
     return;
     }
-    if (menupatientnew.TxtPhone.getText().trim().isEmpty()) {
+    if (panelpatientnew.TxtPhone.getText().trim().isEmpty()) {
     JOptionPane.showMessageDialog(null, "Por favor, ingrese el número de teléfono.");
     return;
     }
-    if (menupatientnew.ComboProvince.getSelectedItem().equals("-SELECCIONAR-")) {
+    if (panelpatientnew.ComboProvince.getSelectedItem().equals("-SELECCIONAR-")) {
     JOptionPane.showMessageDialog(null, "Por favor, seleccione una provincia.");
     return;
 }
-    if (menupatientnew.TxtId.getText().trim().isEmpty()) {
+    if (panelpatientnew.TxtId.getText().trim().isEmpty()) {
     JOptionPane.showMessageDialog(null, "Por favor, ingrese la identificación.");
     return;
     }
     
-    if (menupatientnew.ComboCivilStatus.getSelectedItem().equals("-SELECCIONAR-")) {
+    if (panelpatientnew.ComboCivilStatus.getSelectedItem().equals("-SELECCIONAR-")) {
     JOptionPane.showMessageDialog(null, "Por favor, seleccione el estado civil.");
     return;
 }
 
-if (menupatientnew.ComboSex.getSelectedItem().equals("-SELECCIONAR-")) {
+if (panelpatientnew.ComboSex.getSelectedItem().equals("-SELECCIONAR-")) {
     JOptionPane.showMessageDialog(null, "Por favor, seleccione el sexo.");
     return;
 }
 
-if (menupatientnew.ComboOccupation.getSelectedItem().equals("-SELECCIONAR-")) {
+if (panelpatientnew.ComboOccupation.getSelectedItem().equals("-SELECCIONAR-")) {
     JOptionPane.showMessageDialog(null, "Por favor, seleccione la ocupación.");
     return;
 }
-if (menupatientnew.JDateOfBirth.getDate() == null) {
+if (panelpatientnew.JDateOfBirth.getDate() == null) {
     JOptionPane.showMessageDialog(null, "Por favor, seleccione la fecha de nacimiento.");
     return;
 }
 
 
-       lastNameF = menupatientnew.TxtLastNameF.getText().trim();
-       lastNameM = menupatientnew.TxtLastNameM.getText().trim();
-       phone = menupatientnew.TxtPhone.getText().trim();
-       province = (String) menupatientnew.ComboProvince.getSelectedItem();
-       responsible = menupatientnew.TxtResponsible.getText().trim();
-       civilStatus = (String) menupatientnew.ComboCivilStatus.getSelectedItem();
-       sex = (String) menupatientnew.ComboSex.getSelectedItem();
-       occupation = (String) menupatientnew.ComboOccupation.getSelectedItem();
+       lastNameF = panelpatientnew.TxtLastNameF.getText().trim();
+       lastNameM = panelpatientnew.TxtLastNameM.getText().trim();
+       phone = panelpatientnew.TxtPhone.getText().trim();
+       province = (String) panelpatientnew.ComboProvince.getSelectedItem();
+       responsible = panelpatientnew.TxtResponsible.getText().trim();
+       civilStatus = (String) panelpatientnew.ComboCivilStatus.getSelectedItem();
+       sex = (String) panelpatientnew.ComboSex.getSelectedItem();
+       occupation = (String) panelpatientnew.ComboOccupation.getSelectedItem();
        
        
        
        
        
-      Date fecha = menupatientnew.JDateOfBirth.getDate();
+      Date fecha = panelpatientnew.JDateOfBirth.getDate();
       java.sql.Date sqlDate = new java.sql.Date(fecha.getTime());
     
     saveUser();
-    MenuAppointmentPatient menupatient = new MenuAppointmentPatient();
-    menupatient.setVisible(true);
-    menupatientnew.dispose();
+    panelappointmentpatient = new PanelAppointmentPatient(); // inicializas
+    initPanelAppointmentPatient();
+    ControllerPanelAppointmentPatient controllerpanelappointmentpatient = new ControllerPanelAppointmentPatient(panelappointmentpatient, id);
+       
+       
     
-       
-       
+
+    
+    }
     
     
     
@@ -141,16 +150,29 @@ if (menupatientnew.JDateOfBirth.getDate() == null) {
     
     
     
-    
-    
-    
-    
+    public void initPanelAppointmentPatient() {
+    panelappointmentpatient.setSize(600, 800);
+    panelappointmentpatient.setLocation(0, 0);
+
+    register.Content1.removeAll();
+    register.Content1.add(panelappointmentpatient, BorderLayout.CENTER);
+    register.Content1.revalidate();
+    register.Content1.repaint();
+   
     }
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
     private void calculateAge() {
-        Date fechaNacimiento = menupatientnew.JDateOfBirth.getDate();
+        Date fechaNacimiento = panelpatientnew.JDateOfBirth.getDate();
         if (fechaNacimiento == null) return;
 
         Calendar nacimiento = Calendar.getInstance();
@@ -169,12 +191,12 @@ if (menupatientnew.JDateOfBirth.getDate() == null) {
         
       
     if (edad-- >= 18) {
-        menupatientnew.TxtResponsible.setText("");
-        menupatientnew.TxtResponsible.setEditable(false); // Bloquear edición
+        panelpatientnew.TxtResponsible.setText("");
+        panelpatientnew.TxtResponsible.setEditable(false); // Bloquear edición
  
         
     } else {
-       menupatientnew.TxtResponsible.setEditable(true); // Habilitar edición si es menor
+       panelpatientnew.TxtResponsible.setEditable(true); // Habilitar edición si es menor
     }
     
     }
@@ -215,7 +237,7 @@ if (menupatientnew.JDateOfBirth.getDate() == null) {
         ps.setString(9, occupation);
 
         // Fecha segura
-        Date fecha = menupatientnew.JDateOfBirth.getDate();
+        Date fecha = panelpatientnew.JDateOfBirth.getDate();
         java.sql.Date sqlDate = new java.sql.Date(fecha.getTime());
         ps.setDate(10, sqlDate);
 
@@ -234,27 +256,5 @@ if (menupatientnew.JDateOfBirth.getDate() == null) {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
 }

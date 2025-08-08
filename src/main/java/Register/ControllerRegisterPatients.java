@@ -3,13 +3,13 @@ package Register;
 
 import Home.Home;
 import Home.ControllerHome;
-import Register.Register;
 import ConnectionDataBase.ConnectionDB;
-import Patients.ControllerMenuPatientNew;
-import Patients.MenuPatientNew;
+import Patients.ControllerPanelPatientNew;
 import Validations.ValidationsPatientNew;
 import Login.ControllerLoginPatients;
 import Login.LoginPatient;
+import Patients.PanelPatientNew;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -17,13 +17,16 @@ import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Random;
 import javax.swing.JOptionPane;
+
+
 
 
 public class ControllerRegisterPatients implements ActionListener{ 
     
     private Register register;
+    private PanelPatientNew panelpatientnew;
+    
     String name = "";
     String id = "";
     String email = "";
@@ -125,17 +128,17 @@ public class ControllerRegisterPatients implements ActionListener{
     return;
 }    
           
-     saveUsers();   
-     MenuPatientNew menupatientnew = new MenuPatientNew();
-     ControllerMenuPatientNew controllermenupatientnew = new ControllerMenuPatientNew(menupatientnew, id);     
-     ValidationsPatientNew validationpatientnew = new ValidationsPatientNew(menupatientnew);
-     menupatientnew.setVisible(true);
-     register.dispose();
-    
-     
            
-            
-            
+           
+           
+saveUsers();  
+panelpatientnew = new PanelPatientNew(); // inicializas
+ControllerPanelPatientNew controllerpanelpatientnew = new ControllerPanelPatientNew(panelpatientnew, id, register);
+ValidationsPatientNew validationpatientnew = new ValidationsPatientNew(panelpatientnew);
+initPanelNewPatient();     
+
+     
+      
             
           
             
@@ -169,11 +172,25 @@ public class ControllerRegisterPatients implements ActionListener{
     
     }
     
+   
+    }
     
     
     
+    public void initPanelNewPatient() {
+    panelpatientnew.setSize(600, 800);
+    panelpatientnew.setLocation(0, 0);
+
+    register.Content1.removeAll();
+    register.Content1.add(panelpatientnew, BorderLayout.CENTER);
+    register.Content1.revalidate();
+    register.Content1.repaint();
     
     }
+    
+    
+    
+    
     
     
     

@@ -23,6 +23,17 @@ public class ControllerPanelPatients implements ActionListener{
         
         initializeListeners();
         loadPatients();
+        
+        
+        
+         this.panelpatients.TxtSearch.addActionListener(new ActionListener() {
+     @Override
+            public void actionPerformed(ActionEvent e) {
+                searchPatient();
+            }
+            });
+        
+        
     }
     
     
@@ -49,8 +60,9 @@ public class ControllerPanelPatients implements ActionListener{
     updatePatient();
     } else if (e.getSource() == panelpatients.BtnX) {
     JOptionPane.showMessageDialog(null, "Se cancelo la actualización", "Actualización de datos", JOptionPane.INFORMATION_MESSAGE);
+    panelpatients.jTabbedPane1.setSelectedIndex(0);
     disableFields();
-    }
+    } 
     
     
   
@@ -178,7 +190,36 @@ public class ControllerPanelPatients implements ActionListener{
    
    
    
-   
+   public void searchPatient() {
+    String patient = panelpatients.TxtSearch.getText().trim();
+    
+    if (patient.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Ingrese la  identificación que desea buscar", "Campo vacío", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+
+
+    DefaultTableModel modelo = (DefaultTableModel) panelpatients.PatientsTable.getModel();
+    boolean encontrado = false;
+
+    for (int i = 0; i < modelo.getRowCount(); i++) {
+        String idActual = modelo.getValueAt(i, 3
+        ).toString();
+        if (idActual.equalsIgnoreCase(patient)) {
+            panelpatients.PatientsTable.setRowSelectionInterval(i, i);
+            panelpatients.PatientsTable.scrollRectToVisible(panelpatients.PatientsTable.getCellRect(i, 0, true));
+            encontrado = true;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        JOptionPane.showMessageDialog(null, "No se encontró el paciente con esa identificación", "No encontrado", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    
+    }
    
    
    

@@ -1,13 +1,14 @@
 
 package Login;
 
+import Appointment.PanelAppointmentPatient;
 import Register.ControllerRegisterPatients;
 import Home.Home;
 import Home.ControllerHome;
 import Validations.ValidationsPatients;
 import Register.Register;
 import ConnectionDataBase.ConnectionDB;
-import Appointment.MenuAppointmentPatient;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -22,6 +23,8 @@ public class ControllerLoginPatients implements ActionListener{
     
     
   private LoginPatient loginpatient;
+  private PanelAppointmentPatient panelappointmentpatient;
+  
   
   ConnectionDataBase.ConnectionDB con = new ConnectionDB();
   Connection cn = con.establecerConexion();
@@ -112,11 +115,10 @@ public class ControllerLoginPatients implements ActionListener{
     ResultSet rs = ps.executeQuery();
 
     if (rs.next()) {
-        JOptionPane.showMessageDialog(null, "Inicio de sesión aprobado", "Inicio de Sesión", JOptionPane.INFORMATION_MESSAGE);
-        MenuAppointmentPatient menupatient = new MenuAppointmentPatient();
-        menupatient.setVisible(true);
-        loginpatient.dispose();
-        
+        JOptionPane.showMessageDialog(null, "Inicio de sesión aprobado", "Inicio de Sesión", JOptionPane.INFORMATION_MESSAGE);        
+        panelappointmentpatient = new PanelAppointmentPatient(); 
+        initPanelAppointmentPatient();
+
         
         
         
@@ -142,7 +144,18 @@ public class ControllerLoginPatients implements ActionListener{
     
     
     
+    private void initPanelAppointmentPatient() {
+    panelappointmentpatient.setSize(600, 800);
+    panelappointmentpatient.setLocation(0, 0);
+
+    loginpatient.Content.removeAll();
+    loginpatient.Content.add(panelappointmentpatient, BorderLayout.CENTER);
+    loginpatient.Content.revalidate();
+    loginpatient.Content.repaint();
     
+    
+    
+    }
     
     
     

@@ -9,8 +9,10 @@ import Doctors.PanelDoctors;
 import Login.LoginDoctor;
 import Patients.PanelPatients;
 import Appointment.PanelAppointmentDoctors;
+import Login.ControllerLoginDoctor;
 import Patients.ControllerPanelPatients;
 import Patients.ModelPanelPatients;
+import Validations.ValidationsDoctors;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -64,6 +66,7 @@ public class ControllerSistemDoctors implements ActionListener{
     
     } else if (e.getSource() == menudoctor.BtnLogout) {
         LoginDoctor logindoctor = new LoginDoctor();
+        ControllerLoginDoctor controllerlogindoctor = new ControllerLoginDoctor(logindoctor);
         logindoctor.setVisible(true);
         menudoctor.dispose();
         
@@ -143,6 +146,7 @@ public class ControllerSistemDoctors implements ActionListener{
     PanelDoctors paneldoctors = new PanelDoctors();
     ModelDoctors modeldoctors = new ModelDoctors();
     ControllerDoctors controllerdoctors = new ControllerDoctors(paneldoctors, modeldoctors);
+    ValidationsDoctors validationsdoctors = new ValidationsDoctors(paneldoctors);
     boolean editando = false;
     String idOriginal = "";
     paneldoctors.setSize(1020, 720);

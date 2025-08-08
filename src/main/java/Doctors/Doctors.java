@@ -9,9 +9,9 @@ public class Doctors {
     private String correo;
     private String telefono;
     private String contrasena;
+    private String especialidad;
 
-    public Doctors(String nombre, String primerApellido, String segundoApellido, String identificacion, String correo, String telefono, String contrasena) {
-
+    public Doctors(String nombre, String primerApellido, String segundoApellido, String identificacion, String correo, String telefono, String contrasena, String especialidad) {
         this.nombre = nombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
@@ -19,6 +19,7 @@ public class Doctors {
         this.correo = correo;
         this.telefono = telefono;
         this.contrasena = contrasena;
+        this.especialidad = especialidad;
     }
 
     public String getNombre() {
@@ -77,6 +78,15 @@ public class Doctors {
         this.contrasena = contrasena;
     }
 
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    
     
     
     
