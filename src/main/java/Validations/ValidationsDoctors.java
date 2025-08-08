@@ -100,7 +100,7 @@ public class ValidationsDoctors {
        char c = e.getKeyChar();
         String symbols = "!@#$%&*.,-_ ";
 
-        if (!(Character.isLetterOrDigit(c) || symbols.indexOf(c) >= 0) || paneldoctors.TxtPass.getText().length() >= 100) {
+        if (!(Character.isLetterOrDigit(c) || symbols.indexOf(c) >= 0) || paneldoctors.TxtPass.getText().length() >= 250) {
             e.consume();
         }
   }
