@@ -240,7 +240,7 @@ public class PanelDoctors extends javax.swing.JPanel {
         jPanel2.add(Lbl15, new org.netbeans.lib.awtextra.AbsoluteConstraints(529, 445, 200, -1));
 
         ComboSpecialty.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        ComboSpecialty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONAR--", "Medico General", "Odontologo", "Pediatra", "Dermatologo", "Psiquiatra", "Nutricionista", " " }));
+        ComboSpecialty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONAR--", "Medico General", "Odontologo", "Pediatra", "Dermatologo", "Psiquiatra", "Nutricionista" }));
         jPanel2.add(ComboSpecialty, new org.netbeans.lib.awtextra.AbsoluteConstraints(529, 486, 200, 30));
         jPanel2.add(TxtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 486, 200, 30));
 

@@ -88,7 +88,7 @@ public class LoginDoctor extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel5.setText("¿Olvitaste tu contraseña?");
+        jLabel5.setText("¿Olvidaste tu contraseña?");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);

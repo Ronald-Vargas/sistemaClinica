@@ -2,6 +2,7 @@
 package Patients;
 
 import Appointment.ControllerPanelAppointmentPatient;
+import Appointment.ModelPanelAppointmentPatient;
 import Appointment.PanelAppointmentPatient;
 import ConnectionDataBase.ConnectionDB;
 import Register.Register;
@@ -133,8 +134,9 @@ if (panelpatientnew.JDateOfBirth.getDate() == null) {
     
     saveUser();
     panelappointmentpatient = new PanelAppointmentPatient(); // inicializas
+    ModelPanelAppointmentPatient modelpanealappointmentpatient = new ModelPanelAppointmentPatient();
     initPanelAppointmentPatient();
-    ControllerPanelAppointmentPatient controllerpanelappointmentpatient = new ControllerPanelAppointmentPatient(panelappointmentpatient, id);
+    ControllerPanelAppointmentPatient controllerpanelappointmentpatient = new ControllerPanelAppointmentPatient(panelappointmentpatient, modelpanealappointmentpatient, id);
        
        
     
