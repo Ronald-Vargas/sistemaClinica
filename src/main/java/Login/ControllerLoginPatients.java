@@ -1,6 +1,8 @@
 
 package Login;
 
+import Appointment.ControllerPanelAppointmentPatient;
+import Appointment.ModelPanelAppointmentPatient;
 import Appointment.PanelAppointmentPatient;
 import Register.ControllerRegisterPatients;
 import Home.Home;
@@ -57,22 +59,13 @@ public class ControllerLoginPatients implements ActionListener{
     
     
     
-   
-    
-    
-    
-    
-    
-    
-    
-    
     public void actionPerformed (ActionEvent e) {
     
     
      if (e.getSource() == loginpatient.BtnLogIn) {
     validationLogIn();
     
-        
+    
     
     
     
@@ -99,7 +92,6 @@ public class ControllerLoginPatients implements ActionListener{
     String email = loginpatient.TxtEmail.getText();
     String pass = loginpatient.TxtPass.getText();
     
-    
     if (email.isEmpty() || pass.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor, Complete todos los datos solicitados", "Información Incompleta", JOptionPane.ERROR_MESSAGE);
 
@@ -107,33 +99,28 @@ public class ControllerLoginPatients implements ActionListener{
     
         
        try {
-    String query = "SELECT Correo, Contrasena FROM Pacientes WHERE Correo = ? AND Contrasena = ?";
-    PreparedStatement ps = cn.prepareStatement(query);
-    ps.setString(1, email); 
-    ps.setString(2, pass);  
+            String query = "SELECT Identificacion FROM Pacientes WHERE Correo = ? AND Contrasena = ?";
+            PreparedStatement ps = cn.prepareStatement(query);
+            ps.setString(1, email); 
+            ps.setString(2, pass);  
+            ResultSet rs = ps.executeQuery();
 
-    ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String id = rs.getString("Identificacion"); 
+                JOptionPane.showMessageDialog(null, "Inicio de sesión aprobado", "Inicio de Sesión", JOptionPane.INFORMATION_MESSAGE);
 
-    if (rs.next()) {
-        JOptionPane.showMessageDialog(null, "Inicio de sesión aprobado", "Inicio de Sesión", JOptionPane.INFORMATION_MESSAGE);        
-        panelappointmentpatient = new PanelAppointmentPatient(); 
-        initPanelAppointmentPatient();
-
-        
-        
-        
-        
-    } else {
-    JOptionPane.showMessageDialog(null, "Correo o Contraseña Incorrectos", "Error", JOptionPane.ERROR_MESSAGE);    
-    }
-    
-    
-    
-    
-        }catch (Exception i) {
-    JOptionPane.showMessageDialog(null, "Error al iniciar sesión: " +i , "Error", JOptionPane.ERROR_MESSAGE);
-    
-    }
+                panelappointmentpatient = new PanelAppointmentPatient(); 
+                ModelPanelAppointmentPatient modelpanelappointmentpatient = new ModelPanelAppointmentPatient();
+                ControllerPanelAppointmentPatient controllerpanelappointmentpatient = new ControllerPanelAppointmentPatient(
+                        panelappointmentpatient, modelpanelappointmentpatient, id
+                );
+                initPanelAppointmentPatient();
+            } else {
+                JOptionPane.showMessageDialog(null, "Correo o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception i) {
+            JOptionPane.showMessageDialog(null, "Error al iniciar sesión: " + i.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
      
     }
     
