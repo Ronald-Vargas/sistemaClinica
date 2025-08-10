@@ -25,7 +25,6 @@ private ModelPanelAppointmentPatient modelpanelappointmentpatient;
 private String id;
 
 
-
     public ControllerPanelAppointmentPatient(PanelAppointmentPatient panelappointmentpatient, ModelPanelAppointmentPatient modelpanelappointmentpatient, String id) {
         this.panelappointmentpatient = panelappointmentpatient;
         this.modelpanelappointmentpatient = modelpanelappointmentpatient;
@@ -87,9 +86,11 @@ public void agendarCita() {
     String fechaRegistro = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));    
     String estado = "Pendiente";
     String area = (String) panelappointmentpatient.ComboArea.getSelectedItem();
+    String idCita = "ClinicaLatina_" + System.currentTimeMillis();
+
 
     
-    Appointment appointment = new Appointment(fechaCita, hora, fechaRegistro, estado, area, id);
+    Appointment appointment = new Appointment(idCita, fechaCita, hora, fechaRegistro, estado, area, id);
     if (modelpanelappointmentpatient.insertAppointmentPatient(appointment)) {
             JOptionPane.showMessageDialog(null, "Cita agendada con éxito.");
             panelappointmentpatient.ComboArea.setSelectedIndex(0);

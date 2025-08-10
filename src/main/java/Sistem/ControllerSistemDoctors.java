@@ -2,6 +2,8 @@
 package Sistem;
 
 import About.PanelAbout;
+import Appointment.ControllerPanelAppointmentDoctors;
+import Appointment.ModelPanelAppointmentDoctors;
 import Box.PanelBox;
 import Doctors.ControllerDoctors;
 import Doctors.ModelDoctors;
@@ -110,13 +112,14 @@ public class ControllerSistemDoctors implements ActionListener{
     
     
     public void initQuotes() {
-    PanelAppointmentDoctors panelquotes = new PanelAppointmentDoctors();
-    panelquotes.setSize(1020, 720);
-    panelquotes.setLocation(0,0);
+    PanelAppointmentDoctors panelappointmentdoctors = new PanelAppointmentDoctors();
+    panelappointmentdoctors.setSize(1020, 720);
+    panelappointmentdoctors.setLocation(0,0);
   
-    
+    ModelPanelAppointmentDoctors modelpanelappointmentdoctors = new ModelPanelAppointmentDoctors();
+    ControllerPanelAppointmentDoctors controllerpanelappointmentdoctors = new ControllerPanelAppointmentDoctors(modelpanelappointmentdoctors, panelappointmentdoctors);
     menudoctor.Content.removeAll();
-    menudoctor.Content.add(panelquotes, BorderLayout.CENTER);
+    menudoctor.Content.add(panelappointmentdoctors, BorderLayout.CENTER);
     menudoctor.Content.revalidate();
     menudoctor.Content.repaint();
 

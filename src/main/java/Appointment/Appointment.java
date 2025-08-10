@@ -4,7 +4,7 @@ package Appointment;
 
 public class Appointment {
     
-
+    private String idCita;
     private String fechaCita;
     private String hora;
     private String fechaRegistro;
@@ -12,7 +12,8 @@ public class Appointment {
     private String area;   
     private String id;
 
-    public Appointment(String fechaCita, String hora, String fechaRegistro, String estado, String area, String id) {
+    public Appointment(String idCita, String fechaCita, String hora, String fechaRegistro, String estado, String area, String id) {
+        this.idCita = idCita;
         this.fechaCita = fechaCita;
         this.hora = hora;
         this.fechaRegistro = fechaRegistro;
@@ -21,17 +22,14 @@ public class Appointment {
         this.id = id;
     }
 
-    
-    
-    public String getId() {
-        return id;
+    public String getIdCita() {
+        return idCita;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdCita(String idCita) {
+        this.idCita = idCita;
     }
 
-   
     public String getFechaCita() {
         return fechaCita;
     }
@@ -72,6 +70,15 @@ public class Appointment {
         this.area = area;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    
     
     
     

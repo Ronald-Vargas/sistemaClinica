@@ -23,17 +23,18 @@ public class ModelPanelAppointmentPatient {
     public boolean insertAppointmentPatient(Appointment appointment) { 
         
         
- String sql = "INSERT INTO Citas (fechaCita, hora, fechaRegistro, estado, area, PacienteID) VALUES (?, ?, ?, ?, ?, ?)";
+ String sql = "INSERT INTO Citas (IDCita, fechaCita, hora, fechaRegistro, estado, area, PacienteID) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 try (Connection conexion = conn.establecerConexion();
      PreparedStatement ps = conexion.prepareStatement(sql)) {
 
-    ps.setString(1, appointment.getFechaCita());
-    ps.setString(2, appointment.getHora());
-    ps.setString(3, appointment.getFechaRegistro());
-    ps.setString(4, appointment.getEstado());
-    ps.setString(5, appointment.getArea());
-    ps.setString(6, appointment.getId()); 
+    ps.setString(1, appointment.getIdCita());
+    ps.setString(2, appointment.getFechaCita());
+    ps.setString(3, appointment.getHora());
+    ps.setString(4, appointment.getFechaRegistro());
+    ps.setString(5, appointment.getEstado());
+    ps.setString(6, appointment.getArea());
+    ps.setString(7, appointment.getId()); 
 
     ps.executeUpdate();
             return true;
