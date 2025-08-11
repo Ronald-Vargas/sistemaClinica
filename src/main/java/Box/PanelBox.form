@@ -51,8 +51,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel2" min="-2" pref="151" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jComboBox1" min="-2" pref="185" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
@@ -60,6 +59,7 @@
                           </Group>
                           <Component id="jLabel1" alignment="0" min="-2" pref="938" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jLabel2" min="-2" pref="185" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="25" max="32767" attributes="0"/>
               </Group>
@@ -97,36 +97,39 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Realizar pago de pacientes"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="24" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="66" red="33" type="rgb"/>
             </Property>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Realizar pago de pacientes"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
+            <Property name="text" type="java.lang.String" value="Tipo de consulta"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Tipo de cargo"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="7">
+                <StringItem index="0" value="--SELECCIONAR--"/>
+                <StringItem index="1" value="Medico General"/>
+                <StringItem index="2" value="Odontologo"/>
+                <StringItem index="3" value="Pediatra"/>
+                <StringItem index="4" value="Dermatologo"/>
+                <StringItem index="5" value="Psiquiatra"/>
+                <StringItem index="6" value="Nutricionista"/>
+              </StringArray>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="14" style="1"/>
-            </Property>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Consulta general"/>
-                <StringItem index="1" value="Examenes generales"/>
-                <StringItem index="2" value="Ultrasonido"/>
-                <StringItem index="3" value="Rayos X"/>
-              </StringArray>
             </Property>
           </Properties>
           <AuxValues>
@@ -199,6 +202,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="BtnPay">
           <Properties>
+            <Property name="text" type="java.lang.String" value="Pagar"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="66" red="33" type="rgb"/>
             </Property>
@@ -208,7 +212,6 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Pagar"/>
           </Properties>
         </Component>
       </SubComponents>

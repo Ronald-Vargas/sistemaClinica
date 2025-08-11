@@ -73,4 +73,48 @@ public class ModelPanelAppointmentDoctors {
 }
     
     
+      
+      
+      
+      public boolean update (String idCita, String fechaCita, String hora, String idPaciente, String especialiadad, String fechaRegistro) {
+    
+        String sql = "UPDATE Citas SET FechaCita=?, PacienteID=?, FechaRegistro=?, Hora=?, Area=? WHERE IDCita=?";
+        
+        try (Connection conexion = conn.establecerConexion();
+             PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+            ps.setString(1, fechaCita);
+            ps.setString(2, idPaciente);
+            ps.setString(3, fechaRegistro);
+            ps.setString(4, hora);
+            ps.setString(5, especialiadad);
+            ps.setString(6, idCita);
+
+            
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error al actualizar cita:\n" + e.getMessage(),
+                    "SQL Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
+      
+      
 }
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
