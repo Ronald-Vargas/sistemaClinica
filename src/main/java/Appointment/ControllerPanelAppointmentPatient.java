@@ -3,6 +3,7 @@ package Appointment;
 
 import Home.ControllerHome;
 import Home.Home;
+import Login.LoginPatient;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -97,7 +98,8 @@ public void agendarCita() {
             Home home = new Home();
             ControllerHome controllerhome = new ControllerHome(home);
             home.setVisible(true);
-            panelappointmentpatient.disable();
+            LoginPatient login = new LoginPatient();
+            login.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Error al agendar cita.");
         }

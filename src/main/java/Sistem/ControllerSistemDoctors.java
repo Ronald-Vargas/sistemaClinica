@@ -4,7 +4,7 @@ package Sistem;
 import About.PanelAbout;
 import Appointment.ControllerPanelAppointmentDoctors;
 import Appointment.ModelPanelAppointmentDoctors;
-import Box.PanelBox;
+import Record.PanelRecord;
 import Doctors.ControllerDoctors;
 import Doctors.ModelDoctors;
 import Doctors.PanelDoctors;
@@ -95,7 +95,7 @@ public class ControllerSistemDoctors implements ActionListener{
     
     
     public void initBox() {
-    PanelBox panelbox = new PanelBox();
+    PanelRecord panelbox = new PanelRecord();
     panelbox.setSize(1020, 720);
     panelbox.setLocation(0,0);
   

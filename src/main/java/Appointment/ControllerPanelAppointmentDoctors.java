@@ -1,6 +1,7 @@
 
 package Appointment;
 
+import Patients.Patients;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -49,7 +50,9 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
     this.panelappointmentdoctors.BtnDelete.addActionListener(this);
     this.panelappointmentdoctors.BtnUpdate.addActionListener(this);
     this.panelappointmentdoctors.BtnX.addActionListener(this);
-
+    this.panelappointmentdoctors.BtnRegistrarPago.addActionListener(this);
+    this.panelappointmentdoctors.BtnCancel.addActionListener(this);
+    this.panelappointmentdoctors.BtnPagar.addActionListener(this);
     }
     
     
@@ -90,6 +93,15 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
     } else if (e.getSource() == panelappointmentdoctors.BtnX) {
     JOptionPane.showMessageDialog(null, "Se cancelo la actualización de la cita", "", JOptionPane.INFORMATION_MESSAGE);
     panelappointmentdoctors.jTabbedPane1.setSelectedIndex(0);
+    } else if (e.getSource() == panelappointmentdoctors.BtnRegistrarPago) {
+    realizarPago();
+    } else if (e.getSource() == panelappointmentdoctors.BtnCancel) {
+     JOptionPane.showMessageDialog(null, "Se cancelo el cobro de la cita", "", JOptionPane.INFORMATION_MESSAGE);
+     panelappointmentdoctors.jTabbedPane1.setSelectedIndex(0);
+     cleanFields();
+    } else if (e.getSource() == panelappointmentdoctors.BtnPagar) {
+    pagarCita();
+
     }
     
     
@@ -120,6 +132,38 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
         }
     }
     
+    
+    
+    private void pagarCita() {
+    String idCita = panelappointmentdoctors.TxtIdCita4.getText();
+
+    if (idCita.isEmpty()) {
+        JOptionPane.showMessageDialog(null,
+                "No hay cita seleccionada para pagar.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // 1️⃣ Actualizar estado en la base de datos
+    boolean actualizado = modelpanelappointmentdoctors.actualizarEstadoCita(idCita, "Atendida");
+
+    if (actualizado) {
+        JOptionPane.showMessageDialog(null, "Pago registrado y cita marcada como Atendida.");
+
+        // 2️⃣ Preparar registro para historial (por ahora, solo mostramos mensaje)
+        // Más adelante aquí insertaremos en la tabla historial_pagos
+        System.out.println("Preparar inserción en historial con ID cita: " + idCita);
+
+        // Recargar tabla
+        loadDoctors();
+        panelappointmentdoctors.jTabbedPane1.setSelectedIndex(0);
+        cleanFields();
+    } else {
+        JOptionPane.showMessageDialog(null,
+                "No se pudo actualizar el estado de la cita.",
+                "Error SQL", JOptionPane.ERROR_MESSAGE);
+    }
+}
     
     
     
@@ -189,7 +233,10 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
     private void cleanFields() {
     panelappointmentdoctors.TxtIdPaciente.setText("");
     panelappointmentdoctors.TxtIdCita.setText("");
-   
+    panelappointmentdoctors.TxtMonto.setText("");
+    panelappointmentdoctors.TxtIVA.setText("");
+    panelappointmentdoctors.TxtMontoFinal.setText("");
+
     }
     
     
@@ -202,14 +249,50 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
     
     
     
+    public void realizarPago() {
+       int fila = panelappointmentdoctors.AppointmentTable.getSelectedRow();
+    if (fila < 0) {
+        JOptionPane.showMessageDialog(null,
+                "Seleccione una cita de la tabla.",
+                "Sin selección", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    String idCita = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 0).toString();
+    String idPaciente = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 3).toString();
+
+    panelappointmentdoctors.TxtIdCita4.setText(idCita);
+    panelappointmentdoctors.TxtIdPaciente4.setText(idPaciente);
+
+    // Llamar al modelo para obtener los datos del paciente
+    Patients paciente = modelpanelappointmentdoctors.cargarDatosPaciente(idPaciente);
+
+    if (paciente != null) {
+        panelappointmentdoctors.TxtNombre4.setText(paciente.getNombre());
+        panelappointmentdoctors.TxtPrimerApellido4.setText(paciente.getPrimerApellido());
+        panelappointmentdoctors.TxtSegundoApellido4.setText(paciente.getSegundoApellido());
+    }
+
+    panelappointmentdoctors.jTabbedPane1.setSelectedIndex(2);
+    }
     
-     public void modifyAppointment(){
+    
+    
+    
+   
+    
+    
+    
+    
+     public void modifyAppointment() {
     int fila = panelappointmentdoctors.AppointmentTable.getSelectedRow();
     if (fila < 0) {
         JOptionPane.showMessageDialog(null,
                 "Seleccione una cita de la tabla.",
                 "Sin selección", JOptionPane.ERROR_MESSAGE);
         return;
+        
+        
     }
 
     idOriginal = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 0).toString();
@@ -242,7 +325,7 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
     
     
     
-   // Método que aplica ambos filtros
+
 private void applyCombinedFilters() {
     List<RowFilter<Object, Object>> filtros = new ArrayList<>();
 

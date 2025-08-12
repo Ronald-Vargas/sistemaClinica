@@ -2,10 +2,13 @@
 package Appointment;
 
 import ConnectionDataBase.ConnectionDB;
+import Patients.Patients;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -71,8 +74,36 @@ public class ModelPanelAppointmentDoctors {
         return false;
     }
 }
+      
     
-    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+   public boolean actualizarEstadoCita(String idCita, String nuevoEstado) {
+    String sql = "UPDATE Citas SET Estado = ? WHERE IDCita = ?";
+    try (Connection conexion = conn.establecerConexion();
+         PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+        ps.setString(1, nuevoEstado);
+        ps.setString(2, idCita);
+
+        return ps.executeUpdate() > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }
+}
       
       
       
@@ -101,6 +132,49 @@ public class ModelPanelAppointmentDoctors {
         }
     }
 
+      
+      
+      
+      public Patients cargarDatosPaciente(String idPaciente) {
+    String sql = "SELECT Identificacion, Nombre, PrimerApellido, SegundoApellido, Correo, Telefono, Direccion, Edad, Responsable, EstadoCivil, Sexo, Ocupacion, FechaNacimiento FROM Pacientes WHERE Identificacion = ?";
+
+    try (Connection conexion = conn.establecerConexion();
+         PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+        ps.setString(1, idPaciente);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            return new Patients(
+                rs.getString("Identificacion"),    // identificacion
+                rs.getString("Nombre"),
+                rs.getString("PrimerApellido"),
+                rs.getString("SegundoApellido"),
+                rs.getString("Correo"),
+                rs.getString("Telefono"),
+                rs.getString("Direccion"),
+                rs.getString("Edad"),
+                rs.getString("Responsable"),
+                rs.getString("EstadoCivil"),
+                rs.getString("Sexo"),
+                rs.getString("Ocupacion"),
+                rs.getString("FechaNacimiento")
+            );
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null,
+                "Error al cargar datos del paciente:\n" + e.getMessage(),
+                "SQL Error", JOptionPane.ERROR_MESSAGE);
+    }
+    return null; // si no encuentra datos
+}
+      
+      
+      
+      
+      
+      
       
       
 }

@@ -112,6 +112,7 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ComboHora2 = new com.github.lgooddatepicker.components.TimePicker();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -123,6 +124,7 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
         BtnEdit = new javax.swing.JButton();
         BtnDelete = new javax.swing.JButton();
         BtnPDF = new javax.swing.JButton();
+        BtnRegistrarPago = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         ComboFilter = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
@@ -140,19 +142,56 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
         ComboFechaRegistro = new com.toedter.calendar.JDateChooser();
         BtnUpdate = new javax.swing.JButton();
         BtnX = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
+        Lbl19 = new javax.swing.JLabel();
+        Lbl20 = new javax.swing.JLabel();
+        Lbl21 = new javax.swing.JLabel();
+        Lbl22 = new javax.swing.JLabel();
+        Lbl23 = new javax.swing.JLabel();
+        Lbl24 = new javax.swing.JLabel();
+        Lbl25 = new javax.swing.JLabel();
+        Lbl26 = new javax.swing.JLabel();
+        panelRound2 = new Mvc.PanelRound();
+        Lbl27 = new javax.swing.JLabel();
+        Lbl28 = new javax.swing.JLabel();
+        Lbl29 = new javax.swing.JLabel();
+        TxtMonto = new javax.swing.JTextField();
+        TxtIVA = new javax.swing.JTextField();
+        TxtMontoFinal = new javax.swing.JTextField();
+        BtnPagar = new javax.swing.JButton();
+        BtnCancel = new javax.swing.JButton();
+        Lbl30 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        Lbl31 = new javax.swing.JLabel();
+        TxtNombre4 = new javax.swing.JLabel();
+        TxtIdPaciente4 = new javax.swing.JLabel();
+        TxtIdCita4 = new javax.swing.JLabel();
+        TxtPrimerApellido4 = new javax.swing.JLabel();
+        TxtSegundoApellido4 = new javax.swing.JLabel();
+        ComboEspecialidad4 = new javax.swing.JLabel();
+        ComboEstado4 = new javax.swing.JLabel();
+        ComboHora4 = new javax.swing.JLabel();
+        ComboFechaCita4 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane1.setMinimumSize(new java.awt.Dimension(1022, 716));
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(1022, 716));
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Lista de citas");
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 255));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 8, 962, -1));
 
         jLabel3.setText("Citas el dia:");
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 65, 118, -1));
+        jPanel1.add(ComboSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 98, 200, 30));
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
         panelRound1.setRoundBottomLeft(75);
@@ -196,22 +235,27 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
         BtnPDF.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         BtnPDF.setForeground(new java.awt.Color(255, 0, 0));
 
+        BtnRegistrarPago.setText("Registrar Pago");
+        BtnRegistrarPago.setBackground(new java.awt.Color(0, 0, 255));
+        BtnRegistrarPago.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        BtnRegistrarPago.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(14, 14, 14)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(216, 216, 216)
                         .addComponent(BtnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
+                        .addComponent(BtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BtnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49)
-                        .addComponent(BtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 958, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(BtnRegistrarPago, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 958, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
@@ -221,66 +265,22 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnRegistrarPago, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
+        jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 159, -1, -1));
+
         jLabel4.setText("Estado");
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 69, 118, -1));
 
         ComboFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "Pendiente", "Atendida" }));
         ComboFilter.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1020, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 15, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(14, 14, 14)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 962, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(187, 187, 187)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(264, 264, 264)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(187, 187, 187)
-                            .addComponent(ComboSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(182, 182, 182)
-                            .addComponent(ComboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 16, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 685, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 8, Short.MAX_VALUE)
-                    .addComponent(jLabel1)
-                    .addGap(28, 28, 28)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(4, 4, 4)
-                            .addComponent(jLabel4)))
-                    .addGap(6, 6, 6)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(2, 2, 2)
-                            .addComponent(ComboSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(ComboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(31, 31, 31)
-                    .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 9, Short.MAX_VALUE)))
-        );
+        jPanel1.add(ComboFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 96, 150, 30));
 
         jTabbedPane1.addTab("tab1", jPanel1);
 
@@ -405,22 +405,287 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("tab2", jPanel2);
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+
+        Lbl19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Lbl19.setText("Nombre del paciente");
+        Lbl19.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+
+        Lbl20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Lbl20.setText("Primer Apellido");
+        Lbl20.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+
+        Lbl21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Lbl21.setText("Segundo Apellido");
+        Lbl21.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+
+        Lbl22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Lbl22.setText("ID Cita");
+        Lbl22.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+
+        Lbl23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Lbl23.setText("Especialidad");
+        Lbl23.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+
+        Lbl24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Lbl24.setText("Estado");
+        Lbl24.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+
+        Lbl25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Lbl25.setText("Fecha Cita");
+        Lbl25.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        Lbl25.setToolTipText("");
+
+        Lbl26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Lbl26.setText("Hora");
+        Lbl26.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+
+        panelRound2.setBackground(new java.awt.Color(248, 248, 248));
+        panelRound2.setRoundBottomLeft(75);
+        panelRound2.setRoundBottomRight(75);
+        panelRound2.setRoundTopLeft(75);
+        panelRound2.setRoundTopRight(75);
+
+        Lbl27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Lbl27.setText("Monto");
+        Lbl27.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+
+        Lbl28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Lbl28.setText("IVA");
+        Lbl28.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+
+        Lbl29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Lbl29.setText("Monto Final");
+        Lbl29.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+
+        BtnPagar.setText("Pagar");
+        BtnPagar.setBackground(new java.awt.Color(0, 204, 0));
+        BtnPagar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        BtnPagar.setForeground(new java.awt.Color(255, 255, 255));
+
+        BtnCancel.setText("Cancelar");
+        BtnCancel.setBackground(new java.awt.Color(204, 0, 0));
+        BtnCancel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        BtnCancel.setForeground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
+        panelRound2.setLayout(panelRound2Layout);
+        panelRound2Layout.setHorizontalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound2Layout.createSequentialGroup()
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Lbl27)
+                            .addComponent(Lbl28)
+                            .addComponent(Lbl29))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtMontoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30))
+        );
+        panelRound2Layout.setVerticalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Lbl27)
+                    .addComponent(TxtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Lbl28)
+                    .addComponent(TxtIVA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Lbl29)
+                    .addComponent(TxtMontoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(BtnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(BtnPagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
+        );
+
+        Lbl30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Lbl30.setText("Observaciones");
+        Lbl30.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jScrollPane2.setViewportView(jTextArea1);
+
+        Lbl31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Lbl31.setText("ID Paciente");
+        Lbl31.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+
+        TxtNombre4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TxtNombre4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+
+        TxtIdPaciente4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TxtIdPaciente4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        TxtIdPaciente4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        TxtIdCita4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TxtIdCita4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        TxtIdCita4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        TxtPrimerApellido4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TxtPrimerApellido4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+
+        TxtSegundoApellido4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TxtSegundoApellido4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+
+        ComboEspecialidad4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ComboEspecialidad4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+
+        ComboEstado4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ComboEstado4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+
+        ComboHora4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ComboHora4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+
+        ComboFechaCita4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ComboFechaCita4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Lbl21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Lbl19, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(TxtNombre4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Lbl20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TxtPrimerApellido4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TxtSegundoApellido4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(109, 109, 109)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ComboEspecialidad4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Lbl23, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(Lbl31, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                        .addComponent(TxtIdCita4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Lbl22, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TxtIdPaciente4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ComboHora4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(ComboEstado4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Lbl24, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Lbl26, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Lbl25, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboFechaCita4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(96, 96, 96))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1020, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                    .addComponent(Lbl30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Lbl22)
+                            .addComponent(Lbl25))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TxtIdCita4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboFechaCita4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(Lbl19)
+                        .addGap(18, 18, 18)
+                        .addComponent(TxtNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Lbl20)
+                    .addComponent(Lbl26)
+                    .addComponent(Lbl31))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(TxtIdPaciente4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtPrimerApellido4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboHora4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(Lbl23)
+                                .addGap(18, 18, 18)
+                                .addComponent(ComboEspecialidad4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(Lbl24)
+                                .addGap(18, 18, 18)
+                                .addComponent(ComboEstado4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(54, 54, 54))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(Lbl21, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TxtSegundoApellido4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)))
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(Lbl30)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2)))
+                .addGap(27, 27, 27))
+        );
+
+        jTabbedPane1.addTab("tab3", jPanel3);
+
         add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 720));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable AppointmentTable;
+    public javax.swing.JButton BtnCancel;
     public javax.swing.JButton BtnDelete;
     public javax.swing.JButton BtnEdit;
     public javax.swing.JButton BtnPDF;
+    public javax.swing.JButton BtnPagar;
+    public javax.swing.JButton BtnRegistrarPago;
     public javax.swing.JButton BtnUpdate;
     public javax.swing.JButton BtnX;
     public javax.swing.JComboBox<String> ComboEspecialidad;
+    public javax.swing.JLabel ComboEspecialidad4;
+    public javax.swing.JLabel ComboEstado4;
     public com.toedter.calendar.JDateChooser ComboFechaCita;
+    public javax.swing.JLabel ComboFechaCita4;
     public com.toedter.calendar.JDateChooser ComboFechaRegistro;
     public javax.swing.JComboBox<String> ComboFilter;
     public com.github.lgooddatepicker.components.TimePicker ComboHora;
+    public com.github.lgooddatepicker.components.TimePicker ComboHora2;
+    public javax.swing.JLabel ComboHora4;
     public com.toedter.calendar.JDateChooser ComboSearch;
     public javax.swing.JLabel Lbl13;
     public javax.swing.JLabel Lbl14;
@@ -428,15 +693,41 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
     public javax.swing.JLabel Lbl16;
     public javax.swing.JLabel Lbl17;
     public javax.swing.JLabel Lbl18;
+    public javax.swing.JLabel Lbl19;
+    public javax.swing.JLabel Lbl20;
+    public javax.swing.JLabel Lbl21;
+    public javax.swing.JLabel Lbl22;
+    public javax.swing.JLabel Lbl23;
+    public javax.swing.JLabel Lbl24;
+    public javax.swing.JLabel Lbl25;
+    public javax.swing.JLabel Lbl26;
+    public javax.swing.JLabel Lbl27;
+    public javax.swing.JLabel Lbl28;
+    public javax.swing.JLabel Lbl29;
+    public javax.swing.JLabel Lbl30;
+    public javax.swing.JLabel Lbl31;
+    public javax.swing.JTextField TxtIVA;
     public javax.swing.JTextField TxtIdCita;
+    public javax.swing.JLabel TxtIdCita4;
     public javax.swing.JTextField TxtIdPaciente;
+    public javax.swing.JLabel TxtIdPaciente4;
+    public javax.swing.JTextField TxtMonto;
+    public javax.swing.JTextField TxtMontoFinal;
+    public javax.swing.JLabel TxtNombre4;
+    public javax.swing.JLabel TxtPrimerApellido4;
+    public javax.swing.JLabel TxtSegundoApellido4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
     public javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea1;
     private Mvc.PanelRound panelRound1;
+    private Mvc.PanelRound panelRound2;
     // End of variables declaration//GEN-END:variables
 }
