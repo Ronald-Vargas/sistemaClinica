@@ -2,8 +2,11 @@
 package Appointment;
 
 import Patients.Patients;
+import Record.History;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.ParseException;
@@ -35,7 +38,7 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
         this.panelappointmentdoctors = panelappointmentdoctors;
         
         initializeListeners();
-        loadDoctors();
+        loadAppointment();
         initializeFilters();
         
         
@@ -68,6 +71,13 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
 
     // Listener para el JDateChooser de fecha
     panelappointmentdoctors.ComboSearch.addPropertyChangeListener("date", evt -> applyCombinedFilters());
+    
+     panelappointmentdoctors.TxtSearchId.addKeyListener(new KeyAdapter() {
+        @Override
+        public void keyReleased(KeyEvent e) {
+            applyCombinedFilters();
+        }
+    });
 }
     
     
@@ -112,7 +122,7 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
     
     
     
-    public void loadDoctors() {
+    public void loadAppointment() {
         List<Appointment> lista = modelpanelappointmentdoctors.obtainAppointment();
         DefaultTableModel tableModel = (DefaultTableModel) panelappointmentdoctors.AppointmentTable.getModel();
         tableModel.setRowCount(0); 
@@ -144,20 +154,59 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
         return;
     }
 
-    // 1️⃣ Actualizar estado en la base de datos
+    // Actualizar estado en la base de datos
     boolean actualizado = modelpanelappointmentdoctors.actualizarEstadoCita(idCita, "Atendida");
 
     if (actualizado) {
+        // Obtener datos completos de la cita y paciente para historial
+        Appointment cita = modelpanelappointmentdoctors.obtenerCitaPorId(idCita);
+        if (cita == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró la cita para registrar el historial.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Patients paciente = modelpanelappointmentdoctors.cargarDatosPaciente(cita.getId());
+        if (paciente == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró el paciente para registrar el historial.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Crear objeto History con todos los datos necesarios
+        History historial = new History(
+            cita.getIdCita(),
+            cita.getFechaCita(),
+            cita.getHora(),
+            cita.getArea(),
+            paciente.getIdentificacion(),
+            paciente.getPrimerApellido(),
+            paciente.getSegundoApellido(),
+            paciente.getTelefono(),
+            paciente.getCorreo(),
+            paciente.getDireccion(),
+            paciente.getEdad(),
+            paciente.getResponsable(),
+            paciente.getEstadoCivil(),
+            paciente.getSexo(),
+            paciente.getOcupacion(),
+            paciente.getFechaNacimiento()
+        );
+
+        // Insertar historial en la base de datos
+        boolean insertado = modelpanelappointmentdoctors.insertarHistorial(historial);
+        if (!insertado) {
+            JOptionPane.showMessageDialog(null,
+                    "No se pudo registrar el historial.",
+                    "Error SQL", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         JOptionPane.showMessageDialog(null, "Pago registrado y cita marcada como Atendida.");
 
-        // 2️⃣ Preparar registro para historial (por ahora, solo mostramos mensaje)
-        // Más adelante aquí insertaremos en la tabla historial_pagos
-        System.out.println("Preparar inserción en historial con ID cita: " + idCita);
-
         // Recargar tabla
-        loadDoctors();
+        loadAppointment();
         panelappointmentdoctors.jTabbedPane1.setSelectedIndex(0);
         cleanFields();
+
     } else {
         JOptionPane.showMessageDialog(null,
                 "No se pudo actualizar el estado de la cita.",
@@ -181,8 +230,8 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
         if (confirm == JOptionPane.YES_OPTION) {
             boolean eliminado = modelpanelappointmentdoctors.deleteAppointment(idCita);
             if (eliminado) {
-                JOptionPane.showMessageDialog(null, "Cita eliminado correctamente.");
-                loadDoctors();  
+                JOptionPane.showMessageDialog(null, "Cita eliminada correctamente.");
+                loadAppointment();  
             }
         }
 
@@ -222,7 +271,7 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
             JOptionPane.showMessageDialog(null, "Cita actualizada correctamente");
             panelappointmentdoctors.jTabbedPane1.setSelectedIndex(0);
             cleanFields();
-            loadDoctors();
+            loadAppointment();
         }
     }
     
@@ -327,23 +376,35 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
     
 
 private void applyCombinedFilters() {
-    List<RowFilter<Object, Object>> filtros = new ArrayList<>();
+  List<RowFilter<Object, Object>> filtros = new ArrayList<>();
 
-    // 1️⃣ Filtro por fecha (columna 1)
+    // Filtro por fecha (columna 1)
     Date fechaSeleccionada = panelappointmentdoctors.ComboSearch.getDate();
+
+    // Filtro por estado (columna 6)
+    String estadoSeleccionado = panelappointmentdoctors.ComboFilter.getSelectedItem().toString();
+
+    // Filtro por texto en TxtSearchId (columna 0)
+    String textoBusqueda = panelappointmentdoctors.TxtSearchId.getText().trim();
+
+    // Agregar filtro fecha solo si hay fecha seleccionada
     if (fechaSeleccionada != null) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // ajusta formato
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String fechaTexto = sdf.format(fechaSeleccionada);
         filtros.add(RowFilter.regexFilter("^" + fechaTexto + "$", 1));
     }
 
-    // 2️⃣ Filtro por estado (columna 6)
-    String estadoSeleccionado = panelappointmentdoctors.ComboFilter.getSelectedItem().toString();
+    // Agregar filtro estado solo si no es "Todas"
     if (!estadoSeleccionado.equalsIgnoreCase("Todas")) {
         filtros.add(RowFilter.regexFilter("^" + estadoSeleccionado + "$", 6));
     }
 
-    // Aplica filtros combinados
+    // Agregar filtro texto solo si no está vacío
+    if (!textoBusqueda.isEmpty()) {
+        filtros.add(RowFilter.regexFilter("(?i)" + textoBusqueda, 3));
+    }
+
+    // Si no hay filtros activos, quitar filtros para mostrar todo
     if (filtros.isEmpty()) {
         sorter.setRowFilter(null);
     } else {

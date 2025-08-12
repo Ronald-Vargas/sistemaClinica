@@ -14,6 +14,8 @@ import Appointment.PanelAppointmentDoctors;
 import Login.ControllerLoginDoctor;
 import Patients.ControllerPanelPatients;
 import Patients.ModelPanelPatients;
+import Record.ControllerPanelRecord;
+import Record.ModelPanelRecord;
 import Validations.ValidationsDoctors;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -53,7 +55,7 @@ public class ControllerSistemDoctors implements ActionListener{
     
     
     if (e.getSource() == menudoctor.BtnBox) {
-    initBox();
+    initHistory();
     
     
     
@@ -94,14 +96,15 @@ public class ControllerSistemDoctors implements ActionListener{
     
     
     
-    public void initBox() {
-    PanelRecord panelbox = new PanelRecord();
-    panelbox.setSize(1020, 720);
-    panelbox.setLocation(0,0);
+    public void initHistory() {
+    PanelRecord panelrecord = new PanelRecord();
+    panelrecord.setSize(1020, 720);
+    panelrecord.setLocation(0,0);
   
-    
+    ModelPanelRecord modelpanelrecord = new ModelPanelRecord();
+    ControllerPanelRecord controllerpanelrecord = new ControllerPanelRecord(modelpanelrecord, panelrecord);
     menudoctor.Content.removeAll();
-    menudoctor.Content.add(panelbox, BorderLayout.CENTER);
+    menudoctor.Content.add(panelrecord, BorderLayout.CENTER);
     menudoctor.Content.revalidate();
     menudoctor.Content.repaint();
 

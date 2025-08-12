@@ -3,12 +3,12 @@ package Appointment;
 
 import ConnectionDataBase.ConnectionDB;
 import Patients.Patients;
+import Record.History;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -146,7 +146,7 @@ public class ModelPanelAppointmentDoctors {
 
         if (rs.next()) {
             return new Patients(
-                rs.getString("Identificacion"),    // identificacion
+                rs.getString("Identificacion"),   
                 rs.getString("Nombre"),
                 rs.getString("PrimerApellido"),
                 rs.getString("SegundoApellido"),
@@ -167,13 +167,86 @@ public class ModelPanelAppointmentDoctors {
                 "Error al cargar datos del paciente:\n" + e.getMessage(),
                 "SQL Error", JOptionPane.ERROR_MESSAGE);
     }
-    return null; // si no encuentra datos
+    return null; 
 }
       
       
       
       
       
+     
+      
+      
+     public Appointment obtenerCitaPorId(String idCita) {
+    Appointment cita = null;
+    String sql = "SELECT IDCita, FechaCita, Hora, FechaRegistro, Estado, Area, PacienteID FROM Citas WHERE IDCita = ?";
+
+    try (Connection conexion = conn.establecerConexion();
+         PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+        ps.setString(1, idCita);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                cita = new Appointment(
+                    rs.getString("IDCita"),
+                    rs.getString("FechaCita"),
+                    rs.getString("Hora"),
+                    rs.getString("FechaRegistro"),
+                    rs.getString("Estado"),
+                    rs.getString("Area"),
+                    rs.getString("PacienteID")
+                );
+            }
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return cita;
+}
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    public boolean insertarHistorial(History record) {
+    String sql = "INSERT INTO Historial (IDCita, FechaCita, HoraCita, Area, IDPaciente, PrimerApellido, SegundoApellido, Telefono, Correo, Direccion, Edad, Responsable, EstadoCivil, Sexo, Ocupacion, FechaNacimiento) " +
+                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    try (Connection conexion = conn.establecerConexion();
+         PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+        ps.setString(1, record.getIdCita());
+        ps.setString(2, record.getFechaCita());  
+        ps.setString(3, record.getHoraCita());   
+        ps.setString(4, record.getArea());
+        ps.setString(5, record.getIdPaciente());
+        ps.setString(6, record.getPrimerApellido());
+        ps.setString(7, record.getSegundoApellido());
+        ps.setString(8, record.getTelefono());
+        ps.setString(9, record.getCorreo());
+        ps.setString(10, record.getDireccion());
+        ps.setString(11, record.getEdad());
+        ps.setString(12, record.getResponsable());
+        ps.setString(13, record.getEstadoCivil());
+        ps.setString(14, record.getSexo());
+        ps.setString(15, record.getOcupacion());
+        ps.setString(16, record.getFechaNacimiente());
+       
+        ps.executeUpdate();
+        return true;
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error al insertar historial: " + e.getMessage());
+        return false;
+    }
+}
+       
       
       
       

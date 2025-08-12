@@ -89,7 +89,6 @@ public void agendarCita() {
     String area = (String) panelappointmentpatient.ComboArea.getSelectedItem();
     String idCita = "ClinicaLatina_" + System.currentTimeMillis();
 
-
     
     Appointment appointment = new Appointment(idCita, fechaCita, hora, fechaRegistro, estado, area, id);
     if (modelpanelappointmentpatient.insertAppointmentPatient(appointment)) {

@@ -127,6 +127,8 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
         BtnRegistrarPago = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         ComboFilter = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        TxtSearchId = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         Lbl13 = new javax.swing.JLabel();
         TxtIdCita = new javax.swing.JTextField();
@@ -180,18 +182,13 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
         jTabbedPane1.setMinimumSize(new java.awt.Dimension(1022, 716));
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(1022, 716));
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Lista de citas");
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 255));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 8, 962, -1));
 
         jLabel3.setText("Citas el dia:");
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 65, 118, -1));
-        jPanel1.add(ComboSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 98, 200, 30));
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
         panelRound1.setRoundBottomLeft(75);
@@ -230,7 +227,7 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
         BtnDelete.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         BtnDelete.setForeground(new java.awt.Color(255, 255, 255));
 
-        BtnPDF.setText("Reporte PDF");
+        BtnPDF.setText("Comprobante");
         BtnPDF.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
         BtnPDF.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         BtnPDF.setForeground(new java.awt.Color(255, 0, 0));
@@ -272,15 +269,69 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 159, -1, -1));
-
-        jLabel4.setText("Estado");
+        jLabel4.setText("Idenitificación Paciente");
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 69, 118, -1));
 
         ComboFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "Pendiente", "Atendida" }));
         ComboFilter.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jPanel1.add(ComboFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 96, 150, 30));
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel5.setText("Estado");
+
+        TxtSearchId.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 962, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(100, 100, 100)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(115, 115, 115)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TxtSearchId)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(ComboSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(ComboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TxtSearchId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel4)))
+                .addGap(29, 29, 29)
+                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         jTabbedPane1.addTab("tab1", jPanel1);
 
@@ -715,10 +766,12 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
     public javax.swing.JTextField TxtMontoFinal;
     public javax.swing.JLabel TxtNombre4;
     public javax.swing.JLabel TxtPrimerApellido4;
+    public javax.swing.JTextField TxtSearchId;
     public javax.swing.JLabel TxtSegundoApellido4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
