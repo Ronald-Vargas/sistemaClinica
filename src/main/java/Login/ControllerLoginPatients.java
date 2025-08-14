@@ -51,7 +51,24 @@ public class ControllerLoginPatients implements ActionListener{
         register.setVisible(true);
         loginpatient.dispose();
         }
+        
+                
+        
+        
          });
+        
+        this.loginpatient.LblOlvideContrasena.addMouseListener (new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        
+        }
+        
+        
+        
+        
+        });
+
+        
     }
     
     
