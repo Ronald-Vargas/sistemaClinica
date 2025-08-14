@@ -309,9 +309,21 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
 
     String idCita = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 0).toString();
     String idPaciente = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 3).toString();
+    String especialidad = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 4).toString();
+    String fechacita = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 1).toString();
+    String hora = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 2).toString();
+    String estado = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 6).toString();
+
+    
+    
+    
 
     panelappointmentdoctors.TxtIdCita4.setText(idCita);
     panelappointmentdoctors.TxtIdPaciente4.setText(idPaciente);
+    panelappointmentdoctors.ComboEspecialidad4.setText(especialidad);
+    panelappointmentdoctors.ComboFechaCita4.setText(fechacita);
+    panelappointmentdoctors.ComboHora4.setText(hora);
+    panelappointmentdoctors.ComboEstado4.setText(estado);
 
     // Llamar al modelo para obtener los datos del paciente
     Patients paciente = modelpanelappointmentdoctors.cargarDatosPaciente(idPaciente);

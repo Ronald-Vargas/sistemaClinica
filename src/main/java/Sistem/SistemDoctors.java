@@ -39,16 +39,12 @@ public class SistemDoctors extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         BtnBox = new javax.swing.JButton();
         Header = new javax.swing.JPanel();
-        LblCopy = new javax.swing.JLabel();
         Content = new javax.swing.JPanel();
         Header1 = new javax.swing.JPanel();
         LblDate = new javax.swing.JLabel();
+        LblCopy = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
-        setResizable(false);
-
-        Background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         BackgroundMenus.setBackground(new java.awt.Color(40, 39, 38));
         BackgroundMenus.setForeground(new java.awt.Color(43, 42, 42));
@@ -151,9 +147,9 @@ public class SistemDoctors extends javax.swing.JFrame {
                 .addGap(208, 208, 208))
             .addGroup(BackgroundMenusLayout.createSequentialGroup()
                 .addGroup(BackgroundMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(BackgroundMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(BtnQuotes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                        .addComponent(BtnBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(BackgroundMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(BtnQuotes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, BackgroundMenusLayout.createSequentialGroup()
                             .addContainerGap()
@@ -162,7 +158,7 @@ public class SistemDoctors extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(208, 208, 208))
         );
         BackgroundMenusLayout.setVerticalGroup(
             BackgroundMenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,52 +197,17 @@ public class SistemDoctors extends javax.swing.JFrame {
                 .addComponent(BtnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        Background.add(BackgroundMenus, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, -1));
-
         Header.setBackground(new java.awt.Color(255, 255, 255));
-
-        LblCopy.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        LblCopy.setForeground(new java.awt.Color(40, 39, 38));
-        LblCopy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LblCopy.setText("© Copyright 2025");
-
-        javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
-        Header.setLayout(HeaderLayout);
-        HeaderLayout.setHorizontalGroup(
-            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HeaderLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LblCopy, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
-        HeaderLayout.setVerticalGroup(
-            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(LblCopy, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        Background.add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 778, 1020, 30));
+        Header.setLayout(new java.awt.BorderLayout());
 
         Content.setBackground(new java.awt.Color(240, 247, 248));
-
-        javax.swing.GroupLayout ContentLayout = new javax.swing.GroupLayout(Content);
-        Content.setLayout(ContentLayout);
-        ContentLayout.setHorizontalGroup(
-            ContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        ContentLayout.setVerticalGroup(
-            ContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        Background.add(Content, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 1020, 720));
+        Content.setLayout(new java.awt.BorderLayout());
 
         Header1.setBackground(new java.awt.Color(255, 255, 255));
 
         LblDate.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         LblDate.setForeground(new java.awt.Color(40, 39, 38));
+        LblDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LblDate.setText("Hoy es {dayname} {day} de {month} de {year}");
 
         javax.swing.GroupLayout Header1Layout = new javax.swing.GroupLayout(Header1);
@@ -255,29 +216,53 @@ public class SistemDoctors extends javax.swing.JFrame {
             Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Header1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(634, Short.MAX_VALUE))
+                .addComponent(LblDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         Header1Layout.setVerticalGroup(
             Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Header1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LblDate, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(LblDate, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        Background.add(Header1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 1020, -1));
+        LblCopy.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        LblCopy.setForeground(new java.awt.Color(40, 39, 38));
+        LblCopy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblCopy.setText("© Copyright 2025");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);
+        Background.setLayout(BackgroundLayout);
+        BackgroundLayout.setHorizontalGroup(
+            BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BackgroundLayout.createSequentialGroup()
+                .addComponent(BackgroundMenus, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Header1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(BackgroundLayout.createSequentialGroup()
+                        .addGap(1026, 1026, 1026)
+                        .addComponent(Header, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(BackgroundLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(LblCopy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        BackgroundLayout.setVerticalGroup(
+            BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(BackgroundMenus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(BackgroundLayout.createSequentialGroup()
+                .addComponent(Header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(BackgroundLayout.createSequentialGroup()
+                        .addGap(738, 738, 738)
+                        .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2))
+                    .addGroup(BackgroundLayout.createSequentialGroup()
+                        .addComponent(Content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(LblCopy)
+                        .addGap(7, 7, 7))))
         );
+
+        getContentPane().add(Background, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
