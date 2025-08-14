@@ -6,9 +6,12 @@ import ConnectionDataBase.ConnectionDB;
 import Sistem.ControllerSistemDoctors;
 import Sistem.SistemDoctors;
 import Home.ControllerHome;
+import Register.EmailSender;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,6 +36,22 @@ public class ControllerLoginDoctor implements ActionListener{
         logindoctor.BtnEnter.addActionListener(this);
         logindoctor.BtnExit.addActionListener(this);
 
+        
+        
+        
+        this.logindoctor.LblOlvideContrasena.addMouseListener (new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        forgotPassword();
+        }
+        
+        
+        
+        
+        });
+
+        
+        
     }
    
    
@@ -64,6 +83,95 @@ public class ControllerLoginDoctor implements ActionListener{
     
     
     }
+    
+    
+    
+    
+    
+    private void forgotPassword() {
+    String email = logindoctor.TxtEmail.getText().trim();
+
+    // 1. Validar campo vacío
+    if (email.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Por favor, ingrese su correo electrónico.", "Campo vacío", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    try {
+        // 2. Verificar si existe el correo
+        String query = "SELECT Identificacion FROM Doctores WHERE Correo = ?";
+        PreparedStatement ps = cn.prepareStatement(query);
+        ps.setString(1, email);
+        ResultSet rs = ps.executeQuery();
+
+        if (!rs.next()) {
+            JOptionPane.showMessageDialog(null, "El correo no está registrado.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // 3. Generar código aleatorio
+        int codigo = (int) (Math.random() * 900000) + 100000; // 6 dígitos
+        String codigoStr = String.valueOf(codigo);
+
+        // 4. Enviar código por correo
+        EmailSender emailSender = new EmailSender();
+        boolean enviado = emailSender.sendEmail(email, "Recuperación de contraseña", "Su código de verificación es: " + codigoStr);
+
+        if (!enviado) {
+            JOptionPane.showMessageDialog(null, "No se pudo enviar el correo. Intente más tarde.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        
+
+        // 5. Solicitar código (máximo 3 intentos)
+        boolean verificado = false;
+        for (int intentos = 0; intentos < 3; intentos++) {
+            String ingreso = JOptionPane.showInputDialog(null, "Ingrese el código enviado a su correo:", "Verificación", JOptionPane.QUESTION_MESSAGE);
+            if (ingreso == null) return; // Usuario canceló
+            if (ingreso.trim().equals(codigoStr)) {
+                verificado = true;
+                break;
+            } else {
+                JOptionPane.showMessageDialog(null, "Código incorrecto. Intentos restantes: " + (2 - intentos), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        if (!verificado) {
+            JOptionPane.showMessageDialog(null, "Se agotaron los intentos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // 6. Solicitar nueva contraseña
+        String nuevaPass = JOptionPane.showInputDialog(null, "Ingrese la nueva contraseña:", "Cambio de contraseña", JOptionPane.QUESTION_MESSAGE);
+        if (nuevaPass == null || nuevaPass.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Contraseña no válida.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // 7. Actualizar en la base de datos
+        String updateQuery = "UPDATE Doctores SET Contrasena = ? WHERE Correo = ?";
+        PreparedStatement psUpdate = cn.prepareStatement(updateQuery);
+        psUpdate.setString(1, nuevaPass);
+        psUpdate.setString(2, email);
+        psUpdate.executeUpdate();
+
+        JOptionPane.showMessageDialog(null, "Contraseña actualizada con éxito. Ahora puede iniciar sesión.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(null, "Error en recuperación: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

@@ -173,36 +173,34 @@ if (panelpatientnew.JDateOfBirth.getDate() == null) {
     
     
     
-    private void calculateAge() {
-        Date fechaNacimiento = panelpatientnew.JDateOfBirth.getDate();
-        if (fechaNacimiento == null) return;
-
-        Calendar nacimiento = Calendar.getInstance();
-        nacimiento.setTime(fechaNacimiento);
-
-        Calendar hoy = Calendar.getInstance();
-
-        int edad = hoy.get(Calendar.YEAR) - nacimiento.get(Calendar.YEAR);
-
-        // Si aún no ha cumplido años este año
-        if (hoy.get(Calendar.DAY_OF_YEAR) < nacimiento.get(Calendar.DAY_OF_YEAR)) {
-            edad--;
-        }
-
-        age = (String.valueOf(edad--));
-        
-      
-    if (edad-- >= 18) {
+   private void calculateAge() {
+    Date fechaNacimiento = panelpatientnew.JDateOfBirth.getDate();
+    if (fechaNacimiento == null) return;
+    
+    Calendar nacimiento = Calendar.getInstance();
+    nacimiento.setTime(fechaNacimiento);
+    Calendar hoy = Calendar.getInstance();
+    
+    int edad = hoy.get(Calendar.YEAR) - nacimiento.get(Calendar.YEAR);
+    
+    // Verificación más precisa considerando mes y día
+    if (hoy.get(Calendar.MONTH) < nacimiento.get(Calendar.MONTH) || 
+        (hoy.get(Calendar.MONTH) == nacimiento.get(Calendar.MONTH) && 
+         hoy.get(Calendar.DAY_OF_MONTH) < nacimiento.get(Calendar.DAY_OF_MONTH))) {
+        edad--;
+    }
+    
+    // Asignar la edad calculada
+    age = String.valueOf(edad);
+    
+    // Verificar si es mayor o menor de edad
+    if (edad >= 18) {
         panelpatientnew.TxtResponsible.setText("");
         panelpatientnew.TxtResponsible.setEditable(false); // Bloquear edición
- 
-        
     } else {
-       panelpatientnew.TxtResponsible.setEditable(true); // Habilitar edición si es menor
+        panelpatientnew.TxtResponsible.setEditable(true); // Habilitar edición si es menor
     }
-    
-    }
-    
+}
     
     
     

@@ -43,7 +43,7 @@ private Register register;
   
   
   
-  KeyAdapter validateEmail = new KeyAdapter() {
+   KeyAdapter validateEmail = new KeyAdapter() {
        public void keyTyped(KeyEvent e) {
        char c = e.getKeyChar();
         String symbols = "!@#$%&*.,-_ ";
@@ -52,7 +52,8 @@ private Register register;
             e.consume();
         }
   }
-};
+        };
+     
   
   
   

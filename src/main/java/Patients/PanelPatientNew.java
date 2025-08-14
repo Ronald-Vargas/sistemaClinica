@@ -104,7 +104,7 @@ public class PanelPatientNew extends javax.swing.JPanel {
         jLabel23.setText("Sexo");
 
         ComboCivilStatus.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        ComboCivilStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-SELECCIONAR-", "Soltero(a)", "Casado(a)", "Divorciado(a)", "Viudo(a)", "Unión libre (o Unido(a))", "Separado(a)", "Comprometido(a)", " " }));
+        ComboCivilStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-SELECCIONAR-", "Soltero(a)", "Casado(a)", "Divorciado(a)", "Viudo(a)", "Unión libre", "Separado(a)", "Comprometido(a)", " " }));
 
         ComboSex.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         ComboSex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-SELECCIONAR-", "Masculino", "Femenino" }));

@@ -79,16 +79,23 @@ public void agendarCita() {
 
     
     Date fechaCitaDate = panelappointmentpatient.ComboCalendar.getDate();
+    LocalTime horaSeleccionada = panelappointmentpatient.ComboTime.getTime();
+    String area = (String) panelappointmentpatient.ComboArea.getSelectedItem();
+    
+     if (fechaCitaDate == null || horaSeleccionada == null || area.equals("--SELECCIONAR--")) {
+    JOptionPane.showMessageDialog(null, "Por favor, Complete todos los datos solicitados", "Campos vacios", JOptionPane.ERROR_MESSAGE); 
+    return;
+    }
+     
+     
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String fechaCita = sdf.format(fechaCitaDate);
-    
-    LocalTime horaSeleccionada = panelappointmentpatient.ComboTime.getTime();
     String hora = horaSeleccionada.format(DateTimeFormatter.ofPattern("HH:mm"));
     String fechaRegistro = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));    
     String estado = "Pendiente";
-    String area = (String) panelappointmentpatient.ComboArea.getSelectedItem();
     String idCita = "ClinicaLatina_" + System.currentTimeMillis();
 
+   
     
     Appointment appointment = new Appointment(idCita, fechaCita, hora, fechaRegistro, estado, area, id);
     if (modelpanelappointmentpatient.insertAppointmentPatient(appointment)) {
@@ -99,6 +106,7 @@ public void agendarCita() {
             home.setVisible(true);
             LoginPatient login = new LoginPatient();
             login.dispose();
+    
         } else {
             JOptionPane.showMessageDialog(null, "Error al agendar cita.");
         }

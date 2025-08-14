@@ -83,14 +83,14 @@ try (Connection conexion = conn.establecerConexion();
     
     
     
-    public boolean existeDoctor(String identificacion) {
-    String sql = "SELECT COUNT(*) FROM doctores WHERE identificacion = ?";
+    public boolean existeDoctor(String identificacion, String correo) {
+    String sql = "SELECT COUNT(*) FROM doctores WHERE identificacion = ? AND Correo=?";
     try (Connection conexion = conn.establecerConexion();
          PreparedStatement ps = conexion.prepareStatement(sql)) {
         ps.setString(1, identificacion);
+        ps.setString(2, correo);
         ResultSet rs = ps.executeQuery();
-        rs.next();
-        return rs.getInt(1) > 0;
+        return rs.next(); // Si hay resultados, el usuario ya existe
     } catch (Exception e) {
         e.printStackTrace();
         return false;

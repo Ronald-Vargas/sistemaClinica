@@ -89,6 +89,7 @@ public class ControllerDoctors implements ActionListener {
 
     if (editando) {
   
+         
         boolean actualizado = modeldoctors.update(idOriginal, nombre, primerApellido, segundoApellido, correo, telefono, contrasena, especialidad);
         if (actualizado) {
             JOptionPane.showMessageDialog(null, "Doctor actualizado correctamente.");
@@ -101,8 +102,8 @@ public class ControllerDoctors implements ActionListener {
 
     } else {
         // ➕ INSERTAR NUEVO
-        if (modeldoctors.existeDoctor(identificacion)) {
-            JOptionPane.showMessageDialog(null, "Ya existe un doctor con esa identificación.");
+        if (modeldoctors.existeDoctor(identificacion, correo)) {
+            JOptionPane.showMessageDialog(null, "Ya existe un doctor con esa identificación o correo.");
             return;
         } 
 
@@ -273,7 +274,7 @@ public class ControllerDoctors implements ActionListener {
             // preparamos modo edición
             editando = true;
             paneldoctors.BtnContinue.setText("Guardar cambios");
-            paneldoctors.BtnOut.setVisible(false);
+            paneldoctors.BtnOut.setVisible(true);
             paneldoctors.TxtId1.setEnabled(false);     // no se cambia la PK
             paneldoctors.jTabbedPane.setSelectedIndex(1);   // volvemos al form de alta
             }

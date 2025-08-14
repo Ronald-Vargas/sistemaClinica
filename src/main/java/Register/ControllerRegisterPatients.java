@@ -205,7 +205,7 @@ initPanelNewPatient();
         return rs.next(); // Si hay resultados, el usuario ya existe
     } catch (Exception e) {
         JOptionPane.showMessageDialog(null, "Error al verificar el usuario: " + e.getMessage());
-        return true; // Por seguridad, asumimos que existe si algo falla
+        return true; 
     }
 }
     
