@@ -37,7 +37,14 @@
         </dependency>  
         
         
-        
+           <!-- OpenPDF - Librería principal para generar PDFs -->
+    <dependency>
+        <groupId>com.github.librepdf</groupId>
+        <artifactId>openpdf</artifactId>
+        <version>1.3.30</version>
+    </dependency>
+
+
         
         <!-- https://mvnrepository.com/artifact/com.github.lgooddatepicker/LGoodDatePicker -->
 <dependency>

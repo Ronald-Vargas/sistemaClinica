@@ -1,6 +1,7 @@
 
 package Record;
 
+import About.About;
 import ConnectionDataBase.ConnectionDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -81,7 +82,46 @@ public class ModelPanelRecord {
     
     
     
-    
+     public About getClinicaInfo() {
+    About clinica = null;
+    try {
+        String sql = "SELECT TOP 1 NombreClinica, Direccion, Telefono, Correo FROM ClinicaInfo";
+        Connection conexion = conn.establecerConexion();
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            clinica = new About(
+                rs.getString("NombreClinica"),
+                rs.getString("Direccion"),
+                rs.getString("Telefono"),
+                rs.getString("Correo")
+            );
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return clinica;
+}
+     
+     
+     
+     
+     
+     
+     
+     // Obtener historial completo
+    public ResultSet getHistorial() {
+         String sql = "SELECT * FROM Historial";
+        try (
+           
+            Connection conexion = conn.establecerConexion();
+            PreparedStatement ps = conexion.prepareStatement(sql)) {
+            return ps.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     
     
      
