@@ -11,6 +11,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,9 +32,13 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
     private PanelAppointmentDoctors panelappointmentdoctors;
     private TableRowSorter<DefaultTableModel> sorter;
     private String idOriginal = ""; 
-    double  monto = 0;
-    double iva = 0;
-    double montoFinal = 0;
+    
+     // Variables de pago
+    private double monto = 0;
+    private double iva = 0;
+    private double montoFinal = 0;
+    private String montoFinalStr = "";
+  
     
 
     public ControllerPanelAppointmentDoctors(ModelPanelAppointmentDoctors modelpanelappointmentdoctors, PanelAppointmentDoctors panelappointmentdoctors) {
@@ -150,72 +156,72 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
     
     private void pagarCita() {
     String idCita = panelappointmentdoctors.TxtIdCita4.getText();
-
     if (idCita.isEmpty()) {
-        JOptionPane.showMessageDialog(null,
-                "No hay cita seleccionada para pagar.",
-                "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "No hay cita seleccionada para pagar.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
 
-    // Actualizar estado en la base de datos
+    // Fecha y hora del pago
+    LocalDateTime ahora = LocalDateTime.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    String fechaPago = ahora.format(formatter);
+
+    // Actualizar estado a Atendida
     boolean actualizado = modelpanelappointmentdoctors.actualizarEstadoCita(idCita, "Atendida");
-
-    if (actualizado) {
-        // Obtener datos completos de la cita y paciente para historial
-        Appointment cita = modelpanelappointmentdoctors.obtenerCitaPorId(idCita);
-        if (cita == null) {
-            JOptionPane.showMessageDialog(null, "No se encontró la cita para registrar el historial.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        Patients paciente = modelpanelappointmentdoctors.cargarDatosPaciente(cita.getId());
-        if (paciente == null) {
-            JOptionPane.showMessageDialog(null, "No se encontró el paciente para registrar el historial.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Crear objeto History con todos los datos necesarios
-        History historial = new History(
-            cita.getIdCita(),
-            cita.getFechaCita(),
-            cita.getHora(),
-            cita.getArea(),
-            paciente.getIdentificacion(),
-            paciente.getPrimerApellido(),
-            paciente.getSegundoApellido(),
-            paciente.getTelefono(),
-            paciente.getCorreo(),
-            paciente.getDireccion(),
-            paciente.getEdad(),
-            paciente.getResponsable(),
-            paciente.getEstadoCivil(),
-            paciente.getSexo(),
-            paciente.getOcupacion(),
-            paciente.getFechaNacimiento()
-        );
-
-        // Insertar historial en la base de datos
-        boolean insertado = modelpanelappointmentdoctors.insertarHistorial(historial);
-        if (!insertado) {
-            JOptionPane.showMessageDialog(null,
-                    "No se pudo registrar el historial.",
-                    "Error SQL", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        JOptionPane.showMessageDialog(null, "Pago registrado y cita marcada como Atendida.");
-
-        // Recargar tabla
-        loadAppointment();
-        panelappointmentdoctors.jTabbedPane1.setSelectedIndex(0);
-        cleanFields();
-
-    } else {
-        JOptionPane.showMessageDialog(null,
-                "No se pudo actualizar el estado de la cita.",
-                "Error SQL", JOptionPane.ERROR_MESSAGE);
+    if (!actualizado) {
+        JOptionPane.showMessageDialog(null, "No se pudo actualizar el estado de la cita.", "Error SQL", JOptionPane.ERROR_MESSAGE);
+        return;
     }
+
+    // Guardar fecha de pago
+    modelpanelappointmentdoctors.registrarFechaPago(idCita, fechaPago);
+
+    // Obtener datos completos de cita y paciente
+    Appointment cita = modelpanelappointmentdoctors.obtenerCitaPorId(idCita);
+    if (cita == null) {
+        JOptionPane.showMessageDialog(null, "No se encontró la cita para registrar el historial.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    Patients paciente = modelpanelappointmentdoctors.cargarDatosPaciente(cita.getId());
+    if (paciente == null) {
+        JOptionPane.showMessageDialog(null, "No se encontró el paciente para registrar el historial.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Crear objeto History usando montoFinalStr calculado
+    History historial = new History(
+        cita.getIdCita(),
+        cita.getFechaCita(),
+        cita.getHora(),
+        cita.getArea(),
+        paciente.getIdentificacion(),
+        paciente.getPrimerApellido(),
+        paciente.getSegundoApellido(),
+        paciente.getTelefono(),
+        paciente.getCorreo(),
+        paciente.getDireccion(),
+        paciente.getEdad(),
+        paciente.getResponsable(),
+        paciente.getEstadoCivil(),
+        paciente.getSexo(),
+        paciente.getOcupacion(),
+        paciente.getFechaNacimiento(),
+        fechaPago,
+        montoFinalStr
+    );
+
+    // Insertar historial
+    boolean insertado = modelpanelappointmentdoctors.insertarHistorial(historial);
+    if (!insertado) {
+        JOptionPane.showMessageDialog(null, "No se pudo registrar el historial.", "Error SQL", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    JOptionPane.showMessageDialog(null, "Pago registrado y cita marcada como Atendida.");
+    loadAppointment();
+    panelappointmentdoctors.jTabbedPane1.setSelectedIndex(0);
+    cleanFields();
 }
     
     
@@ -302,8 +308,8 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
     
     
     
-    public void realizarPago() {
-       int fila = panelappointmentdoctors.AppointmentTable.getSelectedRow();
+   public void realizarPago() {
+    int fila = panelappointmentdoctors.AppointmentTable.getSelectedRow();
     if (fila < 0) {
         JOptionPane.showMessageDialog(null,
                 "Seleccione una cita de la tabla.",
@@ -311,58 +317,55 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
         return;
     }
 
+    // Obtener datos de la tabla
     String idCita = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 0).toString();
     String idPaciente = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 3).toString();
     String especialidad = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 4).toString();
-    String fechacita = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 1).toString();
+    String fechaCita = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 1).toString();
     String hora = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 2).toString();
     String estado = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 6).toString();
 
-    if (especialidad.equals("Medico General")) {
-    monto = 50.000;
-    } else if (especialidad.equals("Odontologo")) {
-    monto = 30.000;  
-    } else if (especialidad.equals("Pediatra")) {
-    monto = 40.000; 
-    } else if (especialidad.equals("Dermatologo")) {
-    monto = 50.000;
-    } else if (especialidad.equals("Psiquiatra")) {
-    monto = 50.000;
-    } else if (especialidad.equals("Nutricionista")) {
-    monto = 25.000;
+    // Calcular montos según especialidad
+    double monto = 0;
+    switch (especialidad) {
+        case "Medico General": monto = 50000; break;
+        case "Odontologo": monto = 30000; break;
+        case "Pediatra": monto = 40000; break;
+        case "Dermatologo": monto = 50000; break;
+        case "Psiquiatra": monto = 50000; break;
+        case "Nutricionista": monto = 25000; break;
     }
 
-    iva = monto * 0.13;
-    montoFinal = monto + iva;
-    
-   
-    String montoStr = String.format("%.3f", monto);
-    String ivaStr = String.format("%.3f", iva);
-    String montoFinalStr = String.format("%.3f", montoFinal);
-    
-    panelappointmentdoctors.TxtMonto.setText(montoStr);
-    panelappointmentdoctors.TxtIVA.setText(ivaStr);
-    panelappointmentdoctors.TxtMontoFinal.setText(montoFinalStr);
+    double iva = monto * 0.13;
+    double montoFinal = monto + iva;
 
-    
+    // Formatear a String para mostrar
+    panelappointmentdoctors.TxtMonto.setText(String.format("%.3f", monto));
+    panelappointmentdoctors.TxtIVA.setText(String.format("%.3f", iva));
+    panelappointmentdoctors.TxtMontoFinal.setText(String.format("%.3f", montoFinal));
+
+    // Llenar campos de pago
     panelappointmentdoctors.TxtIdCita4.setText(idCita);
     panelappointmentdoctors.TxtIdPaciente4.setText(idPaciente);
     panelappointmentdoctors.ComboEspecialidad4.setText(especialidad);
-    panelappointmentdoctors.ComboFechaCita4.setText(fechacita);
+    panelappointmentdoctors.ComboFechaCita4.setText(fechaCita);
     panelappointmentdoctors.ComboHora4.setText(hora);
     panelappointmentdoctors.ComboEstado4.setText(estado);
 
-    // Llamar al modelo para obtener los datos del paciente
+    // Datos del paciente
     Patients paciente = modelpanelappointmentdoctors.cargarDatosPaciente(idPaciente);
-
     if (paciente != null) {
         panelappointmentdoctors.TxtNombre4.setText(paciente.getNombre());
         panelappointmentdoctors.TxtPrimerApellido4.setText(paciente.getPrimerApellido());
         panelappointmentdoctors.TxtSegundoApellido4.setText(paciente.getSegundoApellido());
     }
 
+    // Guardar montoFinal en variable de instancia para pagarCita()
+    this.montoFinalStr = String.format("%.3f", montoFinal);
+
+    // Cambiar pestaña a pago
     panelappointmentdoctors.jTabbedPane1.setSelectedIndex(2);
-    }
+}
     
     
     

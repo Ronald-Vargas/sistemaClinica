@@ -215,8 +215,8 @@ public class ModelPanelAppointmentDoctors {
       
       
     public boolean insertarHistorial(History record) {
-    String sql = "INSERT INTO Historial (IDCita, FechaCita, HoraCita, Area, IDPaciente, PrimerApellido, SegundoApellido, Telefono, Correo, Direccion, Edad, Responsable, EstadoCivil, Sexo, Ocupacion, FechaNacimiento) " +
-                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO Historial (IDCita, FechaCita, HoraCita, Area, IDPaciente, PrimerApellido, SegundoApellido, Telefono, Correo, Direccion, Edad, Responsable, EstadoCivil, Sexo, Ocupacion, FechaNacimiento, FechaPago, Monto) " +
+                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     try (Connection conexion = conn.establecerConexion();
          PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -237,6 +237,8 @@ public class ModelPanelAppointmentDoctors {
         ps.setString(14, record.getSexo());
         ps.setString(15, record.getOcupacion());
         ps.setString(16, record.getFechaNacimiente());
+        ps.setString(17, record.getFechaPago());
+        ps.setString(18, record.getMontoFinal());
        
         ps.executeUpdate();
         return true;
@@ -249,6 +251,27 @@ public class ModelPanelAppointmentDoctors {
        
       
       
+    public boolean registrarFechaPago(String idCita, String fechaPago) {
+    String sql = "UPDATE Citas SET FechaPago = ? WHERE IDCita = ?";
+    try (Connection conexion = conn.establecerConexion();
+         PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+        ps.setString(1, fechaPago);
+        ps.setString(2, idCita);
+
+        return ps.executeUpdate() > 0;
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+    
+    
+    
+    
+    
+    
       
 }
 

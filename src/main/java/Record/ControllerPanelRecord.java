@@ -66,7 +66,8 @@ public class ControllerPanelRecord {
                 history.getIdPaciente(),
                 history.getIdCita(),
                 history.getArea(),
-                history.getFechaCita()
+                history.getFechaPago(),
+                history.getMontoFinal()
 
 
 
@@ -122,10 +123,7 @@ public class ControllerPanelRecord {
     
     
     
-    
-    
-    
-    
+   
     
 }
 

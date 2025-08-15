@@ -19,10 +19,10 @@ public class History {
     private String sexo;
     private String ocupacion;
     private String fechaNacimiente;
+    private String fechaPago;
+    private String montoFinal;
 
-    
-    
-    public History(String idCita, String fechaCita, String horaCita, String area, String idPaciente, String primerApellido, String segundoApellido, String telefono, String correo, String direccion, String edad, String responsable, String estadoCivil, String sexo, String ocupacion, String fechaNacimiente) {
+    public History(String idCita, String fechaCita, String horaCita, String area, String idPaciente, String primerApellido, String segundoApellido, String telefono, String correo, String direccion, String edad, String responsable, String estadoCivil, String sexo, String ocupacion, String fechaNacimiente, String fechaPago, String montoFinal) {
         this.idCita = idCita;
         this.fechaCita = fechaCita;
         this.horaCita = horaCita;
@@ -39,6 +39,8 @@ public class History {
         this.sexo = sexo;
         this.ocupacion = ocupacion;
         this.fechaNacimiente = fechaNacimiente;
+        this.fechaPago = fechaPago;
+        this.montoFinal = montoFinal;
     }
 
     public String getIdCita() {
@@ -169,6 +171,28 @@ public class History {
         this.fechaNacimiente = fechaNacimiente;
     }
 
+    public String getFechaPago() {
+        return fechaPago;
+    }
+
+    public void setFechaPago(String fechaPago) {
+        this.fechaPago = fechaPago;
+    }
+
+    public String getMontoFinal() {
+        return montoFinal;
+    }
+
+    public void setMontoFinal(String montoFinal) {
+        this.montoFinal = montoFinal;
+    }
+
+    
+    
+
+    
+    
+    
  
     
     

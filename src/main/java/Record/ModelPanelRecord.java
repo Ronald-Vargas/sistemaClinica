@@ -45,7 +45,9 @@ public class ModelPanelRecord {
                     rs.getString("estadoCivil"),
                     rs.getString("sexo"),
                     rs.getString("ocupacion"),
-                    rs.getString("fechaNacimiento")
+                    rs.getString("fechaNacimiento"),
+                    rs.getString("fechaPago"),
+                    rs.getString("Monto")
                 );
                 lista.add(history);
             }
