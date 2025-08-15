@@ -1,6 +1,8 @@
 
 package Sistem;
 
+import About.ControllerPanelAbout;
+import About.ModelPanelAbout;
 import About.PanelAbout;
 import Appointment.ControllerPanelAppointmentDoctors;
 import Appointment.ModelPanelAppointmentDoctors;
@@ -172,7 +174,8 @@ public class ControllerSistemDoctors implements ActionListener{
     panelabout.setSize(1020, 720);
     panelabout.setLocation(0,0);
   
-    
+    ModelPanelAbout modelpanelabout = new ModelPanelAbout();
+    ControllerPanelAbout controllerpanelabout = new ControllerPanelAbout(panelabout, modelpanelabout);
     menudoctor.Content.removeAll();
     menudoctor.Content.add(panelabout, BorderLayout.CENTER);
     menudoctor.Content.revalidate();

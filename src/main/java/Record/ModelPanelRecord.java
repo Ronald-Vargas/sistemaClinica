@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 
 public class ModelPanelRecord {
@@ -58,6 +59,27 @@ public class ModelPanelRecord {
 
         return lista;
     }
+    
+    
+    
+    
+     public boolean deleteHistory(String id) {
+    String sql = "DELETE FROM Historial WHERE IDCita=?";
+        try (Connection conexion = conn.establecerConexion();
+             PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+        ps.setString(1, id);
+        return ps.executeUpdate() > 0;
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null,
+                "Error eliminando registro:\n" + e.getMessage(),
+                "SQL Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+}
+    
+    
     
     
     

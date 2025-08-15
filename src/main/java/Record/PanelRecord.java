@@ -28,6 +28,7 @@ public class PanelRecord extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         HistoryTable = new javax.swing.JTable();
         BtnPDF = new javax.swing.JButton();
+        BtnDelete = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         ComboFilter = new javax.swing.JComboBox<>();
@@ -61,6 +62,11 @@ public class PanelRecord extends javax.swing.JPanel {
         BtnPDF.setText("Recibo");
         BtnPDF.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
+        BtnDelete.setBackground(new java.awt.Color(255, 0, 0));
+        BtnDelete.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        BtnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        BtnDelete.setText("Eliminar");
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
@@ -69,15 +75,19 @@ public class PanelRecord extends javax.swing.JPanel {
                 .addGap(7, 7, 7)
                 .addComponent(jScrollPane1))
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(390, 390, 390)
+                .addGap(221, 221, 221)
+                .addComponent(BtnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                .addGap(140, 140, 140)
                 .addComponent(BtnPDF, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                .addGap(386, 386, 386))
+                .addGap(225, 225, 225))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(BtnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
         );
@@ -157,6 +167,7 @@ public class PanelRecord extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton BtnDelete;
     public javax.swing.JButton BtnPDF;
     public javax.swing.JComboBox<String> ComboFilter;
     public com.toedter.calendar.JDateChooser ComboSearch;

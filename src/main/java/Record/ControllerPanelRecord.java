@@ -1,19 +1,22 @@
 
 package Record;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 
 
-public class ControllerPanelRecord {
+public class ControllerPanelRecord implements ActionListener{
     
    private ModelPanelRecord modelpanelrecord;
    private PanelRecord panelrecord;
@@ -27,7 +30,44 @@ public class ControllerPanelRecord {
         
         loadHistory();
         initializeFilters();
+        initializeListeners();
     }
+    
+    
+    
+    
+    private void initializeListeners() {
+        this.panelrecord.BtnDelete.addActionListener(this);
+       
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    @Override
+    public void actionPerformed (ActionEvent e) {
+    
+        if(e.getSource() == panelrecord.BtnDelete) {
+        deleteDoctor();
+       
+            
+            
+        }
+    
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
     
     
     
@@ -50,6 +90,35 @@ public class ControllerPanelRecord {
         }
     });
 }
+    
+    
+    
+    
+    
+       
+    public void deleteDoctor() {
+    int fila = panelrecord.HistoryTable.getSelectedRow();
+
+    if (fila >= 0) {
+        String idHitory = panelrecord.HistoryTable.getValueAt(fila, 1).toString();
+        int confirm = JOptionPane.showConfirmDialog(null,
+                "¿Estás seguro de eliminar la información del registro?",
+                "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            boolean eliminado = modelpanelrecord.deleteHistory(idHitory);
+            if (eliminado) {
+                JOptionPane.showMessageDialog(null, "Historial eliminado correctamente.");
+                loadHistory();  
+            }
+        }
+
+    } else {
+       JOptionPane.showMessageDialog(null,
+                        "Seleccione un registro de la tabla.",
+                        "Sin selección", JOptionPane.ERROR_MESSAGE);
+    }
+    }
     
     
     

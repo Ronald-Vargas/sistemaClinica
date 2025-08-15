@@ -88,9 +88,14 @@ public class ControllerDoctors implements ActionListener {
     }
 
     if (editando) {
-  
-         
-        boolean actualizado = modeldoctors.update(idOriginal, nombre, primerApellido, segundoApellido, correo, telefono, contrasena, especialidad);
+        // Validar que el correo no esté usado por otro doctor diferente al actual
+        if (modeldoctors.correoUsadoPorOtro(correo, idOriginal)) {
+            JOptionPane.showMessageDialog(null, "El correo ya está en uso por otro doctor.");
+            return;
+        }
+
+        boolean actualizado = modeldoctors.update(idOriginal, nombre, primerApellido, segundoApellido,
+                                                  correo, telefono, contrasena, especialidad);
         if (actualizado) {
             JOptionPane.showMessageDialog(null, "Doctor actualizado correctamente.");
             paneldoctors.jTabbedPane.setSelectedIndex(0);
@@ -101,13 +106,15 @@ public class ControllerDoctors implements ActionListener {
         }
 
     } else {
-        // ➕ INSERTAR NUEVO
+        // Alta: bloquear si existe por identificación O correo
         if (modeldoctors.existeDoctor(identificacion, correo)) {
             JOptionPane.showMessageDialog(null, "Ya existe un doctor con esa identificación o correo.");
             return;
-        } 
+        }
 
-        Doctors doctor = new Doctors(nombre, primerApellido, segundoApellido, identificacion, correo, telefono, contrasena, especialidad);
+        Doctors doctor = new Doctors(nombre, primerApellido, segundoApellido, identificacion,
+                                     correo, telefono, contrasena, especialidad);
+
         if (modeldoctors.insertDoctor(doctor)) {
             JOptionPane.showMessageDialog(null, "Doctor registrado con éxito.");
             paneldoctors.jTabbedPane.setSelectedIndex(0);
@@ -202,7 +209,7 @@ public class ControllerDoctors implements ActionListener {
     if (fila >= 0) {
         String idDoctor = paneldoctors.DoctorsTable.getValueAt(fila, 3).toString();
         int confirm = JOptionPane.showConfirmDialog(null,
-                "¿Estás seguro de eliminar la informacion del doctor?",
+                "¿Estás seguro de eliminar la información del doctor?",
                 "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {

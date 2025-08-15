@@ -101,7 +101,7 @@ public class ControllerPanelPatients implements ActionListener{
     if (fila >= 0) {
         String idDoctor = panelpatients.PatientsTable.getValueAt(fila, 3).toString();
         int confirm = JOptionPane.showConfirmDialog(null,
-                "¿Estás seguro de eliminar la informacion del paciente?, Se perdera la información.",
+                "¿Estás seguro de eliminar la información del paciente?, Se perdera la información.",
                 "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
@@ -150,9 +150,9 @@ public class ControllerPanelPatients implements ActionListener{
         panelpatients.ComboProvince.setSelectedItem(paciente.getDireccion()); 
         panelpatients.TxtAge.setText(paciente.getEdad());
         panelpatients.TxtResponsable.setText(paciente.getResponsable());
-        panelpatients.TxtCivilStats.setText(paciente.getEstadoCivil());
+        panelpatients.TxtCivilStats.setSelectedItem(paciente.getEstadoCivil());
         panelpatients.TxtSex.setText(paciente.getSexo());
-        panelpatients.TxtOcupation.setText(paciente.getOcupacion());
+        panelpatients.TxtOcupation.setSelectedItem(paciente.getOcupacion());
 
         disableFields();
         panelpatients.jTabbedPane1.setSelectedIndex(1);
@@ -173,9 +173,9 @@ public class ControllerPanelPatients implements ActionListener{
         String direccion = (String) panelpatients.ComboProvince.getSelectedItem();
         String edad = panelpatients.TxtAge.getText().trim();
         String responsable = panelpatients.TxtResponsable.getText().trim();
-        String estadoCivil = panelpatients.TxtCivilStats.getText().trim();
+        String estadoCivil = (String) panelpatients.TxtCivilStats.getSelectedItem();
         String sexo = panelpatients.TxtSex.getText().trim();
-        String ocupacion = panelpatients.TxtOcupation.getText().trim();
+        String ocupacion = (String) panelpatients.TxtOcupation.getSelectedItem();
         String fechaNacimiento = null;
         
         boolean ok = modelpanelpatients.update(idOriginal, nombre, primerApellido, segundoApellido, correo, telefono, direccion, edad, responsable, estadoCivil, sexo, ocupacion, fechaNacimiento);

@@ -62,7 +62,6 @@ public class PanelPatients extends javax.swing.JPanel {
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         TxtResponsable = new javax.swing.JTextField();
-        TxtCivilStats = new javax.swing.JTextField();
         Lbl14 = new javax.swing.JLabel();
         TxtLastNameM = new javax.swing.JTextField();
         jLabel37 = new javax.swing.JLabel();
@@ -73,11 +72,12 @@ public class PanelPatients extends javax.swing.JPanel {
         jLabel39 = new javax.swing.JLabel();
         TxtSex = new javax.swing.JTextField();
         jLabel40 = new javax.swing.JLabel();
-        TxtOcupation = new javax.swing.JTextField();
         BtnUpdate = new javax.swing.JButton();
         BtnX = new javax.swing.JButton();
         BtnCheck = new javax.swing.JButton();
         ComboProvince = new javax.swing.JComboBox<>();
+        TxtCivilStats = new javax.swing.JComboBox<>();
+        TxtOcupation = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(1010, 700));
 
@@ -96,6 +96,7 @@ public class PanelPatients extends javax.swing.JPanel {
         panelRound1.setRoundTopLeft(75);
         panelRound1.setRoundTopRight(75);
 
+        PatientsTable.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         PatientsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -151,8 +152,8 @@ public class PanelPatients extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(TxtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -248,10 +249,6 @@ public class PanelPatients extends javax.swing.JPanel {
         TxtResponsable.setMaximumSize(null);
         TxtResponsable.setRequestFocusEnabled(false);
 
-        TxtCivilStats.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        TxtCivilStats.setMargin(null);
-        TxtCivilStats.setMaximumSize(null);
-
         Lbl14.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         Lbl14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Lbl14.setText("Segundo apellido");
@@ -317,12 +314,6 @@ public class PanelPatients extends javax.swing.JPanel {
         jLabel40.setMinimumSize(null);
         jLabel40.setPreferredSize(null);
 
-        TxtOcupation.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        TxtOcupation.setMargin(null);
-        TxtOcupation.setMaximumSize(null);
-        TxtOcupation.setMinimumSize(null);
-        TxtOcupation.setPreferredSize(null);
-
         BtnUpdate.setBackground(new java.awt.Color(51, 51, 255));
         BtnUpdate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         BtnUpdate.setForeground(new java.awt.Color(255, 255, 255));
@@ -339,6 +330,12 @@ public class PanelPatients extends javax.swing.JPanel {
         ComboProvince.setMaximumSize(null);
         ComboProvince.setMinimumSize(null);
         ComboProvince.setPreferredSize(null);
+
+        TxtCivilStats.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        TxtCivilStats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Soltero(a)", "Casado(a)", "Divorciado(a)", "Viudo(a)", "Unión libre", "Separado(a)", "Comprometido(a)", " " }));
+
+        TxtOcupation.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        TxtOcupation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Empleado", "Estudiante", "Desempleado", "Pensionado", "Independiente", "Ama de casa", "Comerciante", "Otro" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -381,30 +378,29 @@ public class PanelPatients extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addComponent(TxtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(TxtResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(TxtCivilStats, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(TxtSex, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(TxtOcupation, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(307, 307, 307)
                 .addComponent(BtnX, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(BtnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(BtnCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(TxtCivilStats, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtSex, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(TxtOcupation, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -447,12 +443,16 @@ public class PanelPatients extends javax.swing.JPanel {
                             .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TxtResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtCivilStats, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtSex, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtOcupation, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TxtResponsable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                            .addComponent(TxtSex, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                            .addComponent(TxtOcupation, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(TxtCivilStats)))
                 .addGap(271, 271, 271)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtnCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -474,7 +474,7 @@ public class PanelPatients extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -491,13 +491,13 @@ public class PanelPatients extends javax.swing.JPanel {
     public javax.swing.JLabel Lbl14;
     public javax.swing.JTable PatientsTable;
     public javax.swing.JTextField TxtAge;
-    public javax.swing.JTextField TxtCivilStats;
+    public javax.swing.JComboBox<String> TxtCivilStats;
     public javax.swing.JTextField TxtEmail;
     public javax.swing.JTextField TxtId;
     public javax.swing.JTextField TxtLastNameF;
     public javax.swing.JTextField TxtLastNameM;
     public javax.swing.JTextField TxtNombre;
-    public javax.swing.JTextField TxtOcupation;
+    public javax.swing.JComboBox<String> TxtOcupation;
     public javax.swing.JTextField TxtPhone;
     public javax.swing.JTextField TxtResponsable;
     public javax.swing.JTextField TxtSearch;

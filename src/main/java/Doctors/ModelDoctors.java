@@ -51,48 +51,26 @@ public class ModelDoctors {
     
     
 
-    public boolean insertDoctor(Doctors doctor) { 
-        
-        
-        String sql = "INSERT INTO doctores (nombre, primerApellido, segundoApellido, identificacion, correo, telefono, contrasena, especialidad) VALUES (?, ?, ?, ?, ?, ?,?,?)";
+   public boolean insertDoctor(Doctors doctor) {
+    String sql = "INSERT INTO doctores (nombre, primerApellido, segundoApellido, identificacion, correo, telefono, contrasena, especialidad) " +
+                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-try (Connection conexion = conn.establecerConexion();
-         PreparedStatement checkPs = conexion.prepareStatement(sql)) {
-         PreparedStatement ps = conexion.prepareStatement(sql);
-
-            ps.setString(1, doctor.getNombre());
-            ps.setString(2, doctor.getPrimerApellido());
-            ps.setString(3, doctor.getSegundoApellido());
-            ps.setString(4, doctor.getIdentificacion());
-            ps.setString(5, doctor.getCorreo());
-            ps.setString(6, doctor.getTelefono());
-            ps.setString(7, doctor.getContrasena());
-            ps.setString(8, doctor.getEspecialidad());
-
-            ps.executeUpdate();
-            return true;
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al insertar doctor: " + e.getMessage());
-            return false;
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    public boolean existeDoctor(String identificacion, String correo) {
-    String sql = "SELECT COUNT(*) FROM doctores WHERE identificacion = ? AND Correo=?";
     try (Connection conexion = conn.establecerConexion();
          PreparedStatement ps = conexion.prepareStatement(sql)) {
-        ps.setString(1, identificacion);
-        ps.setString(2, correo);
-        ResultSet rs = ps.executeQuery();
-        return rs.next(); // Si hay resultados, el usuario ya existe
+
+        ps.setString(1, doctor.getNombre());
+        ps.setString(2, doctor.getPrimerApellido());
+        ps.setString(3, doctor.getSegundoApellido());
+        ps.setString(4, doctor.getIdentificacion());
+        ps.setString(5, doctor.getCorreo());
+        ps.setString(6, doctor.getTelefono());
+        ps.setString(7, doctor.getContrasena());
+        ps.setString(8, doctor.getEspecialidad());
+
+        ps.executeUpdate();
+        return true;
     } catch (Exception e) {
-        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error al insertar doctor: " + e.getMessage());
         return false;
     }
 }
@@ -102,8 +80,57 @@ try (Connection conexion = conn.establecerConexion();
     
     
     
+public boolean existeDoctor(String identificacion, String correo) {
+    String sql = "SELECT COUNT(*) FROM doctores WHERE identificacion = ? OR correo = ?";
+    try (Connection conexion = conn.establecerConexion();
+         PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+        ps.setString(1, identificacion);
+        ps.setString(2, correo);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return false;
+}    
     
     
+    
+    
+    
+    /** Valida para EDICIONES: ¿el correo ya lo usa otro doctor distinto al actual? */
+public boolean correoUsadoPorOtro(String correo, String identificacionActual) {
+    String sql = "SELECT COUNT(*) FROM doctores WHERE correo = ? AND identificacion <> ?";
+    try (Connection conexion = conn.establecerConexion();
+         PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+        ps.setString(1, correo);
+        ps.setString(2, identificacionActual);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return false;
+}
+
+
+
+
+
+
+
+
+
 
     public boolean deletedoctor(String id) {
     String sql = "DELETE FROM Doctores WHERE Identificacion=?";
