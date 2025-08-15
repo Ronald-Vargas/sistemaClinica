@@ -104,8 +104,7 @@ public void agendarCita() {
             Home home = new Home();
             ControllerHome controllerhome = new ControllerHome(home);
             home.setVisible(true);
-            LoginPatient login = new LoginPatient();
-            login.dispose();
+            panelappointmentpatient.setVisible(false);
     
         } else {
             JOptionPane.showMessageDialog(null, "Error al agendar cita.");

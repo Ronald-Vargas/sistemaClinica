@@ -248,14 +248,14 @@ public class ControllerLoginPatients implements ActionListener{
                 }
                 
                 int confirm2 = JOptionPane.showConfirmDialog(null,
-                "¿Desea eliminar esta cita?",
+                "¿Desea cancelar esta cita?",
                 "Seleccionar opcion", JOptionPane.YES_NO_OPTION);
                 
                 if (confirm2 == JOptionPane.YES_OPTION) {
                 deletedoctor(idCita);
-                JOptionPane.showMessageDialog(null, "Cita aliminada con exito", "", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Cita cancelada con exito", "", JOptionPane.INFORMATION_MESSAGE);
                 } else if (confirm2 == JOptionPane.NO_OPTION) {
-                JOptionPane.showMessageDialog(null, "Se cancelo la eliminacion de la cita");
+                JOptionPane.showMessageDialog(null, "Se cancelo la cancelación de la cita");
                 
                 }
  

@@ -179,9 +179,6 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
         ComboHora4 = new javax.swing.JLabel();
         ComboFechaCita4 = new javax.swing.JLabel();
 
-        jTabbedPane1.setMinimumSize(null);
-        jTabbedPane1.setPreferredSize(null);
-
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Lista de citas");
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -514,6 +511,15 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
         Lbl29.setText("Monto Final");
         Lbl29.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
+        TxtMonto.setEnabled(false);
+        TxtMonto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+
+        TxtIVA.setEnabled(false);
+        TxtIVA.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+
+        TxtMontoFinal.setEnabled(false);
+        TxtMontoFinal.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+
         BtnPagar.setText("Pagar");
         BtnPagar.setBackground(new java.awt.Color(0, 204, 0));
         BtnPagar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -551,19 +557,19 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(Lbl27))
                     .addComponent(TxtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(Lbl28))
                     .addComponent(TxtIVA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(Lbl29))
@@ -725,11 +731,11 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
     }// </editor-fold>//GEN-END:initComponents
 

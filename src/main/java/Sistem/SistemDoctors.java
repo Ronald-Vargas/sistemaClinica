@@ -114,7 +114,7 @@ public class SistemDoctors extends javax.swing.JFrame {
         BtnBox.setBackground(new java.awt.Color(40, 39, 38));
         BtnBox.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         BtnBox.setForeground(new java.awt.Color(204, 204, 204));
-        BtnBox.setText("Caja");
+        BtnBox.setText("Historial");
         BtnBox.setBorderPainted(false);
         BtnBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnBox.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);

@@ -51,7 +51,7 @@ public class PanelRecord extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID Paciente", "ID Cita", "Especialidad", "Fecha Cita", "Monto"
+                "ID Paciente", "ID Cita", "Especialidad", "Fecha Pago", "Monto"
             }
         ));
         jScrollPane1.setViewportView(HistoryTable);
@@ -96,7 +96,7 @@ public class PanelRecord extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Fecha Cita");
+        jLabel3.setText("Fecha Pago");
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

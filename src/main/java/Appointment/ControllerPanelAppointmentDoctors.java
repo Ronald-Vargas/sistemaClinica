@@ -30,7 +30,9 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
     private PanelAppointmentDoctors panelappointmentdoctors;
     private TableRowSorter<DefaultTableModel> sorter;
     private String idOriginal = ""; 
-    
+    double  monto = 0;
+    double iva = 0;
+    double montoFinal = 0;
     
 
     public ControllerPanelAppointmentDoctors(ModelPanelAppointmentDoctors modelpanelappointmentdoctors, PanelAppointmentDoctors panelappointmentdoctors) {
@@ -144,6 +146,8 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
     
     
     
+    
+    
     private void pagarCita() {
     String idCita = panelappointmentdoctors.TxtIdCita4.getText();
 
@@ -224,7 +228,7 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
     if (fila >= 0) {
         String idCita = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 0).toString();
         int confirm = JOptionPane.showConfirmDialog(null,
-                "¿Estás seguro de eliminar la informacion de la cita?",
+                "¿Estás seguro de eliminar la información de la cita?",
                 "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
@@ -314,10 +318,33 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
     String hora = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 2).toString();
     String estado = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 6).toString();
 
-    
-    
-    
+    if (especialidad.equals("Medico General")) {
+    monto = 50.000;
+    } else if (especialidad.equals("Odontologo")) {
+    monto = 30.000;  
+    } else if (especialidad.equals("Pediatra")) {
+    monto = 40.000; 
+    } else if (especialidad.equals("Dermatologo")) {
+    monto = 50.000;
+    } else if (especialidad.equals("Psiquiatra")) {
+    monto = 50.000;
+    } else if (especialidad.equals("Nutricionista")) {
+    monto = 25.000;
+    }
 
+    iva = monto * 0.13;
+    montoFinal = monto + iva;
+    
+   
+    String montoStr = String.format("%.3f", monto);
+    String ivaStr = String.format("%.3f", iva);
+    String montoFinalStr = String.format("%.3f", montoFinal);
+    
+    panelappointmentdoctors.TxtMonto.setText(montoStr);
+    panelappointmentdoctors.TxtIVA.setText(ivaStr);
+    panelappointmentdoctors.TxtMontoFinal.setText(montoFinalStr);
+
+    
     panelappointmentdoctors.TxtIdCita4.setText(idCita);
     panelappointmentdoctors.TxtIdPaciente4.setText(idPaciente);
     panelappointmentdoctors.ComboEspecialidad4.setText(especialidad);
