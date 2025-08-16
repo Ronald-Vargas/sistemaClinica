@@ -458,7 +458,7 @@ private void applyCombinedFilters() {
 
     // Agregar filtro estado solo si no es "Todas"
     if (!estadoSeleccionado.equalsIgnoreCase("Todas")) {
-        filtros.add(RowFilter.regexFilter("^" + estadoSeleccionado + "$", 4));
+        filtros.add(RowFilter.regexFilter("^" + estadoSeleccionado + "$", 6));
     }
 
     // Agregar filtro texto solo si no está vacío
