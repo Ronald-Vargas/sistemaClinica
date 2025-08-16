@@ -20,6 +20,7 @@ import Record.ControllerPanelRecord;
 import Record.ModelPanelRecord;
 import Validations.ValidationsAbout;
 import Validations.ValidationsDoctors;
+import Validations.ValidationsPatientUpdate;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -121,7 +122,6 @@ public class ControllerSistemDoctors implements ActionListener{
     PanelAppointmentDoctors panelappointmentdoctors = new PanelAppointmentDoctors();
     panelappointmentdoctors.setSize(1020, 720);
     panelappointmentdoctors.setLocation(0,0);
-  
     ModelPanelAppointmentDoctors modelpanelappointmentdoctors = new ModelPanelAppointmentDoctors();
     ControllerPanelAppointmentDoctors controllerpanelappointmentdoctors = new ControllerPanelAppointmentDoctors(modelpanelappointmentdoctors, panelappointmentdoctors);
     menudoctor.Content.removeAll();
@@ -137,6 +137,7 @@ public class ControllerSistemDoctors implements ActionListener{
     PanelPatients panelpatients = new PanelPatients();
     ModelPanelPatients modelpanelpatients = new ModelPanelPatients();
     ControllerPanelPatients controllerpanelpatients = new ControllerPanelPatients(panelpatients, modelpanelpatients);
+    ValidationsPatientUpdate validationspatientupdate = new ValidationsPatientUpdate(panelpatients);
     panelpatients.setSize(1020, 720);
     panelpatients.setLocation(0,0);
   
