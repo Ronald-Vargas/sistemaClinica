@@ -3,12 +3,30 @@ package Appointment;
 
 import Patients.Patients;
 import Record.History;
+import com.lowagie.text.Chunk;
+import com.lowagie.text.Document;
+import com.lowagie.text.Element;
+import com.lowagie.text.FontFactory;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.Rectangle;
+import com.lowagie.text.pdf.ColumnText;
+import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfPageEventHelper;
+import com.lowagie.text.pdf.PdfWriter;
+import com.lowagie.text.pdf.draw.LineSeparator;
+import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -16,6 +34,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -101,7 +120,8 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
     modifyAppointment();
     
     } else if (e.getSource() == panelappointmentdoctors.BtnPDF) {
-    
+    generarComprobanteAsistencia();
+
     
     } else if (e.getSource() == panelappointmentdoctors.BtnDelete) {
     deleteAppointment();
@@ -438,7 +458,7 @@ private void applyCombinedFilters() {
 
     // Agregar filtro estado solo si no es "Todas"
     if (!estadoSeleccionado.equalsIgnoreCase("Todas")) {
-        filtros.add(RowFilter.regexFilter("^" + estadoSeleccionado + "$", 6));
+        filtros.add(RowFilter.regexFilter("^" + estadoSeleccionado + "$", 4));
     }
 
     // Agregar filtro texto solo si no está vacío
@@ -454,15 +474,369 @@ private void applyCombinedFilters() {
     }
 }
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public void generarComprobanteAsistencia() {
+    int fila = panelappointmentdoctors.AppointmentTable.getSelectedRow();
+    if (fila < 0) {
+        JOptionPane.showMessageDialog(null,
+                "Seleccione una cita de la tabla para generar el comprobante.",
+                "Sin selección", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Obtener datos de la cita seleccionada
+    String idCita = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 0).toString();
+    String fechaCita = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 1).toString();
+    String hora = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 2).toString();
+    String idPaciente = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 3).toString();
+    String area = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 4).toString();
+    String fechaRegistro = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 5).toString();
+    String estado = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 6).toString();
+
+    // Cargar datos completos del paciente
+    Patients paciente = modelpanelappointmentdoctors.cargarDatosPaciente(idPaciente);
+    if (paciente == null) {
+        JOptionPane.showMessageDialog(null,
+                "No se pudieron cargar los datos del paciente.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    try {
+        // Configurar documento
+        Document document = new Document(PageSize.A4, 40, 40, 50, 50);
+        
+        String userHome = System.getProperty("user.home");
+        File escritorio = new File(userHome, "Desktop");
+        if (!escritorio.exists()) {
+            escritorio.mkdirs();
+        }
+        
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String filePath = new File(escritorio, "Comprobante_Asistencia_" + idCita + "_" + timestamp + ".pdf").getAbsolutePath();
+        
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filePath));
+        
+        // Footer automático con número de página
+        writer.setPageEvent(new PdfPageEventHelper() {
+            @Override
+            public void onEndPage(PdfWriter writer, Document document) {
+                try {
+                    PdfContentByte cb = writer.getDirectContent();
+                    com.lowagie.text.Font footerFont = FontFactory.getFont(FontFactory.HELVETICA, 8, Color.GRAY);
+                    Phrase footer = new Phrase("Comprobante generado el " + 
+                                             new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()),
+                                             footerFont);
+                    ColumnText.showTextAligned(cb, Element.ALIGN_CENTER, footer,
+                                             document.getPageSize().getWidth() / 2,
+                                             document.bottom() - 10, 0);
+                } catch (Exception e) {
+                    System.err.println("Error en footer: " + e.getMessage());
+                }
+            }
+        });
+        
+        document.open();
+        
+        // === ENCABEZADO DEL COMPROBANTE ===
+        com.lowagie.text.Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20, Color.DARK_GRAY);
+        Paragraph titulo = new Paragraph("COMPROBANTE DE ASISTENCIA MÉDICA", titleFont);
+        titulo.setAlignment(Element.ALIGN_CENTER);
+        titulo.setSpacingAfter(10);
+        document.add(titulo);
+        
+        // Línea decorativa
+        LineSeparator line1 = new LineSeparator();
+        line1.setLineWidth(2);
+        line1.setLineColor(Color.DARK_GRAY);
+        document.add(new Chunk(line1));
+        document.add(new Paragraph("\n"));
+        
+        // Número de comprobante
+        com.lowagie.text.Font numberFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 14, Color.BLACK);
+        Paragraph numeroComprobante = new Paragraph("Comprobante N°: " + idCita, numberFont);
+        numeroComprobante.setAlignment(Element.ALIGN_RIGHT);
+        numeroComprobante.setSpacingAfter(20);
+        document.add(numeroComprobante);
+        
+        // === INFORMACIÓN DEL PACIENTE ===
+        com.lowagie.text.Font sectionFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 14, Color.DARK_GRAY);
+        Paragraph seccionPaciente = new Paragraph("INFORMACIÓN DEL PACIENTE", sectionFont);
+        seccionPaciente.setSpacingAfter(10);
+        document.add(seccionPaciente);
+        
+        // Tabla de datos del paciente
+        PdfPTable tablaPaciente = new PdfPTable(2);
+        tablaPaciente.setWidthPercentage(100);
+        tablaPaciente.setWidths(new float[]{30f, 70f});
+        tablaPaciente.setSpacingAfter(20);
+        
+        addInfoRow(tablaPaciente, "Identificación:", paciente.getIdentificacion());
+        addInfoRow(tablaPaciente, "Nombre completo:", paciente.getNombre() + " " + 
+                   paciente.getPrimerApellido() + " " + paciente.getSegundoApellido());
+        addInfoRow(tablaPaciente, "Edad:", paciente.getEdad() + " años");
+        addInfoRow(tablaPaciente, "Sexo:", paciente.getSexo());
+        addInfoRow(tablaPaciente, "Teléfono:", paciente.getTelefono());
+        addInfoRow(tablaPaciente, "Correo:", paciente.getCorreo());
+        addInfoRow(tablaPaciente, "Dirección:", paciente.getDireccion());
+        
+        document.add(tablaPaciente);
+        
+        // === INFORMACIÓN DE LA CITA ===
+        Paragraph seccionCita = new Paragraph("INFORMACIÓN DE LA CITA MÉDICA", sectionFont);
+        seccionCita.setSpacingAfter(10);
+        document.add(seccionCita);
+        
+        PdfPTable tablaCita = new PdfPTable(2);
+        tablaCita.setWidthPercentage(100);
+        tablaCita.setWidths(new float[]{30f, 70f});
+        tablaCita.setSpacingAfter(20);
+        
+        addInfoRow(tablaCita, "Código de Cita:", idCita);
+        addInfoRow(tablaCita, "Fecha de Cita:", formatearFecha(fechaCita));
+        addInfoRow(tablaCita, "Hora:", hora);
+        addInfoRow(tablaCita, "Especialidad:", area);
+        addInfoRow(tablaCita, "Estado:", estado);
+        addInfoRow(tablaCita, "Fecha de Registro:", formatearFecha(fechaRegistro));
+        
+        document.add(tablaCita);
+        
+        // === INFORMACIÓN DE PAGO (si aplica) ===
+        if ("Atendida".equalsIgnoreCase(estado)) {
+            Paragraph seccionPago = new Paragraph("INFORMACIÓN DE PAGO", sectionFont);
+            seccionPago.setSpacingAfter(10);
+            document.add(seccionPago);
+            
+            // Calcular montos según especialidad
+            double monto = calcularMontoPorEspecialidad(area);
+            double iva = monto * 0.13;
+            double montoFinal = monto + iva;
+            
+            PdfPTable tablaPago = new PdfPTable(2);
+            tablaPago.setWidthPercentage(100);
+            tablaPago.setWidths(new float[]{30f, 70f});
+            tablaPago.setSpacingAfter(20);
+            
+            addInfoRow(tablaPago, "Monto Base:", String.format("₡%.3f", monto));
+            addInfoRow(tablaPago, "IVA (13%):", String.format("₡%.3f", iva));
+            addInfoRow(tablaPago, "TOTAL PAGADO:", String.format("₡%.3f", montoFinal));
+            addInfoRow(tablaPago, "Fecha de Pago:", formatearFecha(new Date()));
+            
+            document.add(tablaPago);
+        }
+        
+        // === CERTIFICACIÓN ===
+        document.add(new Paragraph("\n\n"));
+        LineSeparator line2 = new LineSeparator();
+        line2.setLineWidth(1);
+        line2.setLineColor(Color.LIGHT_GRAY);
+        document.add(new Chunk(line2));
+        
+        com.lowagie.text.Font certFont = FontFactory.getFont(FontFactory.HELVETICA, 12, Color.BLACK);
+        Paragraph certificacion = new Paragraph(
+            "\nCERTIFICACIÓN\n\n" +
+            "Por medio del presente documento se certifica que el paciente arriba mencionado " +
+            ("Atendida".equalsIgnoreCase(estado) ? "ASISTIÓ" : "TIENE PROGRAMADA") +
+            " su cita médica en la especialidad de " + area + 
+            " el día " + formatearFecha(fechaCita) + " a las " + hora + ".\n\n" +
+            "Este comprobante es válido para fines laborales, académicos y administrativos que lo requieran.",
+            certFont
+        );
+        certificacion.setAlignment(Element.ALIGN_JUSTIFIED);
+        certificacion.setSpacingAfter(30);
+        document.add(certificacion);
+        
+        // === FIRMA Y SELLO ===
+        com.lowagie.text.Font firmaFont = FontFactory.getFont(FontFactory.HELVETICA, 10, Color.BLACK);
+        
+        // Crear tabla para firmas
+        PdfPTable tablaFirmas = new PdfPTable(2);
+        tablaFirmas.setWidthPercentage(100);
+        tablaFirmas.setWidths(new float[]{50f, 50f});
+        
+        // Celda izquierda - Firma del médico
+        PdfPCell celdaFirmaMedico = new PdfPCell();
+        celdaFirmaMedico.setBorder(Rectangle.NO_BORDER);
+        celdaFirmaMedico.setHorizontalAlignment(Element.ALIGN_CENTER);
+        celdaFirmaMedico.addElement(new Paragraph("\n\n\n"));
+        celdaFirmaMedico.addElement(new Paragraph("_______________________________", firmaFont));
+        celdaFirmaMedico.addElement(new Paragraph("Firma del Médico", firmaFont));
+        celdaFirmaMedico.addElement(new Paragraph("Dr./Dra. [Nombre del Médico]", firmaFont));
+        celdaFirmaMedico.addElement(new Paragraph("Código Médico: [Número]", firmaFont));
+        
+        // Celda derecha - Sello de la clínica
+        PdfPCell celdaSello = new PdfPCell();
+        celdaSello.setBorder(Rectangle.NO_BORDER);
+        celdaSello.setHorizontalAlignment(Element.ALIGN_CENTER);
+        celdaSello.addElement(new Paragraph("\n\n\n"));
+        celdaSello.addElement(new Paragraph("_______________________________", firmaFont));
+        celdaSello.addElement(new Paragraph("Sello de la Clínica", firmaFont));
+        
+        tablaFirmas.addCell(celdaFirmaMedico);
+        tablaFirmas.addCell(celdaSello);
+        
+        document.add(tablaFirmas);
+        
+        // === PIE DE PÁGINA FINAL ===
+        document.add(new Paragraph("\n"));
+        com.lowagie.text.Font disclaimerFont = FontFactory.getFont(FontFactory.HELVETICA, 8, Color.GRAY);
+        Paragraph disclaimer = new Paragraph(
+            "Este es un documento generado automáticamente por el Sistema de Gestión Médica.\n" +
+            "Para verificar la autenticidad de este comprobante, contacte a la clínica con el código: " + idCita,
+            disclaimerFont
+        );
+        disclaimer.setAlignment(Element.ALIGN_CENTER);
+        document.add(disclaimer);
+        
+        document.close();
+        
+        // Abrir automáticamente
+        abrirPDFAutomaticamente(filePath);
+        
+        // Mensaje de éxito
+        JOptionPane.showMessageDialog(null,
+            "✅ Comprobante generado exitosamente\n" +
+            "📁 Ubicación: " + filePath + "\n" +
+            "👤 Paciente: " + paciente.getNombre() + " " + paciente.getPrimerApellido() + "\n" +
+            "📅 Cita: " + formatearFecha(fechaCita) + " - " + hora,
+            "Comprobante Generado",
+            JOptionPane.INFORMATION_MESSAGE);
+            
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null,
+                "❌ Error al generar el comprobante:\n" + e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+// === MÉTODOS AUXILIARES ===
+private void addInfoRow(PdfPTable table, String label, String value) {
+        com.lowagie.text.Font labelFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10, Color.DARK_GRAY);
+        com.lowagie.text.Font valueFont = FontFactory.getFont(FontFactory.HELVETICA, 10, Color.BLACK);
     
+    PdfPCell labelCell = new PdfPCell(new Phrase(label, labelFont));
+    labelCell.setBackgroundColor(new Color(248, 249, 250));
+    labelCell.setPadding(8);
+    labelCell.setBorder(Rectangle.BOX);
+    labelCell.setBorderWidth(0.5f);
+    labelCell.setBorderColor(Color.LIGHT_GRAY);
     
+    PdfPCell valueCell = new PdfPCell(new Phrase(value != null ? value : "N/A", valueFont));
+    valueCell.setPadding(8);
+    valueCell.setBorder(Rectangle.BOX);
+    valueCell.setBorderWidth(0.5f);
+    valueCell.setBorderColor(Color.LIGHT_GRAY);
     
-    
-    
-    
-    
-    
-    
-    
+    table.addCell(labelCell);
+    table.addCell(valueCell);
+}
+
+private double calcularMontoPorEspecialidad(String especialidad) {
+    switch (especialidad) {
+        case "Medico General": return 50000;
+        case "Odontologo": return 30000;
+        case "Pediatra": return 40000;
+        case "Dermatologo": return 50000;
+        case "Psiquiatra": return 50000;
+        case "Nutricionista": return 25000;
+        default: return 35000;
+    }
+}
+
+private String formatearFecha(String fecha) {
+    try {
+        SimpleDateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatoSalida = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy", new Locale("es", "ES"));
+        Date date = formatoEntrada.parse(fecha);
+        return formatoSalida.format(date);
+    } catch (Exception e) {
+        return fecha; // Si no se puede formatear, devolver la fecha original
+    }
+}
+
+private String formatearFecha(Date fecha) {
+    SimpleDateFormat formatoSalida = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy", new Locale("es", "ES"));
+    return formatoSalida.format(fecha);
+}
+
+// Método para abrir PDF automáticamente (reutilizar del código anterior)
+private void abrirPDFAutomaticamente(String filePath) {
+    try {
+        File pdfFile = new File(filePath);
+        
+        if (!pdfFile.exists()) {
+            System.err.println("El archivo PDF no existe: " + filePath);
+            return;
+        }
+        
+        if (Desktop.isDesktopSupported()) {
+            Desktop desktop = Desktop.getDesktop();
+            if (desktop.isSupported(Desktop.Action.OPEN)) {
+                desktop.open(pdfFile);
+                System.out.println("Comprobante abierto automáticamente: " + filePath);
+            }
+        }
+        
+    } catch (Exception e) {
+        System.err.println("Error al abrir comprobante automáticamente: " + e.getMessage());
+    }
+}
+
+
+
+
     
 }
