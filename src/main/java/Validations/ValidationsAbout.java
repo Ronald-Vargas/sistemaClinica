@@ -1,13 +1,69 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Validations;
+import About.PanelAbout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-/**
- *
- * @author jimeneby
- */
+
 public class ValidationsAbout {
+    
+    private PanelAbout panelabout;
+
+    public ValidationsAbout(PanelAbout panelabout) {
+        this.panelabout = panelabout;
+        ValidationsAbout();
+    }
+    
+    public void ValidationsAbout() {
+    
+          
+    KeyAdapter validateName = new KeyAdapter() {
+              public void keyTyped(KeyEvent e) {
+                  char c = e.getKeyChar();
+                  if (!Character.isLetter(c) && c != ' ' || panelabout.txtName.getText().length() >= 15) {
+                      e.consume();
+                  }
+              }
+          };
+    
+    KeyAdapter validateAddress = new KeyAdapter() {
+              public void keyTyped(KeyEvent e) {
+                  char c = e.getKeyChar();
+                  if (!Character.isLetter(c) && c != ' ' || panelabout.txtAddress.getText().length() >= 100) {
+                      e.consume();
+                  }
+              }
+          };    
+    
+     KeyAdapter validatePhone = new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) || panelabout.txtPhone.getText().length() >= 8) {
+                    e.consume();
+                }
+            }
+        };   
+    
+    KeyAdapter validateEmail = new KeyAdapter() {
+              public void keyTyped(KeyEvent e) {
+                  char c = e.getKeyChar();
+                  if (!Character.isLetter(c) && c != ' ' || panelabout.txtEmail.getText().length() >= 100) {
+                      e.consume();
+                  }
+              }
+          };          
+    
+        panelabout.txtName.addKeyListener(validateName);
+        panelabout.txtAddress.addKeyListener(validateAddress);
+        panelabout.txtPhone.addKeyListener(validatePhone);
+        panelabout.txtEmail.addKeyListener(validateEmail);
+
+    
+    
+    
+    }
+    
+    
+    
+    
     
 }
