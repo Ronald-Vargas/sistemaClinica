@@ -18,6 +18,7 @@ import Patients.ControllerPanelPatients;
 import Patients.ModelPanelPatients;
 import Record.ControllerPanelRecord;
 import Record.ModelPanelRecord;
+import Validations.ValidationsAbout;
 import Validations.ValidationsDoctors;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -176,6 +177,8 @@ public class ControllerSistemDoctors implements ActionListener{
   
     ModelPanelAbout modelpanelabout = new ModelPanelAbout();
     ControllerPanelAbout controllerpanelabout = new ControllerPanelAbout(panelabout, modelpanelabout);
+    ValidationsAbout validationsabout = new ValidationsAbout(panelabout);
+    
     menudoctor.Content.removeAll();
     menudoctor.Content.add(panelabout, BorderLayout.CENTER);
     menudoctor.Content.revalidate();
