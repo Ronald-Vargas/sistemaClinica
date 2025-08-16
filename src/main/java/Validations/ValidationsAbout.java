@@ -43,14 +43,17 @@ public class ValidationsAbout {
             }
         };   
     
-    KeyAdapter validateEmail = new KeyAdapter() {
-              public void keyTyped(KeyEvent e) {
-                  char c = e.getKeyChar();
-                  if (!Character.isLetter(c) && c != ' ' || panelabout.txtEmail.getText().length() >= 100) {
-                      e.consume();
-                  }
-              }
-          };          
+        KeyAdapter validateEmail = new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                String text = panelabout.txtEmail.getText();
+                if (!(Character.isLetterOrDigit(c) || c == '@' || c == '.' || c == '_' || c == '-') 
+                    || text.length() >= 50) {
+                    e.consume(); 
+                }
+            }
+        };               
+                
     
         panelabout.txtName.addKeyListener(validateName);
         panelabout.txtAddress.addKeyListener(validateAddress);
