@@ -53,7 +53,7 @@ public class PanelPatients extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         Lbl13 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        TxtNombre = new javax.swing.JTextField();
+        TxtName = new javax.swing.JTextField();
         TxtLastNameF = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
         Lbl12 = new javax.swing.JLabel();
@@ -196,9 +196,9 @@ public class PanelPatients extends javax.swing.JPanel {
         jLabel33.setMinimumSize(null);
         jLabel33.setPreferredSize(null);
 
-        TxtNombre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        TxtNombre.setMargin(new java.awt.Insets(6, 2, 6, 6));
-        TxtNombre.setMaximumSize(null);
+        TxtName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        TxtName.setMargin(new java.awt.Insets(6, 2, 6, 6));
+        TxtName.setMaximumSize(null);
 
         TxtLastNameF.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         TxtLastNameF.setMargin(null);
@@ -352,7 +352,7 @@ public class PanelPatients extends javax.swing.JPanel {
                 .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(TxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TxtName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(TxtLastNameF, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
@@ -417,7 +417,7 @@ public class PanelPatients extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TxtLastNameF, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TxtLastNameM, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(30, 30, 30)
@@ -496,7 +496,7 @@ public class PanelPatients extends javax.swing.JPanel {
     public javax.swing.JTextField TxtId;
     public javax.swing.JTextField TxtLastNameF;
     public javax.swing.JTextField TxtLastNameM;
-    public javax.swing.JTextField TxtNombre;
+    public javax.swing.JTextField TxtName;
     public javax.swing.JComboBox<String> TxtOcupation;
     public javax.swing.JTextField TxtPhone;
     public javax.swing.JTextField TxtResponsable;

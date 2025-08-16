@@ -142,7 +142,7 @@ public class ControllerPanelPatients implements ActionListener{
     if (paciente != null) {
         
         panelpatients.TxtId.setText(paciente.getIdentificacion());
-        panelpatients.TxtNombre.setText(paciente.getNombre());
+        panelpatients.TxtName.setText(paciente.getNombre());
         panelpatients.TxtLastNameF.setText(paciente.getPrimerApellido());
         panelpatients.TxtLastNameM.setText(paciente.getSegundoApellido());
         panelpatients.TxtPhone.setText(paciente.getTelefono());
@@ -165,7 +165,7 @@ public class ControllerPanelPatients implements ActionListener{
    
    private void updatePatient() {
         idOriginal = panelpatients.TxtId.getText().trim();
-        String nombre = panelpatients.TxtNombre.getText().trim();
+        String nombre = panelpatients.TxtName.getText().trim();
         String primerApellido = panelpatients.TxtLastNameF.getText().trim();
         String segundoApellido = panelpatients.TxtLastNameM.getText().trim();
         String correo = panelpatients.TxtEmail.getText().trim();
@@ -231,7 +231,7 @@ public class ControllerPanelPatients implements ActionListener{
     
     private void disableFields() {
     panelpatients.TxtId.disable();
-    panelpatients.TxtNombre.disable();
+    panelpatients.TxtName.disable();
     panelpatients.TxtLastNameF.disable();
     panelpatients.TxtLastNameM.disable();
     panelpatients.TxtPhone.disable();      
@@ -248,7 +248,7 @@ public class ControllerPanelPatients implements ActionListener{
     
     
     private void enableFields() {
-    panelpatients.TxtNombre.enable(true);
+    panelpatients.TxtName.enable(true);
     panelpatients.TxtLastNameF.enable(true);
     panelpatients.TxtLastNameM.enable(true);
     panelpatients.TxtPhone.enable(true);      

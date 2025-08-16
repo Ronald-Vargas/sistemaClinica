@@ -100,6 +100,7 @@ public void agendarCita() {
     Appointment appointment = new Appointment(idCita, fechaCita, hora, fechaRegistro, estado, area, id);
     if (modelpanelappointmentpatient.insertAppointmentPatient(appointment)) {
             JOptionPane.showMessageDialog(null, "Cita agendada con éxito.");
+            JOptionPane.showMessageDialog(null, "Numero de cita: " + idCita + "\n" + "GUARDAR ESTE NUMERO");
             panelappointmentpatient.ComboArea.setSelectedIndex(0);
             Home home = new Home();
             ControllerHome controllerhome = new ControllerHome(home);

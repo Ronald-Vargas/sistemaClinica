@@ -165,9 +165,6 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
         TxtMontoFinal = new javax.swing.JTextField();
         BtnPagar = new javax.swing.JButton();
         BtnCancel = new javax.swing.JButton();
-        Lbl30 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         Lbl31 = new javax.swing.JLabel();
         TxtNombre4 = new javax.swing.JLabel();
         TxtIdPaciente4 = new javax.swing.JLabel();
@@ -339,8 +336,8 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
         Lbl13.setText("ID Cita");
         Lbl13.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        TxtIdCita.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         TxtIdCita.setEnabled(false);
+        TxtIdCita.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
         Lbl14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Lbl14.setText("Fecha Registro");
@@ -355,8 +352,8 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
         Lbl16.setText("ID Paciente");
         Lbl16.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        TxtIdPaciente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         TxtIdPaciente.setEnabled(false);
+        TxtIdPaciente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
         Lbl17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Lbl17.setText("Especialidad");
@@ -511,14 +508,14 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
         Lbl29.setText("Monto Final");
         Lbl29.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        TxtMonto.setEnabled(false);
         TxtMonto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        TxtMonto.setEnabled(false);
 
-        TxtIVA.setEnabled(false);
         TxtIVA.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        TxtIVA.setEnabled(false);
 
-        TxtMontoFinal.setEnabled(false);
         TxtMontoFinal.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        TxtMontoFinal.setEnabled(false);
 
         BtnPagar.setText("Pagar");
         BtnPagar.setBackground(new java.awt.Color(0, 204, 0));
@@ -534,29 +531,29 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
         panelRound2.setLayout(panelRound2Layout);
         panelRound2Layout.setHorizontalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Lbl27)
-                    .addComponent(Lbl28)
-                    .addComponent(Lbl29))
-                .addGap(25, 25, 25)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TxtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtMontoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
-            .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(BtnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BtnPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
+                .addContainerGap(127, Short.MAX_VALUE)
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelRound2Layout.createSequentialGroup()
+                        .addComponent(BtnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRound2Layout.createSequentialGroup()
+                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Lbl27)
+                            .addComponent(Lbl28)
+                            .addComponent(Lbl29))
+                        .addGap(25, 25, 25)
+                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtMontoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(124, 124, 124))
         );
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(28, 28, 28)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
@@ -574,21 +571,12 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
                         .addGap(1, 1, 1)
                         .addComponent(Lbl29))
                     .addComponent(TxtMontoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGap(32, 32, 32))
         );
-
-        Lbl30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Lbl30.setText("Observaciones");
-        Lbl30.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jScrollPane2.setViewportView(jTextArea1);
 
         Lbl31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Lbl31.setText("ID Paciente");
@@ -657,14 +645,10 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
-                    .addComponent(Lbl30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(55, 55, 55)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(270, 270, 270)
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -713,16 +697,9 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
                         .addComponent(TxtSegundoApellido4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60)))
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Lbl30, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-                        .addGap(27, 27, 27))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(41, 41, 41)
+                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab3", jPanel3);
@@ -778,7 +755,6 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
     public javax.swing.JLabel Lbl27;
     public javax.swing.JLabel Lbl28;
     public javax.swing.JLabel Lbl29;
-    public javax.swing.JLabel Lbl30;
     public javax.swing.JLabel Lbl31;
     public javax.swing.JTextField TxtIVA;
     public javax.swing.JTextField TxtIdCita;
@@ -799,10 +775,8 @@ public class PanelAppointmentDoctors extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     public javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
     private Mvc.PanelRound panelRound1;
     private Mvc.PanelRound panelRound2;
     // End of variables declaration//GEN-END:variables

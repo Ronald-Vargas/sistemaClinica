@@ -207,7 +207,13 @@ public class ControllerDoctors implements ActionListener {
     int fila = paneldoctors.DoctorsTable.getSelectedRow();
 
     if (fila >= 0) {
-        String idDoctor = paneldoctors.DoctorsTable.getValueAt(fila, 3).toString();
+        
+    DefaultTableModel model = (DefaultTableModel) paneldoctors.DoctorsTable.getModel();
+
+if (paneldoctors.DoctorsTable.getSelectedRow() != -1) {
+    if (model.getRowCount() > 1) { 
+        
+           String idDoctor = paneldoctors.DoctorsTable.getValueAt(fila, 3).toString();
         int confirm = JOptionPane.showConfirmDialog(null,
                 "¿Estás seguro de eliminar la información del doctor?",
                 "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
@@ -219,6 +225,12 @@ public class ControllerDoctors implements ActionListener {
                 loadDoctors();  // refrescar la tabla
             }
         }
+    } else {
+        JOptionPane.showMessageDialog(null, "La tabla debe tener al menos un registro.");
+        return;
+    }
+}
+       
 
     } else {
        JOptionPane.showMessageDialog(null,
@@ -281,7 +293,7 @@ public class ControllerDoctors implements ActionListener {
             // preparamos modo edición
             editando = true;
             paneldoctors.BtnContinue.setText("Guardar cambios");
-            paneldoctors.BtnOut.setVisible(true);
+            paneldoctors.BtnOut.setVisible(false);
             paneldoctors.TxtId1.setEnabled(false);     // no se cambia la PK
             paneldoctors.jTabbedPane.setSelectedIndex(1);   // volvemos al form de alta
             }
