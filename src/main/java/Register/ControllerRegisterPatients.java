@@ -17,6 +17,7 @@ import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Random;
 import javax.swing.JOptionPane;
 
 
@@ -96,62 +97,66 @@ public class ControllerRegisterPatients implements ActionListener{
         
     } else {
 
-//        //Llamado del metodo
-//        EmailSender sender = new EmailSender();
-//        
-//        String generatedCode = String.valueOf(new Random().nextInt(900000) + 100000); 
-//
-//        //Enviar codigo al correo
-//        boolean success = sender.sendEmail(email, "Código de Verificación", "Tu código es: " + generatedCode);   
-//
-//        
-//    if (success) {
-//        // Mensaje con el correo
-//        String mensaje = "Se envió un código de verificación al correo: \n" + email + "\nIngresa el código de verificación:";
-//
-//        // Mostrar un JOptionPane con campo de entrada
-//        String code = JOptionPane.showInputDialog(
-//            null,
-//            mensaje,
-//            "Verificación de Correo",
-//            JOptionPane.INFORMATION_MESSAGE
-//        );
-//
-//        // Verificar código ingresado
-//        if (code != null && code.equals(generatedCode)) {
-//            JOptionPane.showMessageDialog(null, "Código correcto. Registro exitoso.");
-            
-            
+// Generar código de verificación
+EmailSender sender = new EmailSender();
+String generatedCode = String.valueOf(new Random().nextInt(900000) + 100000);
 
-           if (usuarioYaExiste(id, email)) {
-    JOptionPane.showMessageDialog(null, "Ya existe una cuenta registrada con esa identificación o correo electrónico.");
-    return;
-}    
-          
-           
-           
-           
-saveUsers();  
-panelpatientnew = new PanelPatientNew(); // inicializas
-ControllerPanelPatientNew controllerpanelpatientnew = new ControllerPanelPatientNew(panelpatientnew, id, register);
-ValidationsPatientNew validationpatientnew = new ValidationsPatientNew(panelpatientnew);
-initPanelNewPatient();     
+// Enviar código al correo
+boolean success = sender.sendEmail(email, "Código de Verificación", "Tu código es: " + generatedCode);
 
-     
-      
-            
-          
-            
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Código incorrecto o cancelado.", "Codigo invalido", JOptionPane.ERROR_MESSAGE);
-//        }
-//
-//        
-//        
-//        
-//    } else {
-//        JOptionPane.showMessageDialog(null, "Error al enviar el correo.");
-//    }
+if (success) {
+    int intentos = 0;
+    boolean verificado = false;
+
+    while (intentos < 3 && !verificado) {
+        String mensaje = "Se envió un código de verificación al correo:\n" + email + 
+                         "\nIngresa el código de verificación:";
+
+        String code = JOptionPane.showInputDialog(
+            null,
+            mensaje,
+            "Verificación de Correo",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+
+        if (code == null) { 
+            // Usuario canceló
+            JOptionPane.showMessageDialog(null, "Verificación cancelada.", "Cancelado", JOptionPane.WARNING_MESSAGE);
+            return; 
+        }
+
+        if (code.equals(generatedCode)) {
+            JOptionPane.showMessageDialog(null, "Código correcto. Registro exitoso.");
+            verificado = true;
+        } else {
+            intentos++;
+            if (intentos < 3) {
+                JOptionPane.showMessageDialog(null, "Código incorrecto. Te quedan " + (3 - intentos) + " intentos.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    if (!verificado) {
+        JOptionPane.showMessageDialog(null, "Has excedido el número máximo de intentos. El registro se canceló.", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // se corta el flujo del registro
+    }
+
+    // Validación de duplicados
+    if (usuarioYaExiste(id, email)) {
+        JOptionPane.showMessageDialog(null, "Ya existe una cuenta registrada con esa identificación o correo electrónico.");
+        return;
+    }
+
+    // Guardar usuario
+    saveUsers();
+    panelpatientnew = new PanelPatientNew();
+    ControllerPanelPatientNew controllerpanelpatientnew = new ControllerPanelPatientNew(panelpatientnew, id, register);
+    ValidationsPatientNew validationpatientnew = new ValidationsPatientNew(panelpatientnew);
+    initPanelNewPatient();
+
+} else {
+    JOptionPane.showMessageDialog(null, "Error al enviar el correo.");
+}
     
     
     

@@ -344,6 +344,11 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
     String fechaCita = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 1).toString();
     String hora = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 2).toString();
     String estado = panelappointmentdoctors.AppointmentTable.getValueAt(fila, 6).toString();
+    
+    if (estado.equals("Atendida")) {
+    JOptionPane.showMessageDialog(null, "Esta cita ya fue antendida");
+    return;
+    } else {
 
     // Calcular montos según especialidad
     double monto = 0;
@@ -387,7 +392,7 @@ public class ControllerPanelAppointmentDoctors implements ActionListener {
     panelappointmentdoctors.jTabbedPane1.setSelectedIndex(2);
 }
     
-    
+   }
     
     
    
